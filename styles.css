@@ -1,0 +1,84 @@
+:root {
+    --primary: #3abbfa;
+    --primary-dark: #2a9ee0;
+    --secondary: #f3a515;
+    --secondary-dark: #e39500;
+    --bg-dark: #1b1e24;
+    --bg-card: #2b2f35;
+    --text-primary: #F3F4F6;
+    --text-secondary: #3abbfa;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+footer {
+    flex-shrink: 0;
+}
+
+.site-card {
+    background-color: var(--bg-card);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.site-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    border-color: var(--primary);
+}
+
+.gradient-text {
+    color: var(--primary);
+}
+
+.coming-soon-badge {
+    background-color: var(--secondary);
+    color: var(--bg-dark);
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.disclaimer-banner {
+    background-color: var(--primary);
+    position: relative;
+    overflow: hidden;
+}
+
+.disclaimer-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.1) 75%, transparent 75%, transparent);
+    background-size: 20px 20px;
+    animation: move 20s linear infinite;
+    opacity: 0.1;
+}
+
+@keyframes move {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 40px 40px;
+    }
+} 
