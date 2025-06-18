@@ -23,9 +23,8 @@ body {
     min-height: 100vh;
     background: #151616;
     font-family: 'Inter', sans-serif;
-    line-height: 1.6;
-    color: var(--text-color);
-    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 /* Navigation */
@@ -93,8 +92,9 @@ body {
 /* Hero Section with Water Effect */
 .hero {
     position: relative;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
+    background: #3586ff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -105,6 +105,8 @@ body {
     position: relative;
     z-index: 2;
     text-align: center;
+    width: 100%;
+    padding: 0 20px;
 }
 
 .hero-content h1 {
@@ -115,6 +117,7 @@ body {
     text-shadow: 0 1px 0 #fff, 0 2px 0 #aaa;
     line-height: 1;
     margin: 0;
+    white-space: nowrap;
 }
 
 .hero-content p {
@@ -124,9 +127,76 @@ body {
     margin: 0 auto;
 }
 
+.wave {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 120px;
+    background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg"><path d="M0,0V46.29c47.29,22.09,104.09,29,158,17.39C230.87,51.77,284.09,27.06,339,26.18c54.14-.88,98.68,22.5,146,35.09,48.13,12.76,100.19,14.13,148,1.18,48.36-13.09,94.09-35.36,143-38.44,42.36-2.66,81.09,9.4,119,22.26V0Z" opacity=".25" fill="%23fff"/><path d="M0,0V15.81C47.29,37.9,104.09,44.81,158,33.2c72.87-11.91,126.09-36.62,181-37.5,54.14-.88,98.68,22.5,146,35.09,48.13,12.76,100.19,14.13,148,1.18,48.36-13.09,94.09-35.36,143-38.44,42.36-2.66,81.09,9.4,119,22.26V0Z" opacity=".5" fill="%23fff"/><path d="M0,0V5.63C47.29,27.72,104.09,34.63,158,23.02c72.87-11.91,126.09-36.62,181-37.5,54.14-.88,98.68,22.5,146,35.09,48.13,12.76,100.19,14.13,148,1.18,48.36-13.09,94.09-35.36,143-38.44,42.36-2.66,81.09,9.4,119,22.26V0Z" fill="%23fff"/></svg>');
+    background-size: cover;
+    z-index: 1;
+    opacity: 1;
+    animation: waveAnim 10s linear infinite;
+}
+
+.wave.wave2 {
+    opacity: 0.5;
+    animation-duration: 18s;
+    bottom: 10px;
+}
+
+.wave.wave3 {
+    opacity: 0.2;
+    animation-duration: 25s;
+    bottom: 20px;
+}
+
+.wave.wave4 {
+    opacity: 0.7;
+    animation-duration: 12s;
+    bottom: 30px;
+}
+
+@keyframes waveAnim {
+    0% {
+        background-position-x: 0;
+    }
+    100% {
+        background-position-x: 1000px;
+    }
+}
+
+/* Mobile Responsive Styles */
 @media (max-width: 900px) {
     .hero-content h1 {
-        font-size: 4em;
+        font-size: 3em;
+    }
+    
+    .wave {
+        height: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 1.8em;
+    }
+    
+    .wave {
+        height: 60px;
+    }
+    
+    .wave.wave2 {
+        bottom: 5px;
+    }
+    
+    .wave.wave3 {
+        bottom: 10px;
+    }
+    
+    .wave.wave4 {
+        bottom: 15px;
     }
 }
 
