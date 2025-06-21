@@ -3,122 +3,284 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>H2O - Professional Pressure Washing Services</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="pressure-pro.css">
+    <meta name="description" content="Professional HVAC, Plumbing & Electrical Services - 24/7 Emergency Repairs, Installation & Maintenance. Licensed, Insured & Guaranteed Work.">
+    <meta name="keywords" content="HVAC, plumbing, electrical, emergency repair, installation, maintenance, licensed contractor">
+    <meta name="author" content="Premier Service Solutions">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Premier Service Solutions - Professional HVAC, Plumbing & Electrical">
+    <meta property="og:description" content="24/7 Emergency Services. Licensed, Insured & Guaranteed Work. Call Now for Free Estimates!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://premierservicesolutions.com">
+    
+    <title>Premier Service Solutions - Professional HVAC, Plumbing & Electrical Services</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="nav-container">
-        <div class="nav-content">
-            <a href="index.html" class="nav-logo">H2O</a>
-            <div class="nav-links">
-                <a href="#services">Services</a>
-                <a href="#about">About</a>
-                <a href="#testimonials">Testimonials</a>
-                <a href="#contact" class="btn-primary">Get Quote</a>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">
+                    <i class="fas fa-tools"></i>
+                    <span>Premier Service Solutions</span>
+                </a>
+                
+                <div class="nav-menu" id="nav-menu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="services.html" class="nav-link">Services</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="testimonials.html" class="nav-link">Reviews</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                    <a href="tel:+1-555-123-4567" class="nav-cta">
+                        <i class="fas fa-phone"></i>
+                        Call Now
+                    </a>
+                </div>
+                
+                <div class="nav-toggle" id="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="loader">
-            <h1>H2O</h1>
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Professional <span class="highlight">Service Solutions</span> You Can Trust
+                </h1>
+                <p class="hero-subtitle">
+                    Licensed, insured, and experienced professionals providing top-quality HVAC, plumbing, and electrical services. Available 24/7 for emergencies with guaranteed satisfaction.
+                </p>
+                <div class="hero-cta">
+                    <a href="tel:+1-555-123-4567" class="btn btn-primary btn-large">
+                        <i class="fas fa-phone"></i>
+                        Call Now: (555) 123-4567
+                    </a>
+                    <a href="contact.html" class="btn btn-secondary btn-large">
+                        <i class="fas fa-calendar"></i>
+                        Schedule Service
+                    </a>
+                </div>
+                <div class="hero-features">
+                    <div class="feature">
+                        <i class="fas fa-clock"></i>
+                        <span>24/7 Emergency Service</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Licensed & Insured</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-medal"></i>
+                        <span>Guaranteed Work</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-card">
+                    <h3>Free Estimates</h3>
+                    <p>Get a detailed quote for your project with no hidden fees or obligations</p>
+                    <a href="contact.html" class="btn btn-outline">Request Quote</a>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section class="services">
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-image">
-                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" alt="House Washing">
-                </div>
-                <div class="service-content">
-                    <h3>House Washing</h3>
-                    <p>Restore your home's exterior to its original beauty with our professional house washing service.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Soft washing technology</li>
-                        <li><i class="fas fa-check"></i> Eco-friendly solutions</li>
-                        <li><i class="fas fa-check"></i> Streak-free results</li>
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Professional Services</h2>
+                <p class="section-subtitle">Comprehensive solutions for all your home and business service needs with expert technicians and quality guarantees</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-snowflake"></i>
+                    </div>
+                    <h3>HVAC Services</h3>
+                    <p>Complete heating, ventilation, and air conditioning solutions for residential and commercial properties.</p>
+                    <ul class="service-list">
+                        <li>AC Installation & Repair</li>
+                        <li>Heating System Service</li>
+                        <li>Duct Cleaning & Maintenance</li>
+                        <li>Thermostat Installation</li>
+                        <li>Energy Efficiency Upgrades</li>
                     </ul>
-                    <a href="services.html#house-washing" class="btn-secondary">Learn More</a>
+                    <a href="services.html#hvac" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-faucet"></i>
+                    </div>
+                    <h3>Plumbing Services</h3>
+                    <p>Expert plumbing solutions from emergency repairs to complete system installations and maintenance.</p>
+                    <ul class="service-list">
+                        <li>Emergency Repairs</li>
+                        <li>Pipe Installation & Repair</li>
+                        <li>Drain Cleaning</li>
+                        <li>Water Heater Service</li>
+                        <li>Fixture Installation</li>
+                    </ul>
+                    <a href="services.html#plumbing" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Electrical Services</h3>
+                    <p>Safe and reliable electrical work for residential and commercial properties with certified electricians.</p>
+                    <ul class="service-list">
+                        <li>Wiring & Installation</li>
+                        <li>Panel Upgrades</li>
+                        <li>Lighting Installation</li>
+                        <li>Safety Inspections</li>
+                        <li>Smart Home Integration</li>
+                    </ul>
+                    <a href="services.html#electrical" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="service-card">
-                <div class="service-image">
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" alt="Deck & Patio Cleaning">
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 class="section-title">Why Choose Premier Service Solutions?</h2>
+                    <p class="about-description">
+                        With over 15 years of experience serving our community, we've built our reputation on quality work, honest pricing, and exceptional customer service. Our team of licensed professionals is committed to getting the job done right the first time, every time.
+                    </p>
+                    
+                    <div class="about-stats">
+                        <div class="stat">
+                            <span class="stat-number">15+</span>
+                            <span class="stat-label">Years Experience</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">5000+</span>
+                            <span class="stat-label">Happy Customers</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">24/7</span>
+                            <span class="stat-label">Emergency Service</span>
+                        </div>
+                    </div>
+                    
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Licensed & Insured</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Free Estimates</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Warranty on All Work</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Same Day Service Available</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="service-content">
-                    <h3>Deck & Patio Cleaning</h3>
-                    <p>Revitalize your outdoor living spaces with our specialized deck and patio cleaning service.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Mold & mildew removal</li>
-                        <li><i class="fas fa-check"></i> Wood restoration</li>
-                        <li><i class="fas fa-check"></i> Stain protection</li>
-                    </ul>
-                    <a href="services.html#deck-cleaning" class="btn-secondary">Learn More</a>
-                </div>
-            </div>
-
-            <div class="service-card">
-                <div class="service-image">
-                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" alt="Commercial Cleaning">
-                </div>
-                <div class="service-content">
-                    <h3>Commercial Cleaning</h3>
-                    <p>Keep your business looking professional with our comprehensive commercial cleaning services.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Storefront cleaning</li>
-                        <li><i class="fas fa-check"></i> Parking lot maintenance</li>
-                        <li><i class="fas fa-check"></i> Regular maintenance plans</li>
-                    </ul>
-                    <a href="services.html#commercial" class="btn-secondary">Learn More</a>
+                
+                <div class="about-image">
+                    <div class="image-card">
+                        <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Professional HVAC technician working on air conditioning unit" loading="lazy">
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Testimonials Section -->
-    <section class="testimonials">
-        <div class="testimonials-grid">
-            <div class="testimonial-card">
-                <div class="testimonial-content">
-                    <p>"H2O transformed our home's exterior. The team was professional, thorough, and the results were outstanding!"</p>
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">What Our Customers Say</h2>
+                <p class="section-subtitle">Don't just take our word for it - hear from our satisfied customers across the community</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "Premier Service Solutions saved us during a heat wave when our AC went out. They arrived within an hour and had us cool again in no time. Professional, courteous, and reasonably priced!"
+                    </p>
                     <div class="testimonial-author">
-                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Sarah Johnson">
-                        <div class="testimonial-author-info">
+                        <div class="author-info">
                             <h4>Sarah Johnson</h4>
-                            <p>Homeowner</p>
+                            <span>Homeowner</span>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="testimonial-card">
-                <div class="testimonial-content">
-                    <p>"Our deck looks brand new after H2O's service. They removed years of grime and restored the wood beautifully."</p>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "Outstanding service! They replaced our entire plumbing system and the work was impeccable. Clean, professional, and they explained everything clearly. Highly recommend!"
+                    </p>
                     <div class="testimonial-author">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Michael Chen">
-                        <div class="testimonial-author-info">
-                            <h4>Michael Chen</h4>
-                            <p>Property Manager</p>
+                        <div class="author-info">
+                            <h4>Mike Rodriguez</h4>
+                            <span>Property Manager</span>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="testimonial-card">
-                <div class="testimonial-content">
-                    <p>"The commercial cleaning service has been a game-changer for our business. Our storefront has never looked better!"</p>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "The electrical work they did for our restaurant was top-notch. They worked around our schedule and completed everything on time. Great communication throughout the project."
+                    </p>
                     <div class="testimonial-author">
-                        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Emily Rodriguez">
-                        <div class="testimonial-author-info">
-                            <h4>Emily Rodriguez</h4>
-                            <p>Business Owner</p>
+                        <div class="author-info">
+                            <h4>Lisa Chen</h4>
+                            <span>Restaurant Owner</span>
                         </div>
                     </div>
                 </div>
@@ -128,42 +290,182 @@
 
     <!-- CTA Section -->
     <section class="cta">
-        <div class="cta-content">
-            <h2>Ready to Transform Your Property?</h2>
-            <p>Get a free quote today and experience the H2O difference.</p>
-            <a href="contact.html" class="btn-primary">Get Free Quote</a>
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Get Started?</h2>
+                <p>Contact us today for a free estimate or emergency service - we're here to help 24/7</p>
+                <div class="cta-buttons">
+                    <a href="tel:+1-555-123-4567" class="btn btn-primary btn-large">
+                        <i class="fas fa-phone"></i>
+                        Call Now
+                    </a>
+                    <a href="contact.html" class="btn btn-outline btn-large">
+                        <i class="fas fa-envelope"></i>
+                        Send Message
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Contact Us</h2>
+                <p class="section-subtitle">Get in touch for estimates, emergency service, or general inquiries - we're here to help</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Phone</h3>
+                            <p><a href="tel:+1-555-123-4567">(555) 123-4567</a></p>
+                            <span>24/7 Emergency Service</span>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p><a href="mailto:info@premierservicesolutions.com">info@premierservicesolutions.com</a></p>
+                            <span>We'll respond within 2 hours</span>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Service Area</h3>
+                            <p>Greater Metropolitan Area</p>
+                            <span>50-mile radius from downtown</span>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Business Hours</h3>
+                            <p>Monday - Friday: 7:00 AM - 7:00 PM</p>
+                            <span>Saturday: 8:00 AM - 5:00 PM</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="service">Service Needed</label>
+                            <select id="service" name="service">
+                                <option value="">Select a service</option>
+                                <option value="hvac">HVAC Services</option>
+                                <option value="plumbing">Plumbing Services</option>
+                                <option value="electrical">Electrical Services</option>
+                                <option value="emergency">Emergency Service</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Describe your project or issue..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <i class="fas fa-paper-plane"></i>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>H2O</h3>
-                <p>Professional pressure washing services for residential and commercial properties.</p>
-                <div class="social-links">
-                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-tools"></i>
+                        <span>Premier Service Solutions</span>
+                    </div>
+                    <p>Professional, reliable service solutions for all your home and business needs. Licensed, insured, and committed to excellence in every project we undertake.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="services.html#hvac">HVAC Services</a></li>
+                        <li><a href="services.html#plumbing">Plumbing Services</a></li>
+                        <li><a href="services.html#electrical">Electrical Services</a></li>
+                        <li><a href="services.html#emergency">Emergency Repairs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="testimonials.html">Reviews</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <div class="footer-contact">
+                        <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                        <p><i class="fas fa-envelope"></i> info@premierservicesolutions.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Greater Metropolitan Area</p>
+                    </div>
                 </div>
             </div>
-            <div class="footer-section">
-                <h3>Contact Us</h3>
-                <p><i class="fas fa-phone"></i> (555) 123-4567</p>
-                <p><i class="fas fa-envelope"></i> info@H2O.com</p>
-                <p><i class="fas fa-map-marker-alt"></i> 123 Cleaning Street, City, State</p>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Premier Service Solutions. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
             </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <p><a href="services.html">Services</a></p>
-                <p><a href="about.html">About Us</a></p>
-                <p><a href="testimonials.html">Testimonials</a></p>
-                <p><a href="contact.html">Contact</a></p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 T&H WebWorks. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
 </body>
-</html>
+</html> 
