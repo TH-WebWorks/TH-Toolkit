@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - TechStart Solutions</title>
+    <meta name="description" content="Learn about TechStart Solutions - our mission, team, and commitment to transforming businesses through innovative technology solutions.">
+    <meta property="og:title" content="About Us - TechStart Solutions">
+    <meta property="og:description" content="Discover our story, meet our team, and learn about our mission to drive digital transformation.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://techstart-solutions.com/about">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- Navigation -->
+    <nav class="navbar fixed w-full z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-[#3abbfa]">
+                        <i class="fas fa-rocket mr-2"></i>TechStart
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="index.html#solutions" class="nav-link">Solutions</a>
+                    <a href="index.html#products" class="nav-link">Products</a>
+                    <a href="about.html" class="nav-link active">About</a>
+                    <a href="blog.html" class="nav-link">Blog</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                    <a href="index.html#demo" class="btn-primary">Get Demo</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-white hover:text-[#3abbfa] transition-colors">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu hidden">
+            <div class="px-4 py-6 space-y-4">
+                <a href="index.html" class="mobile-nav-link">Home</a>
+                <a href="index.html#solutions" class="mobile-nav-link">Solutions</a>
+                <a href="index.html#products" class="mobile-nav-link">Products</a>
+                <a href="about.html" class="mobile-nav-link">About</a>
+                <a href="blog.html" class="mobile-nav-link">Blog</a>
+                <a href="contact.html" class="mobile-nav-link">Contact</a>
+                <a href="index.html#demo" class="btn-primary w-full text-center">Get Demo</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-16">
+        <!-- Hero Section -->
+        <section class="hero-section relative py-20">
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-purple-900/20"></div>
+            <!-- Background Image -->
+            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20" 
+                 style="background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80');">
+            </div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                        <span class="gradient-text">About TechStart</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto">
+                        We're a team of innovators, engineers, and visionaries dedicated to transforming 
+                        businesses through cutting-edge technology solutions.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission & Vision -->
+        <section class="py-20 bg-gray-800/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold mb-8">
+                            <span class="gradient-text">Our Mission</span>
+                        </h2>
+                        <p class="text-xl text-gray-300 mb-6">
+                            To democratize access to advanced technology solutions, enabling businesses 
+                            of all sizes to compete in the digital economy through AI-powered insights, 
+                            scalable cloud infrastructure, and transformative digital experiences.
+                        </p>
+                        <p class="text-lg text-gray-400 mb-8">
+                            We believe that technology should be an enabler, not a barrier. Our solutions 
+                            are designed to be accessible, scalable, and impactful, helping organizations 
+                            achieve their goals faster and more efficiently.
+                        </p>
+                        <div class="flex space-x-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-check-circle text-[#3abbfa] mr-2"></i>
+                                <span class="text-gray-300">Innovation First</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check-circle text-[#3abbfa] mr-2"></i>
+                                <span class="text-gray-300">Client Success</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mission-visual">
+                        <div class="bg-gradient-to-br from-blue-600/20 to-purple-600/20 rounded-2xl p-8 border border-gray-700">
+                            <div class="text-center">
+                                <i class="fas fa-rocket text-6xl text-[#3abbfa] mb-4"></i>
+                                <h3 class="text-2xl font-semibold mb-4">Vision 2030</h3>
+                                <p class="text-gray-300">
+                                    To be the leading technology partner for businesses worldwide, 
+                                    driving the next wave of digital transformation and innovation.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Company Story -->
+        <section class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-5xl font-bold mb-6">
+                        <span class="gradient-text">Our Story</span>
+                    </h2>
+                    <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                        From a small startup to a global technology leader
+                    </p>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2020</div>
+                            <h3 class="text-xl font-semibold mb-2">Founded</h3>
+                            <p class="text-gray-400">TechStart Solutions was founded by a team of engineers and entrepreneurs with a vision to make advanced technology accessible to all businesses.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2021</div>
+                            <h3 class="text-xl font-semibold mb-2">First Product Launch</h3>
+                            <p class="text-gray-400">Launched DataFlow Analytics, our flagship AI-powered business intelligence platform, serving our first 50 clients.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2022</div>
+                            <h3 class="text-xl font-semibold mb-2">Global Expansion</h3>
+                            <p class="text-gray-400">Opened offices in London and Singapore, expanding our global reach and serving clients across 25+ countries.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2023</div>
+                            <h3 class="text-xl font-semibold mb-2">Series A Funding</h3>
+                            <p class="text-gray-400">Secured $15M in Series A funding to accelerate product development and expand our team to 50+ members.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2024</div>
+                            <h3 class="text-xl font-semibold mb-2">200+ Projects</h3>
+                            <p class="text-gray-400">Successfully delivered 200+ projects with 98% client satisfaction rate, establishing ourselves as a trusted technology partner.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2025</div>
+                            <h3 class="text-xl font-semibold mb-2">Future Forward</h3>
+                            <p class="text-gray-400">Continuing to innovate and expand our portfolio with cutting-edge AI, cloud, and digital transformation solutions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="py-20 bg-gray-800/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-5xl font-bold mb-6">
+                        <span class="gradient-text">Meet Our Team</span>
+                    </h2>
+                    <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                        The brilliant minds behind our innovative solutions
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Team Member 1 -->
+                    <div class="team-card">
+                        <div class="team-avatar">
+                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                                 alt="Sarah Chen" class="w-32 h-32 rounded-full object-cover mx-auto mb-4">
+                        </div>
+                        <div class="text-center">
+                            <h3 class="text-xl font-semibold mb-2">Sarah Chen</h3>
+                            <p class="text-[#3abbfa] mb-3">CEO & Co-Founder</p>
+                            <p class="text-gray-400 mb-4">
+                                Former Google AI researcher with 15+ years in machine learning and business strategy.
+                            </p>
+                            <div class="flex justify-center space-x-3">
+                                <a href="#" class="social-link-sm">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                                <a href="#" class="social-link-sm">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Team Member 2 -->
+                    <div class="team-card">
+                        <div class="team-avatar">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                                 alt="Marcus Rodriguez" class="w-32 h-32 rounded-full object-cover mx-auto mb-4">
+                        </div>
+                        <div class="text-center">
+                            <h3 class="text-xl font-semibold mb-2">Marcus Rodriguez</h3>
+                            <p class="text-[#3abbfa] mb-3">CTO & Co-Founder</p>
+                            <p class="text-gray-400 mb-4">
+                                Ex-AWS architect with expertise in cloud infrastructure and scalable systems.
+                            </p>
+                            <div class="flex justify-center space-x-3">
+                                <a href="#" class="social-link-sm">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                                <a href="#" class="social-link-sm">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Team Member 3 -->
+                    <div class="team-card">
+                        <div class="team-avatar">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                                 alt="Emily Watson" class="w-32 h-32 rounded-full object-cover mx-auto mb-4">
+                        </div>
+                        <div class="text-center">
+                            <h3 class="text-xl font-semibold mb-2">Emily Watson</h3>
+                            <p class="text-[#3abbfa] mb-3">VP of Product</p>
+                            <p class="text-gray-400 mb-4">
+                                Product leader with experience at Microsoft and Adobe, focused on user experience.
+                            </p>
+                            <div class="flex justify-center space-x-3">
+                                <a href="#" class="social-link-sm">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                                <a href="#" class="social-link-sm">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Team Member 4 -->
+                    <div class="team-card">
+                        <div class="team-avatar">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                                 alt="David Kim" class="w-32 h-32 rounded-full object-cover mx-auto mb-4">
+                        </div>
+                        <div class="text-center">
+                            <h3 class="text-xl font-semibold mb-2">David Kim</h3>
+                            <p class="text-[#3abbfa] mb-3">Head of Engineering</p>
+                            <p class="text-gray-400 mb-4">
+                                Full-stack engineer with 12+ years building scalable applications and APIs.
+                            </p>
+                            <div class="flex justify-center space-x-3">
+                                <a href="#" class="social-link-sm">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                                <a href="#" class="social-link-sm">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Team Member 5 -->
+                    <div class="team-card">
+                        <div class="team-avatar">
+                            <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                                 alt="Lisa Thompson" class="w-32 h-32 rounded-full object-cover mx-auto mb-4">
+                        </div>
+                        <div class="text-center">
+                            <h3 class="text-xl font-semibold mb-2">Lisa Thompson</h3>
+                            <p class="text-[#3abbfa] mb-3">VP of Sales</p>
+                            <p class="text-gray-400 mb-4">
+                                Sales leader with 10+ years in B2B technology sales and customer success.
+                            </p>
+                            <div class="flex justify-center space-x-3">
+                                <a href="#" class="social-link-sm">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                                <a href="#" class="social-link-sm">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Team Member 6 -->
+                    <div class="team-card">
+                        <div class="team-avatar">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                                 alt="Alex Johnson" class="w-32 h-32 rounded-full object-cover mx-auto mb-4">
+                        </div>
+                        <div class="text-center">
+                            <h3 class="text-xl font-semibold mb-2">Alex Johnson</h3>
+                            <p class="text-[#3abbfa] mb-3">Head of Design</p>
+                            <p class="text-gray-400 mb-4">
+                                UX/UI designer with experience at Apple and Airbnb, creating beautiful user experiences.
+                            </p>
+                            <div class="flex justify-center space-x-3">
+                                <a href="#" class="social-link-sm">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                                <a href="#" class="social-link-sm">
+                                    <i class="fab fa-dribbble"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-5xl font-bold mb-6">
+                        <span class="gradient-text">Our Values</span>
+                    </h2>
+                    <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                        The principles that guide everything we do
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-lightbulb text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">Innovation</h3>
+                        <p class="text-gray-400">
+                            We constantly push boundaries and explore new technologies to deliver cutting-edge solutions.
+                        </p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-users text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">Collaboration</h3>
+                        <p class="text-gray-400">
+                            We believe in the power of teamwork and partner closely with our clients to achieve success.
+                        </p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-shield-alt text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">Trust</h3>
+                        <p class="text-gray-400">
+                            We build lasting relationships based on transparency, reliability, and mutual respect.
+                        </p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-rocket text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">Excellence</h3>
+                        <p class="text-gray-400">
+                            We strive for excellence in everything we do, from code quality to customer service.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-20 bg-gray-800/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6">
+                    <span class="gradient-text">Join Our Journey</span>
+                </h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+                    Ready to transform your business with innovative technology solutions? 
+                    Let's build the future together.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="contact.html" class="btn-primary text-lg px-8 py-4">
+                        <i class="fas fa-paper-plane mr-2"></i>Get In Touch
+                    </a>
+                    <a href="index.html#demo" class="btn-secondary text-lg px-8 py-4">
+                        <i class="fas fa-play mr-2"></i>Watch Demo
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-rocket text-2xl text-[#3abbfa] mr-2"></i>
+                        <span class="text-2xl font-bold">TechStart</span>
+                    </div>
+                    <p class="text-gray-400 mb-6 max-w-md">
+                        Transforming businesses through innovative technology solutions. 
+                        We help companies leverage AI, cloud computing, and digital transformation 
+                        to achieve their goals.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Solutions</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#solutions" class="footer-link">AI & Machine Learning</a></li>
+                        <li><a href="index.html#solutions" class="footer-link">Cloud Infrastructure</a></li>
+                        <li><a href="index.html#solutions" class="footer-link">Digital Transformation</a></li>
+                        <li><a href="index.html#solutions" class="footer-link">Technology Consulting</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2">
+                        <li><a href="about.html" class="footer-link">About Us</a></li>
+                        <li><a href="#" class="footer-link">Careers</a></li>
+                        <li><a href="blog.html" class="footer-link">Blog</a></li>
+                        <li><a href="contact.html" class="footer-link">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400">© 2025 TechStart Solutions. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-[#3abbfa] transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-[#3abbfa] transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

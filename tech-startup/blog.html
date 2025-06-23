@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - TechStart Solutions</title>
+    <meta name="description" content="Latest insights on AI, cloud computing, digital transformation, and technology trends from TechStart Solutions.">
+    <meta property="og:title" content="Blog - TechStart Solutions">
+    <meta property="og:description" content="Stay ahead with our latest thoughts on technology trends and industry insights.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://techstart-solutions.com/blog">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- Navigation -->
+    <nav class="navbar fixed w-full z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-[#3abbfa]">
+                        <i class="fas fa-rocket mr-2"></i>TechStart
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="index.html#solutions" class="nav-link">Solutions</a>
+                    <a href="index.html#products" class="nav-link">Products</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="blog.html" class="nav-link active">Blog</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                    <a href="index.html#demo" class="btn-primary">Get Demo</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-white hover:text-[#3abbfa] transition-colors">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu hidden">
+            <div class="px-4 py-6 space-y-4">
+                <a href="index.html" class="mobile-nav-link">Home</a>
+                <a href="index.html#solutions" class="mobile-nav-link">Solutions</a>
+                <a href="index.html#products" class="mobile-nav-link">Products</a>
+                <a href="about.html" class="mobile-nav-link">About</a>
+                <a href="blog.html" class="mobile-nav-link">Blog</a>
+                <a href="contact.html" class="mobile-nav-link">Contact</a>
+                <a href="index.html#demo" class="btn-primary w-full text-center">Get Demo</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-16">
+        <!-- Hero Section -->
+        <section class="hero-section relative py-20">
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-purple-900/20"></div>
+            <!-- Background Image -->
+            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20" 
+                 style="background-image: url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80');">
+            </div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                        <span class="gradient-text">Latest Insights</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto">
+                        Stay ahead with our latest thoughts on technology trends, industry insights, 
+                        and digital transformation strategies.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search and Filter Section -->
+        <section class="py-8 bg-gray-800/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+                    <div class="flex-1 max-w-md">
+                        <div class="relative">
+                            <input type="text" id="searchInput" placeholder="Search articles..." 
+                                   class="w-full px-4 py-3 pl-10 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#3abbfa]">
+                            <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="category-btn active" data-category="all">All</button>
+                        <button class="category-btn" data-category="ai">AI & ML</button>
+                        <button class="category-btn" data-category="cloud">Cloud</button>
+                        <button class="category-btn" data-category="transformation">Digital Transformation</button>
+                        <button class="category-btn" data-category="trends">Tech Trends</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Article -->
+        <section class="py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-2xl font-bold mb-8">Featured Article</h2>
+                <div class="featured-article">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                        <div class="featured-image">
+                            <div class="w-full h-64 lg:h-96 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg"></div>
+                        </div>
+                        <div class="featured-content">
+                            <div class="flex items-center text-sm text-gray-400 mb-3">
+                                <span class="px-2 py-1 bg-[#3abbfa]/20 text-[#3abbfa] rounded">Featured</span>
+                                <span class="mx-2">•</span>
+                                <span>AI & ML</span>
+                                <span class="mx-2">•</span>
+                                <span>March 20, 2025</span>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4">The Future of AI in Business: 2025 and Beyond</h3>
+                            <p class="text-gray-300 mb-6">
+                                Explore the transformative impact of artificial intelligence on business operations, 
+                                from automated decision-making to predictive analytics. Discover how companies are 
+                                leveraging AI to gain competitive advantages and drive innovation.
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-user text-sm text-white"></i>
+                                    </div>
+                                    <span class="text-gray-400">By Sarah Chen</span>
+                                </div>
+                                <a href="#" class="text-[#3abbfa] hover:text-[#f3a515] transition-colors">
+                                    Read Full Article <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Articles Grid -->
+        <section class="py-16 bg-gray-800/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="blogGrid">
+                    <!-- Blog Post 1 -->
+                    <article class="blog-card" data-category="ai">
+                        <div class="blog-image">
+                            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                                 alt="Machine Learning in Customer Service" class="w-full h-48 object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center text-sm text-gray-400 mb-3">
+                                <span>AI & ML</span>
+                                <span class="mx-2">•</span>
+                                <span>March 18, 2025</span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-3">Machine Learning in Customer Service</h3>
+                            <p class="text-gray-400 mb-4">
+                                How AI-powered chatbots and sentiment analysis are revolutionizing customer 
+                                service and improving customer satisfaction rates.
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-6 h-6 bg-gradient-to-br from-green-600 to-blue-600 rounded-full flex items-center justify-center mr-2">
+                                        <i class="fas fa-user text-xs text-white"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-400">By David Kim</span>
+                                </div>
+                                <a href="#" class="text-[#3abbfa] hover:text-[#f3a515] transition-colors text-sm">
+                                    Read More <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Blog Post 2 -->
+                    <article class="blog-card" data-category="cloud">
+                        <div class="blog-image">
+                            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" 
+                                 alt="Multi-Cloud Strategy Benefits" class="w-full h-48 object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center text-sm text-gray-400 mb-3">
+                                <span>Cloud</span>
+                                <span class="mx-2">•</span>
+                                <span>March 15, 2025</span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-3">Multi-Cloud Strategy Benefits</h3>
+                            <p class="text-gray-400 mb-4">
+                                Discover the advantages of implementing a multi-cloud strategy 
+                                and how it can improve your business resilience and performance.
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-6 h-6 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center mr-2">
+                                        <i class="fas fa-user text-xs text-white"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-400">By Marcus Rodriguez</span>
+                                </div>
+                                <a href="#" class="text-[#3abbfa] hover:text-[#f3a515] transition-colors text-sm">
+                                    Read More <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Blog Post 3 -->
+                    <article class="blog-card" data-category="transformation">
+                        <div class="blog-image">
+                            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                                 alt="Digital Transformation Roadmap" class="w-full h-48 object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center text-sm text-gray-400 mb-3">
+                                <span>Digital Transformation</span>
+                                <span class="mx-2">•</span>
+                                <span>March 12, 2025</span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-3">Digital Transformation Roadmap</h3>
+                            <p class="text-gray-400 mb-4">
+                                A comprehensive guide to planning and executing your digital 
+                                transformation journey for maximum impact and ROI.
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-6 h-6 bg-gradient-to-br from-orange-600 to-red-600 rounded-full flex items-center justify-center mr-2">
+                                        <i class="fas fa-user text-xs text-white"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-400">By Emily Watson</span>
+                                </div>
+                                <a href="#" class="text-[#3abbfa] hover:text-[#f3a515] transition-colors text-sm">
+                                    Read More <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Blog Post 4 -->
+                    <article class="blog-card" data-category="trends">
+                        <div class="blog-image">
+                            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                                 alt="Top Technology Trends for 2025" class="w-full h-48 object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center text-sm text-gray-400 mb-3">
+                                <span>Tech Trends</span>
+                                <span class="mx-2">•</span>
+                                <span>March 10, 2025</span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-3">Top Technology Trends for 2025</h3>
+                            <p class="text-gray-400 mb-4">
+                                From edge computing to quantum computing, explore the technologies that 
+                                will shape the future of business and society.
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-6 h-6 bg-gradient-to-br from-teal-600 to-blue-600 rounded-full flex items-center justify-center mr-2">
+                                        <i class="fas fa-user text-xs text-white"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-400">By Alex Johnson</span>
+                                </div>
+                                <a href="#" class="text-[#3abbfa] hover:text-[#f3a515] transition-colors text-sm">
+                                    Read More <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Blog Post 5 -->
+                    <article class="blog-card" data-category="ai">
+                        <div class="blog-image">
+                            <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                                 alt="Natural Language Processing in Business" class="w-full h-48 object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center text-sm text-gray-400 mb-3">
+                                <span>AI & ML</span>
+                                <span class="mx-2">•</span>
+                                <span>March 8, 2025</span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-3">Natural Language Processing in Business</h3>
+                            <p class="text-gray-400 mb-4">
+                                How NLP is transforming customer interactions, content analysis, and 
+                                business intelligence across industries.
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-6 h-6 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-full flex items-center justify-center mr-2">
+                                        <i class="fas fa-user text-xs text-white"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-400">By Sarah Chen</span>
+                                </div>
+                                <a href="#" class="text-[#3abbfa] hover:text-[#f3a515] transition-colors text-sm">
+                                    Read More <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Blog Post 6 -->
+                    <article class="blog-card" data-category="cloud">
+                        <div class="blog-image">
+                            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                                 alt="Serverless Architecture Benefits" class="w-full h-48 object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center text-sm text-gray-400 mb-3">
+                                <span>Cloud</span>
+                                <span class="mx-2">•</span>
+                                <span>March 5, 2025</span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-3">Serverless Architecture Benefits</h3>
+                            <p class="text-gray-400 mb-4">
+                                Understanding the advantages of serverless computing and how it can 
+                                reduce costs and improve scalability for your applications.
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-6 h-6 bg-gradient-to-br from-yellow-600 to-orange-600 rounded-full flex items-center justify-center mr-2">
+                                        <i class="fas fa-user text-xs text-white"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-400">By Marcus Rodriguez</span>
+                                </div>
+                                <a href="#" class="text-[#3abbfa] hover:text-[#f3a515] transition-colors text-sm">
+                                    Read More <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Load More Button -->
+                <div class="text-center mt-12">
+                    <button id="loadMoreBtn" class="btn-outline">
+                        <i class="fas fa-plus mr-2"></i>Load More Articles
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="py-20">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                    <span class="gradient-text">Stay Updated</span>
+                </h2>
+                <p class="text-xl text-gray-300 mb-8">
+                    Get the latest insights delivered to your inbox. No spam, just valuable content.
+                </p>
+                <form class="newsletter-form flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                    <input type="email" placeholder="Enter your email" 
+                           class="flex-1 px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#3abbfa]">
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-paper-plane mr-2"></i>Subscribe
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-rocket text-2xl text-[#3abbfa] mr-2"></i>
+                        <span class="text-2xl font-bold">TechStart</span>
+                    </div>
+                    <p class="text-gray-400 mb-6 max-w-md">
+                        Transforming businesses through innovative technology solutions. 
+                        We help companies leverage AI, cloud computing, and digital transformation 
+                        to achieve their goals.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Solutions</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#solutions" class="footer-link">AI & Machine Learning</a></li>
+                        <li><a href="index.html#solutions" class="footer-link">Cloud Infrastructure</a></li>
+                        <li><a href="index.html#solutions" class="footer-link">Digital Transformation</a></li>
+                        <li><a href="index.html#solutions" class="footer-link">Technology Consulting</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2">
+                        <li><a href="about.html" class="footer-link">About Us</a></li>
+                        <li><a href="#" class="footer-link">Careers</a></li>
+                        <li><a href="blog.html" class="footer-link">Blog</a></li>
+                        <li><a href="contact.html" class="footer-link">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400">© 2025 TechStart Solutions. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-[#3abbfa] transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-[#3abbfa] transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Blog-specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            setupBlogFilters();
+            setupNewsletterForm();
+        });
+
+        function setupBlogFilters() {
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            const searchInput = document.getElementById('searchInput');
+            const blogCards = document.querySelectorAll('.blog-card');
+
+            // Category filter
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const category = this.dataset.category;
+                    
+                    // Update active button
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Filter articles
+                    blogCards.forEach(card => {
+                        if (category === 'all' || card.dataset.category === category) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                blogCards.forEach(card => {
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const content = card.querySelector('p').textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || content.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        function setupNewsletterForm() {
+            const form = document.querySelector('.newsletter-form');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const email = this.querySelector('input[type="email"]').value;
+                    
+                    if (email) {
+                        showNotification('Thank you for subscribing!', 'success');
+                        this.reset();
+                    } else {
+                        showNotification('Please enter a valid email address.', 'error');
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html> 

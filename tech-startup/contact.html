@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - TechStart Solutions</title>
+    <meta name="description" content="Get in touch with TechStart Solutions. We're here to help you transform your business with innovative technology solutions.">
+    <meta property="og:title" content="Contact Us - TechStart Solutions">
+    <meta property="og:description" content="Ready to transform your business? Let's discuss how we can help you achieve your goals.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://techstart-solutions.com/contact">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- Navigation -->
+    <nav class="navbar fixed w-full z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-[#3abbfa]">
+                        <i class="fas fa-rocket mr-2"></i>TechStart
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="index.html#solutions" class="nav-link">Solutions</a>
+                    <a href="index.html#products" class="nav-link">Products</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="blog.html" class="nav-link">Blog</a>
+                    <a href="contact.html" class="nav-link active">Contact</a>
+                    <a href="index.html#demo" class="btn-primary">Get Demo</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-white hover:text-[#3abbfa] transition-colors">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu hidden">
+            <div class="px-4 py-6 space-y-4">
+                <a href="index.html" class="mobile-nav-link">Home</a>
+                <a href="index.html#solutions" class="mobile-nav-link">Solutions</a>
+                <a href="index.html#products" class="mobile-nav-link">Products</a>
+                <a href="about.html" class="mobile-nav-link">About</a>
+                <a href="blog.html" class="mobile-nav-link">Blog</a>
+                <a href="contact.html" class="mobile-nav-link">Contact</a>
+                <a href="index.html#demo" class="btn-primary w-full text-center">Get Demo</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-16">
+        <!-- Hero Section -->
+        <section class="hero-section relative py-20">
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-purple-900/20"></div>
+            <!-- Background Image -->
+            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20" 
+                 style="background-image: url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');">
+            </div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                        <span class="gradient-text">Get In Touch</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto">
+                        Ready to transform your business? Let's discuss how we can help you achieve your goals 
+                        with innovative technology solutions.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Methods -->
+        <section class="py-20 bg-gray-800/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Contact Method 1 -->
+                    <div class="contact-method-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">Email Us</h3>
+                        <p class="text-gray-400 mb-4">
+                            Send us a message and we'll get back to you within 24 hours.
+                        </p>
+                        <div class="space-y-2">
+                            <a href="mailto:hello@techstart.com" class="text-[#3abbfa] hover:text-[#f3a515] transition-colors">
+                                hello@techstart.com
+                            </a>
+                            <br>
+                            <a href="mailto:support@techstart.com" class="text-[#3abbfa] hover:text-[#f3a515] transition-colors">
+                                support@techstart.com
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Contact Method 2 -->
+                    <div class="contact-method-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">Call Us</h3>
+                        <p class="text-gray-400 mb-4">
+                            Speak directly with our team during business hours.
+                        </p>
+                        <div class="space-y-2">
+                            <a href="tel:+15551234567" class="text-[#3abbfa] hover:text-[#f3a515] transition-colors">
+                                +1 (555) 123-4567
+                            </a>
+                            <br>
+                            <span class="text-gray-400">Mon-Fri: 9AM-6PM PST</span>
+                        </div>
+                    </div>
+
+                    <!-- Contact Method 3 -->
+                    <div class="contact-method-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-comments text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">Live Chat</h3>
+                        <p class="text-gray-400 mb-4">
+                            Chat with our support team in real-time for immediate assistance.
+                        </p>
+                        <button class="btn-outline">
+                            <i class="fas fa-comment-dots mr-2"></i>Start Chat
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form & Info -->
+        <section class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- Contact Form -->
+                    <div class="contact-form">
+                        <h2 class="text-3xl font-bold mb-8">
+                            <span class="gradient-text">Send Us a Message</span>
+                        </h2>
+                        <form id="contactForm" class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="firstName" class="block text-sm font-medium mb-2">First Name *</label>
+                                    <input type="text" id="firstName" name="firstName" required class="form-input">
+                                </div>
+                                <div>
+                                    <label for="lastName" class="block text-sm font-medium mb-2">Last Name *</label>
+                                    <input type="text" id="lastName" name="lastName" required class="form-input">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium mb-2">Email Address *</label>
+                                <input type="email" id="email" name="email" required class="form-input">
+                            </div>
+                            <div>
+                                <label for="company" class="block text-sm font-medium mb-2">Company</label>
+                                <input type="text" id="company" name="company" class="form-input">
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-sm font-medium mb-2">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" class="form-input">
+                            </div>
+                            <div>
+                                <label for="service" class="block text-sm font-medium mb-2">Service Interest *</label>
+                                <select id="service" name="service" required class="form-input">
+                                    <option value="">Select a service</option>
+                                    <option value="ai-ml">AI & Machine Learning</option>
+                                    <option value="cloud">Cloud Infrastructure</option>
+                                    <option value="transformation">Digital Transformation</option>
+                                    <option value="consulting">Technology Consulting</option>
+                                    <option value="custom">Custom Solution</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="budget" class="block text-sm font-medium mb-2">Project Budget</label>
+                                <select id="budget" name="budget" class="form-input">
+                                    <option value="">Select budget range</option>
+                                    <option value="under-50k">Under $50,000</option>
+                                    <option value="50k-100k">$50,000 - $100,000</option>
+                                    <option value="100k-250k">$100,000 - $250,000</option>
+                                    <option value="250k-500k">$250,000 - $500,000</option>
+                                    <option value="over-500k">Over $500,000</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="timeline" class="block text-sm font-medium mb-2">Project Timeline</label>
+                                <select id="timeline" name="timeline" class="form-input">
+                                    <option value="">Select timeline</option>
+                                    <option value="immediate">Immediate (1-3 months)</option>
+                                    <option value="short-term">Short-term (3-6 months)</option>
+                                    <option value="medium-term">Medium-term (6-12 months)</option>
+                                    <option value="long-term">Long-term (12+ months)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium mb-2">Project Details *</label>
+                                <textarea id="message" name="message" rows="6" required class="form-input" 
+                                          placeholder="Tell us about your project, goals, and any specific requirements..."></textarea>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <input type="checkbox" id="newsletter" name="newsletter" class="mt-1">
+                                <label for="newsletter" class="text-sm text-gray-400">
+                                    Subscribe to our newsletter for the latest insights and updates.
+                                </label>
+                            </div>
+                            <button type="submit" class="btn-primary w-full">
+                                <i class="fas fa-paper-plane mr-2"></i>Send Message
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="contact-info">
+                        <h2 class="text-3xl font-bold mb-8">
+                            <span class="gradient-text">Get In Touch</span>
+                        </h2>
+                        <div class="space-y-8">
+                            <div>
+                                <h3 class="text-xl font-semibold mb-6">Let's Start a Conversation</h3>
+                                <p class="text-gray-300 mb-6">
+                                    Whether you're looking to implement AI solutions, modernize your 
+                                    infrastructure, or transform your business digitally, we're here to help.
+                                </p>
+                            </div>
+                            
+                            <!-- Office Locations -->
+                            <div class="space-y-6">
+                                <h4 class="text-lg font-semibold">Our Offices</h4>
+                                
+                                <!-- San Francisco -->
+                                <div class="office-card">
+                                    <div class="flex items-start space-x-4">
+                                        <div class="w-12 h-12 bg-[#3abbfa]/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                            <i class="fas fa-map-marker-alt text-[#3abbfa]"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-semibold mb-1">San Francisco</h5>
+                                            <p class="text-gray-400 text-sm mb-2">Headquarters</p>
+                                            <p class="text-gray-300 text-sm">
+                                                123 Innovation Drive<br>
+                                                San Francisco, CA 94105<br>
+                                                United States
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- London -->
+                                <div class="office-card">
+                                    <div class="flex items-start space-x-4">
+                                        <div class="w-12 h-12 bg-[#3abbfa]/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                            <i class="fas fa-map-marker-alt text-[#3abbfa]"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-semibold mb-1">London</h5>
+                                            <p class="text-gray-400 text-sm mb-2">European Hub</p>
+                                            <p class="text-gray-300 text-sm">
+                                                456 Tech Square<br>
+                                                London, EC2A 4BX<br>
+                                                United Kingdom
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Singapore -->
+                                <div class="office-card">
+                                    <div class="flex items-start space-x-4">
+                                        <div class="w-12 h-12 bg-[#3abbfa]/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                            <i class="fas fa-map-marker-alt text-[#3abbfa]"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-semibold mb-1">Singapore</h5>
+                                            <p class="text-gray-400 text-sm mb-2">Asia-Pacific Hub</p>
+                                            <p class="text-gray-300 text-sm">
+                                                789 Digital Avenue<br>
+                                                Singapore 018956<br>
+                                                Singapore
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Business Hours -->
+                            <div>
+                                <h4 class="text-lg font-semibold mb-4">Business Hours</h4>
+                                <div class="space-y-2 text-gray-300">
+                                    <div class="flex justify-between">
+                                        <span>Monday - Friday</span>
+                                        <span>9:00 AM - 6:00 PM PST</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Saturday</span>
+                                        <span>10:00 AM - 4:00 PM PST</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Sunday</span>
+                                        <span>Closed</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Response Time -->
+                            <div class="bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-lg p-6 border border-gray-700">
+                                <h4 class="text-lg font-semibold mb-2">Response Time</h4>
+                                <p class="text-gray-300 text-sm">
+                                    We typically respond to all inquiries within 24 hours during business days. 
+                                    For urgent matters, please call us directly.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="py-20 bg-gray-800/50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                        <span class="gradient-text">Frequently Asked Questions</span>
+                    </h2>
+                    <p class="text-xl text-gray-300">
+                        Common questions about working with TechStart Solutions
+                    </p>
+                </div>
+                <div class="space-y-6">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>What is your typical project timeline?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Project timelines vary depending on complexity and scope. Small projects typically take 4-8 weeks, while larger enterprise solutions can take 3-6 months. We'll provide a detailed timeline during our initial consultation.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Do you work with startups and small businesses?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Absolutely! We work with businesses of all sizes, from startups to Fortune 500 companies. We offer scalable solutions that grow with your business and budget.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>What industries do you specialize in?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>We have experience across multiple industries including healthcare, finance, retail, manufacturing, and technology. Our solutions are adaptable to any industry's specific needs.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Do you provide ongoing support after project completion?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes, we offer comprehensive support packages including maintenance, updates, training, and 24/7 technical support to ensure your solution continues to perform optimally.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-20">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                    <span class="gradient-text">Ready to Get Started?</span>
+                </h2>
+                <p class="text-xl text-gray-300 mb-8">
+                    Let's discuss your project and explore how we can help you achieve your goals.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="index.html#demo" class="btn-primary text-lg px-8 py-4">
+                        <i class="fas fa-play mr-2"></i>Watch Demo
+                    </a>
+                    <a href="tel:+15551234567" class="btn-secondary text-lg px-8 py-4">
+                        <i class="fas fa-phone mr-2"></i>Call Now
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-rocket text-2xl text-[#3abbfa] mr-2"></i>
+                        <span class="text-2xl font-bold">TechStart</span>
+                    </div>
+                    <p class="text-gray-400 mb-6 max-w-md">
+                        Transforming businesses through innovative technology solutions. 
+                        We help companies leverage AI, cloud computing, and digital transformation 
+                        to achieve their goals.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Solutions</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#solutions" class="footer-link">AI & Machine Learning</a></li>
+                        <li><a href="index.html#solutions" class="footer-link">Cloud Infrastructure</a></li>
+                        <li><a href="index.html#solutions" class="footer-link">Digital Transformation</a></li>
+                        <li><a href="index.html#solutions" class="footer-link">Technology Consulting</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2">
+                        <li><a href="about.html" class="footer-link">About Us</a></li>
+                        <li><a href="#" class="footer-link">Careers</a></li>
+                        <li><a href="blog.html" class="footer-link">Blog</a></li>
+                        <li><a href="contact.html" class="footer-link">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400">© 2025 TechStart Solutions. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-[#3abbfa] transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-[#3abbfa] transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Contact page specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            setupFAQ();
+        });
+
+        function setupFAQ() {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    const icon = this.querySelector('i');
+                    
+                    // Toggle answer visibility
+                    if (answer.style.maxHeight) {
+                        answer.style.maxHeight = null;
+                        icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+</html> 
