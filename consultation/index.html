@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Brief Wizard - T&H WebWorks</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .fade-step { transition: opacity 0.4s cubic-bezier(.4,0,.2,1), transform 0.4s cubic-bezier(.4,0,.2,1); }
+        .fade-step-enter { opacity: 0; transform: scale(0.98) translateY(20px); }
+        .fade-step-enter-active { opacity: 1; transform: scale(1) translateY(0); }
+        .fade-step-exit { opacity: 1; transform: scale(1) translateY(0); }
+        .fade-step-exit-active { opacity: 0; transform: scale(0.98) translateY(-20px); }
+    </style>
+</head>
+<body class="bg-[#1b1e24] text-gray-100 min-h-screen flex flex-col">
+    <main class="flex-1 flex flex-col items-center justify-center py-8">
+        <div class="w-full max-w-2xl bg-[#2b2f35] rounded-lg shadow-lg p-6 md:p-8 border border-gray-700 relative">
+            <!-- Progress Bar -->
+            <div class="mb-6">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-semibold text-[#3abbfa]">Step <span id="progressStep">1</span> of <span id="progressTotal">11</span></span>
+                    <span class="text-xs text-gray-400" id="progressLabel">Welcome</span>
+                </div>
+                <div class="w-full h-2 bg-gray-800 rounded-full overflow-hidden">
+                    <div id="progressBar" class="h-2 bg-[#3abbfa] transition-all duration-500" style="width: 9%"></div>
+                </div>
+            </div>
+            <!-- Dynamic Form -->
+            <form id="wizardForm" class="space-y-8"></form>
+        </div>
+        <!-- Placeholder for Live Preview Panel (to be implemented after core logic) -->
+        <!-- <aside id="livePreviewPanel" class="hidden md:block ...">Live Preview Coming Soon</aside> -->
+    </main>
+    <script>
+    // --- Creative Brief Wizard Step Config ---
+    // Each section is clearly commented for modular editing.
+    const wizardSteps = [
+        // 0. Landing Page (cleaned up)
+        {
+            // No icon, no "Welcome" heading
+            title: '',
+            icon: '',
+            fields: [
+                // Branding block (logo, mission, subheader)
+                { type: 'branding', logo: '../Images/THLogo_trans.webp', mission: 'Premium web development for businesses that want to stand out.', subheader: 'Let’s build your dream website together.' },
+                // Supporting text only
+                { type: 'intro', label: '', description: 'This guided process will help us understand your vision and requirements. Click Start to begin!' },
+                // CTA button
+                { type: 'button', label: 'Start', action: 'next', classes: 'bg-[#3abbfa] hover:bg-[#2a9ee0] text-white px-6 py-2 rounded font-semibold mt-8 w-full md:w-auto' }
+            ]
+        },
+        // 1. Business Basics
+        {
+            title: 'Business Basics',
+            icon: 'briefcase',
+            fields: [
+                { type: 'text', name: 'businessName', label: 'Business Name', required: true },
+                { type: 'text', name: 'ownerName', label: 'Owner Name', required: true },
+                { type: 'dropdown', name: 'industry', label: 'Business Type / Industry', required: true, options: ['Restaurant', 'Retail', 'Consulting', 'Health & Wellness', 'Trades', 'Nonprofit', 'Education', 'Real Estate', 'Finance', 'Other'] },
+                // Show if 'Other' is selected
+                { type: 'text', name: 'industryOther', label: 'Please describe your business type', showIf: { field: 'industry', value: 'Other' } },
+                { type: 'text', name: 'tagline', label: 'Tagline or Slogan (optional)' },
+                { type: 'text', name: 'location', label: 'Physical Location or Service Area', required: true },
+                { type: 'text', name: 'yearFounded', label: 'Year Founded' },
+                { type: 'text', name: 'existingURL', label: 'Existing Website URL (if any)' },
+                { type: 'text', name: 'siteHate', label: 'What do you hate about your current site?', showIf: { field: 'existingURL', notEmpty: true } }
+            ]
+        },
+        // 2. Goals & Strategy
+        {
+            title: 'Goals & Strategy',
+            icon: 'target',
+            fields: [
+                { type: 'checkbox-group', name: 'goals', label: 'What are your main website goals?', required: true, options: [
+                    'Lead generation', 'Online booking', 'Selling products', 'Portfolio display', 'Event promotion', 'Content marketing', 'SEO visibility', 'Brand trust', 'Other'
+                ], vertical: true },
+                // Show if 'Other' is checked
+                { type: 'text', name: 'goalsOther', label: 'What other goal do you have in mind?', showIf: { field: 'goals', includes: 'Other' } }
+            ]
+        },
+        // 3. Target Audience
+        {
+            title: 'Target Audience',
+            icon: 'users',
+            fields: [
+                { type: 'text', name: 'idealCustomer', label: 'Who is your ideal customer?', required: true },
+                { type: 'text', name: 'customerProblem', label: 'What problem are you solving for them?', required: true },
+                { type: 'text', name: 'uniqueValue', label: 'What makes your business different?', required: true },
+                { type: 'toggle', name: 'hasSeasonal', label: 'Are there any seasonal offers/events to plan around?' },
+                { type: 'text', name: 'seasonalDetails', label: 'Please describe (optional)', showIf: { field: 'hasSeasonal', value: true } }
+            ]
+        },
+        // 4. Pages & Site Structure
+        {
+            title: 'Pages & Site Structure',
+            icon: 'layout',
+            fields: [
+                { type: 'checkbox-group', name: 'pagesCore', label: 'Core Pages', options: ['Home', 'About', 'Services', 'Contact'], vertical: true },
+                { type: 'checkbox-group', name: 'pagesTrust', label: 'Trust-Building', options: ['Testimonials', 'FAQ', 'Case Studies'], vertical: true },
+                { type: 'checkbox-group', name: 'pagesEngage', label: 'Engagement', options: ['Blog', 'Resources', 'Events'], vertical: true },
+                { type: 'checkbox-group', name: 'pagesCommerce', label: 'Commerce', options: ['Booking', 'Store', 'Pricing'], vertical: true },
+                { type: 'checkbox-group', name: 'pagesAdmin', label: 'Admin/Other', options: ['Login', 'Dashboard', 'Careers'], vertical: true },
+                { type: 'text', name: 'pagesCustom', label: 'Do you need any custom pages?' }
+            ]
+        },
+        // 5. Features & Integrations
+        {
+            title: 'What functional features would you like your site to include?',
+            icon: 'settings',
+            fields: [
+                { type: 'checkbox-group', name: 'features', label: 'Needed Features', options: [
+                    'Contact form', 'Online scheduler', 'Payment processing', 'Newsletter/email signup', 'Google Maps', 'Client login/dashboard', 'Testimonials carousel', 'Live chat'
+                ], vertical: true },
+                { type: 'text', name: 'integrationNote', label: 'Do you use any specific tools or integrations?' }
+            ]
+        },
+        // 6. Branding
+        {
+            title: 'Branding',
+            icon: 'palette',
+            fields: [
+                { type: 'toggle', name: 'hasLogo', label: 'Do you have a logo?' },
+                { type: 'file', name: 'logoUpload', label: 'Upload Logo', showIf: { field: 'hasLogo', value: true } },
+                // Collect 2–3 colors
+                { type: 'color', name: 'primaryColor', label: 'Primary Color', placeholder: '#3abbfa or blue', required: true },
+                { type: 'color', name: 'secondaryColor', label: 'Secondary Color', placeholder: '#f3a515 or gold', required: true },
+                { type: 'color', name: 'accentColor', label: 'Accent Color (optional)', placeholder: '#23262b or dark gray', required: false },
+                { type: 'text', name: 'fontPref', label: 'Font Preferences' },
+                { type: 'text', name: 'exampleLinks', label: 'Example Websites You Like', placeholder: 'Paste URLs separated by commas' },
+                { type: 'text', name: 'likeAboutSites', label: 'What do you like about those sites?' }
+            ]
+        },
+        // 7. Content Collection (redesigned)
+        {
+            title: 'Content Collection',
+            icon: 'file-text',
+            fields: [
+                // Section A: Logo & Visuals
+                { type: 'section', label: 'Logo & Visuals' },
+                { type: 'toggle', name: 'hasLogo', label: 'Do you have a logo?' },
+                { type: 'file', name: 'logoUpload', label: 'Upload your logo', showIf: { field: 'hasLogo', value: true } },
+                { type: 'toggle', name: 'hasColorScheme', label: 'Do you have a defined color scheme?' },
+                { type: 'color', name: 'colorScheme', label: 'Color Scheme', placeholder: 'List or pick your brand colors', showIf: { field: 'hasColorScheme', value: true } },
+                { type: 'toggle', name: 'wantLogoHelp', label: 'Would you like help creating a logo or color scheme?' },
+                // Section B: Written Content
+                { type: 'section', label: 'Written Content' },
+                { type: 'toggle', name: 'hasBios', label: 'Do you have team bios?' },
+                { type: 'file', name: 'biosUpload', label: 'Upload team bios', showIf: { field: 'hasBios', value: true } },
+                { type: 'textarea', name: 'biosText', label: 'Paste team bios', showIf: { field: 'hasBios', value: true } },
+                { type: 'toggle', name: 'hasServiceDescs', label: 'Do you have service descriptions?' },
+                { type: 'file', name: 'servicesUpload', label: 'Upload service descriptions', showIf: { field: 'hasServiceDescs', value: true } },
+                { type: 'textarea', name: 'servicesText', label: 'Paste service descriptions', showIf: { field: 'hasServiceDescs', value: true } },
+                { type: 'toggle', name: 'wantContentHelp', label: 'Would you like help writing content?' },
+                // Section C: Open Prompt
+                { type: 'section', label: 'Open Prompt' },
+                { type: 'textarea', name: 'uniqueBusiness', label: 'Tell us about your business — what makes you unique?' }
+            ]
+        },
+        // 8. Social Media
+        {
+            title: 'Social Media',
+            icon: 'share',
+            fields: [
+                { type: 'toggle', name: 'wantSocial', label: 'Would you like your profiles linked?' },
+                { type: 'checkbox-group', name: 'socialPlatforms', label: 'Select platforms to link', options: ['Facebook', 'Instagram', 'Twitter/X', 'LinkedIn', 'TikTok', 'YouTube', 'Other'], vertical: true },
+                { type: 'text', name: 'socialLinks', label: 'Social Media URLs', placeholder: 'Paste URLs separated by commas' }
+            ]
+        },
+        // 9. Contact Details
+        {
+            title: 'Contact Details',
+            icon: 'mail',
+            fields: [
+                { type: 'email', name: 'email', label: 'Business Email', required: true },
+                { type: 'tel', name: 'phone', label: 'Phone Number', required: true },
+                { type: 'text', name: 'address', label: 'Address' },
+                { type: 'dropdown', name: 'contactMethod', label: 'Preferred Contact Method', options: ['Email', 'Phone', 'Text'] }
+            ]
+        },
+        // 10. Budget & Timeline
+        {
+            title: 'Budget & Timeline',
+            icon: 'dollar-sign',
+            fields: [
+                { type: 'radio', name: 'budget', label: 'Budget Range', options: ['<$500', '$500–$1000', '$1000–$2000', '$2000+'], required: true },
+                { type: 'dropdown', name: 'timeline', label: 'Timeline', options: ['ASAP', '1 week', '2–4 weeks', '1–2 months'] },
+                { type: 'toggle', name: 'expedite', label: 'Do you need this expedited?' }
+            ]
+        },
+        // 11. Wrap-Up & Proposal
+        {
+            title: 'Wrap-Up & Proposal',
+            icon: 'file-check',
+            fields: [
+                { type: 'toggle', name: 'wantProposal', label: 'Would you like us to send a proposal PDF?' },
+                { type: 'dropdown', name: 'followUp', label: 'How should we follow up?', options: ['Text', 'Email', 'Phone'] },
+                { type: 'text', name: 'bestTime', label: 'Best time to reach you' },
+                { type: 'textarea', name: 'finalNotes', label: 'Is there anything else we should know?' },
+                { type: 'summary' },
+                { type: 'button', label: 'Download Summary', action: 'download', classes: 'bg-[#71a3c1] hover:bg-[#3abbfa] text-white px-6 py-2 rounded font-semibold mt-4 w-full md:w-auto' },
+                { type: 'button', label: 'Submit', action: 'submit', classes: 'bg-[#3abbfa] hover:bg-[#2a9ee0] text-white px-6 py-2 rounded font-semibold mt-4 w-full md:w-auto' }
+            ]
+        }
+    ];
+
+    // --- Icon SVGs (Lucide/Heroicons, inline for simplicity) ---
+    const icons = {
+        'briefcase': '<svg class="w-6 h-6 text-[#3abbfa] mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3v4M8 3v4"/></svg>',
+        'target': '<svg class="w-6 h-6 text-[#3abbfa] mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>',
+        'users': '<svg class="w-6 h-6 text-[#3abbfa] mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+        'layout': '<svg class="w-6 h-6 text-[#3abbfa] mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>',
+        'settings': '<svg class="w-6 h-6 text-[#3abbfa] mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.09a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>',
+        'palette': '<svg class="w-6 h-6 text-[#3abbfa] mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="7.5" cy="10.5" r="1.5"/><circle cx="16.5" cy="10.5" r="1.5"/><circle cx="12" cy="16.5" r="1.5"/></svg>',
+        'file-text': '<svg class="w-6 h-6 text-[#3abbfa] mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
+        'share': '<svg class="w-6 h-6 text-[#3abbfa] mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>',
+        'mail': '<svg class="w-6 h-6 text-[#3abbfa] mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>',
+        'dollar-sign': '<svg class="w-6 h-6 text-[#3abbfa] mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',
+        'file-check': '<svg class="w-6 h-6 text-[#3abbfa] mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 12 18 17 13"/></svg>',
+        'hand-wave': '<svg class="w-6 h-6 text-[#3abbfa] mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 10V3.5a2.5 2.5 0 0 0-5 0V10"/><path d="M14 16V10"/><path d="M14 10V3.5a2.5 2.5 0 0 1 5 0V10"/></svg>'
+    };
+
+    // --- State ---
+    let currentStep = 0;
+    let formData = {};
+
+    // --- Render Step ---
+    function renderStep(idx) {
+        const step = wizardSteps[idx];
+        const form = document.getElementById('wizardForm');
+        form.innerHTML = '';
+        // Step header
+        form.innerHTML += `<div class='flex items-center mb-4'>${icons[step.icon] || ''}<h2 class='text-xl font-semibold'>${step.title}</h2></div>`;
+        // Fields
+        step.fields.forEach(field => {
+            // ShowIf logic
+            if (field.showIf) {
+                const val = formData[field.showIf.field];
+                if (field.showIf.value !== undefined && val !== field.showIf.value) return;
+                if (field.showIf.notEmpty && (!val || val.trim() === '')) return;
+                if (field.showIf.includes && (!val || !val.includes(field.showIf.includes))) return;
+                if (field.showIf.any && (!val || val.length === 0)) return;
+            }
+            // Branding block for landing page
+            if (field.type === 'branding') {
+                form.innerHTML += `
+                    <div class='flex flex-col items-center mb-4'>
+                        <img src='${field.logo}' alt='T&H WebWorks Logo' class='h-16 mb-2'>
+                        <div class='text-[#3abbfa] font-bold text-lg mb-1'>T&H WebWorks</div>
+                        <div class='text-gray-400 text-sm mb-1'>${field.mission}</div>
+                        <div class='text-gray-500 text-xs mb-2'>${field.subheader}</div>
+                        <div class='flex gap-2 mt-2'>
+                            <span class='w-5 h-5 rounded-full' style='background:#3abbfa'></span>
+                            <span class='w-5 h-5 rounded-full' style='background:#f3a515'></span>
+                            <span class='w-5 h-5 rounded-full' style='background:#23262b'></span>
+                        </div>
+                    </div>`;
+            } else if (field.type === 'intro') {
+                form.innerHTML += `<div class='mb-6'><h1 class='text-2xl font-bold gradient-text mb-2'>${field.label}</h1><p class='text-gray-300'>${field.description}</p></div>`;
+            } else if (field.type === 'text' || field.type === 'email' || field.type === 'tel') {
+                form.innerHTML += `
+                    <div class='mb-4'>
+                        <label class='block mb-1 font-medium'>${field.label}${field.required ? ' <span class="text-red-500">*</span>' : ''}</label>
+                        <input type='${field.type}' name='${field.name}' placeholder='${field.placeholder || ''}' class='w-full p-2 rounded bg-gray-800 border border-gray-700' ${field.required ? 'required' : ''} value='${formData[field.name] || ''}'>
+                    </div>`;
+            } else if (field.type === 'color') {
+                form.innerHTML += `
+                    <div class='mb-4'>
+                        <label class='block mb-1 font-medium'>${field.label}</label>
+                        <input type='color' name='${field.name}' class='w-10 h-10 p-0 border-none bg-transparent inline-block align-middle mr-2' value='${formData[field.name] || '#3abbfa'}'>
+                        <input type='text' name='${field.name}' placeholder='${field.placeholder || ''}' class='w-32 p-2 rounded bg-gray-800 border border-gray-700 inline-block align-middle' value='${formData[field.name] || ''}'>
+                    </div>`;
+            } else if (field.type === 'toggle') {
+                form.innerHTML += `
+                    <div class='mb-4 flex items-center'>
+                        <label class='mr-4 font-medium'>${field.label}</label>
+                        <button type='button' class='toggle-btn ${formData[field.name] ? 'bg-[#3abbfa]' : 'bg-gray-700'} text-white px-4 py-1 rounded' data-toggle='${field.name}'>${formData[field.name] ? 'Yes' : 'No'}</button>
+                    </div>`;
+            } else if (field.type === 'dropdown') {
+                form.innerHTML += `
+                    <div class='mb-4'>
+                        <label class='block mb-1 font-medium'>${field.label}</label>
+                        <select name='${field.name}' class='w-full p-2 rounded bg-gray-800 border border-gray-700'>
+                            <option value=''>Select...</option>
+                            ${field.options.map(opt => `<option value='${opt}' ${formData[field.name] === opt ? 'selected' : ''}>${opt}</option>`).join('')}
+                        </select>
+                    </div>`;
+            } else if (field.type === 'radio') {
+                form.innerHTML += `
+                    <div class='mb-4'>
+                        <label class='block mb-1 font-medium'>${field.label}${field.required ? ' <span class="text-red-500">*</span>' : ''}</label>
+                        <div class='flex flex-wrap gap-3'>
+                            ${field.options.map(opt => `
+                                <label class='flex items-center gap-2'>
+                                    <input type='radio' name='${field.name}' value='${opt}' ${formData[field.name] === opt ? 'checked' : ''} class='accent-[#3abbfa]'>
+                                    <span>${opt}</span>
+                                </label>
+                            `).join('')}
+                        </div>
+                    </div>`;
+            } else if (field.type === 'checkbox-group') {
+                // Use vertical layout if specified
+                const vertical = field.vertical;
+                form.innerHTML += `
+                    <div class='mb-4'>
+                        <label class='block mb-1 font-medium'>${field.label}${field.required ? ' <span class="text-red-500">*</span>' : ''}</label>
+                        <div class='${vertical ? 'flex flex-col space-y-2' : 'flex flex-wrap gap-3'}'>
+                            ${field.options.map(opt => `
+                                <label class='flex items-center gap-2'>
+                                    <input type='checkbox' name='${field.name}' value='${opt}' ${formData[field.name] && formData[field.name].includes(opt) ? 'checked' : ''} class='accent-[#3abbfa]'>
+                                    <span>${opt}</span>
+                                </label>
+                            `).join('')}
+                        </div>
+                    </div>`;
+            } else if (field.type === 'file') {
+                form.innerHTML += `
+                    <div class='mb-4'>
+                        <label class='block mb-1 font-medium'>${field.label}</label>
+                        <input type='file' name='${field.name}' class='w-full p-2 rounded bg-gray-800 border border-gray-700'>
+                    </div>`;
+            } else if (field.type === 'textarea') {
+                form.innerHTML += `
+                    <div class='mb-4'>
+                        <label class='block mb-1 font-medium'>${field.label}</label>
+                        <textarea name='${field.name}' rows='4' class='w-full p-2 rounded bg-gray-800 border border-gray-700'>${formData[field.name] || ''}</textarea>
+                    </div>`;
+            } else if (field.type === 'button') {
+                form.innerHTML += `<button type='button' class='${field.classes}' data-action='${field.action}'>${field.label}</button>`;
+            } else if (field.type === 'summary') {
+                form.innerHTML += `<div class='bg-gray-800 rounded p-4 text-gray-200 mb-4'>${renderSummary()}</div>`;
+            } else if (field.type === 'section') {
+                form.innerHTML += `<div class='mt-6 mb-2 text-lg font-semibold text-[#3abbfa]'>${field.label}</div>`;
+            }
+        });
+        // Navigation
+        if (idx > 0 && idx < wizardSteps.length - 1) {
+            form.innerHTML += `<div class='flex justify-between mt-8'>
+                <button type='button' class='bg-gray-700 text-white px-4 py-2 rounded' data-action='back'>Back</button>
+                <button type='button' class='bg-[#3abbfa] hover:bg-[#2a9ee0] text-white px-4 py-2 rounded' data-action='next'>Next</button>
+            </div>`;
+        }
+        // Progress bar
+        document.getElementById('progressStep').textContent = idx + 1;
+        document.getElementById('progressTotal').textContent = wizardSteps.length;
+        document.getElementById('progressLabel').textContent = step.title;
+        document.getElementById('progressBar').style.width = `${((idx+1)/wizardSteps.length)*100}%`;
+
+        // Add a hidden Formspree _cc field with the client email
+        if (step.title === 'Wrap-Up & Proposal') {
+            form.innerHTML += `<input type="hidden" name="_cc" value="${formData.email || ''}">`;
+        }
+    }
+
+    // --- Render Summary ---
+    function renderSummary() {
+        // For brevity, just show all formData as JSON (customize as needed)
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('admin') === 'true') {
+            return `<pre class='text-xs whitespace-pre-wrap break-all'>${JSON.stringify(formData, null, 2)}</pre>`;
+        }
+        return '<div class="text-gray-400 text-sm">Thank you! Your creative brief is ready for review and submission.</div>';
+    }
+
+    // --- Step Navigation & Data Handling ---
+    function goToStep(idx) {
+        currentStep = idx;
+        renderStep(currentStep);
+    }
+    function nextStep() {
+        if (!validateStep(currentStep)) return;
+        goToStep(currentStep + 1);
+    }
+    function prevStep() {
+        goToStep(currentStep - 1);
+    }
+    function validateStep(idx) {
+        const step = wizardSteps[idx];
+        let valid = true;
+        step.fields.forEach(field => {
+            if (field.required) {
+                if (field.type === 'checkbox-group') {
+                    if (!formData[field.name] || !formData[field.name].length) valid = false;
+                } else if (!formData[field.name]) {
+                    valid = false;
+                }
+            }
+        });
+        return valid;
+    }
+    // --- Form Event Handling ---
+    document.getElementById('wizardForm').addEventListener('input', function(e) {
+        const t = e.target;
+        if (t.type === 'checkbox') {
+            if (!formData[t.name]) formData[t.name] = [];
+            if (t.checked) {
+                if (!formData[t.name].includes(t.value)) formData[t.name].push(t.value);
+            } else {
+                formData[t.name] = formData[t.name].filter(v => v !== t.value);
+            }
+        } else if (t.type === 'radio') {
+            formData[t.name] = t.value;
+        } else if (t.type === 'file') {
+            formData[t.name] = t.files[0] ? t.files[0].name : '';
+        } else {
+            formData[t.name] = t.value;
+        }
+    });
+    document.getElementById('wizardForm').addEventListener('click', function(e) {
+        const t = e.target;
+        if (t.dataset.action === 'next') nextStep();
+        if (t.dataset.action === 'back') prevStep();
+        if (t.dataset.action === 'download') {
+            // Download all answers as .json
+            const dataStr = JSON.stringify(formData, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'creative-brief-summary.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+        if (t.dataset.action === 'submit') {
+            // Submit to Formspree
+            const form = document.createElement('form');
+            form.action = 'https://formspree.io/f/your-form-id'; // TODO: Replace with your Formspree endpoint
+            form.method = 'POST';
+            form.style.display = 'none';
+            for (const key in formData) {
+                if (formData.hasOwnProperty(key)) {
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = key;
+                    input.value = typeof formData[key] === 'object' ? JSON.stringify(formData[key]) : formData[key];
+                    form.appendChild(input);
+                }
+            }
+            // Add _cc field for client email
+            if (formData.email) {
+                const cc = document.createElement('input');
+                cc.type = 'hidden';
+                cc.name = '_cc';
+                cc.value = formData.email;
+                form.appendChild(cc);
+            }
+            document.body.appendChild(form);
+            form.submit();
+            document.body.removeChild(form);
+        }
+        if (t.dataset.action === 'start' || t.dataset.action === 'next') {
+            // Animate step in
+            const form = document.getElementById('wizardForm');
+            form.classList.add('fade-step-enter');
+            setTimeout(() => form.classList.add('fade-step-enter-active'), 10);
+            setTimeout(() => {
+                form.classList.remove('fade-step-enter');
+                form.classList.remove('fade-step-enter-active');
+            }, 400);
+        }
+        if (t.dataset.toggle) {
+            const key = t.dataset.toggle;
+            formData[key] = !formData[key];
+            renderStep(currentStep);
+        }
+    });
+    // --- Initial Render ---
+    renderStep(currentStep);
+    </script>
+</body>
+</html> 
