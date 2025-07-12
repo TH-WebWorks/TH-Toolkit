@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Creative Brief Wizard - Streamlined consultation process for T&H WebWorks">
+    <meta name="robots" content="noindex, nofollow">
     <title>Creative Brief Wizard - T&H WebWorks</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
     <style>
@@ -15,25 +18,121 @@
     </style>
 </head>
 <body class="bg-[#1b1e24] text-gray-100 min-h-screen flex flex-col">
-    <main class="flex-1 flex flex-col items-center justify-center py-8">
-        <div class="w-full max-w-2xl bg-[#2b2f35] rounded-lg shadow-lg p-6 md:p-8 border border-gray-700 relative">
-            <!-- Progress Bar -->
-            <div class="mb-6">
-                <div class="flex items-center justify-between mb-2">
-                    <span class="text-xs font-semibold text-[#3abbfa]">Step <span id="progressStep">1</span> of <span id="progressTotal">11</span></span>
-                    <span class="text-xs text-gray-400" id="progressLabel">Welcome</span>
-                </div>
-                <div class="w-full h-2 bg-gray-800 rounded-full overflow-hidden">
-                    <div id="progressBar" class="h-2 bg-[#3abbfa] transition-all duration-500" style="width: 9%"></div>
-                </div>
+    <!-- PIN Authentication Overlay -->
+    <div id="authOverlay" class="fixed inset-0 bg-[#1b1e24] z-50 flex items-center justify-center">
+        <div class="bg-[#2b2f35] rounded-lg shadow-lg p-8 max-w-md w-full mx-4 border border-gray-700">
+            <div class="text-center mb-6">
+                <img src="../Images/THLogo_trans.webp" alt="T&H WebWorks Logo" class="h-16 mx-auto mb-4">
+                <h2 class="text-2xl font-bold text-white mb-2">Creative Brief Wizard</h2>
+                <p class="text-gray-400">Enter PIN to access</p>
             </div>
-            <!-- Dynamic Form -->
-            <form id="wizardForm" class="space-y-8"></form>
+            
+            <form id="pinForm" class="space-y-4">
+                <div class="relative">
+                    <input type="password" id="pinInput" maxlength="4" placeholder="Enter 4-digit PIN" 
+                           class="w-full p-4 text-center text-2xl font-mono bg-gray-800 border border-gray-700 rounded-lg focus:border-[#3abbfa] focus:outline-none text-white">
+                </div>
+                
+                <div id="pinError" class="text-red-500 text-sm text-center hidden">
+                    Incorrect PIN. Please try again.
+                </div>
+                
+                <button type="submit" 
+                        class="w-full bg-[#3abbfa] hover:bg-[#2a9ee0] text-white py-3 px-6 rounded-lg font-semibold transition-colors">
+                    Access Wizard
+                </button>
+            </form>
+            
+            <div class="mt-6 text-center">
+                <p class="text-gray-500 text-sm">For T&H WebWorks team use only</p>
+                <a href="../index.html" class="text-[#3abbfa] hover:text-[#2a9ee0] text-sm mt-2 inline-block">
+                    ← Back to Toolkit
+                </a>
+            </div>
         </div>
-        <!-- Placeholder for Live Preview Panel (to be implemented after core logic) -->
-        <!-- <aside id="livePreviewPanel" class="hidden md:block ...">Live Preview Coming Soon</aside> -->
-    </main>
+    </div>
+
+    <!-- Main Content (hidden until authenticated) -->
+    <div id="mainContent" class="hidden">
+        <main class="flex-1 flex flex-col items-center justify-center py-8">
+            <div class="w-full max-w-2xl bg-[#2b2f35] rounded-lg shadow-lg p-6 md:p-8 border border-gray-700 relative">
+                <!-- Progress Bar -->
+                <div class="mb-6">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-semibold text-[#3abbfa]">Step <span id="progressStep">1</span> of <span id="progressTotal">11</span></span>
+                        <span class="text-xs text-gray-400" id="progressLabel">Welcome</span>
+                    </div>
+                    <div class="w-full h-2 bg-gray-800 rounded-full overflow-hidden">
+                        <div id="progressBar" class="h-2 bg-[#3abbfa] transition-all duration-500" style="width: 9%"></div>
+                    </div>
+                </div>
+                <!-- Dynamic Form -->
+                <form id="wizardForm" class="space-y-8"></form>
+            </div>
+            <!-- Placeholder for Live Preview Panel (to be implemented after core logic) -->
+            <!-- <aside id="livePreviewPanel" class="hidden md:block ...">Live Preview Coming Soon</aside> -->
+        </main>
+    </div>
+
     <script>
+        // PIN Authentication System
+        const CORRECT_PIN = '1234'; // Change this to your desired PIN
+        const authOverlay = document.getElementById('authOverlay');
+        const mainContent = document.getElementById('mainContent');
+        const pinForm = document.getElementById('pinForm');
+        const pinInput = document.getElementById('pinInput');
+        const pinError = document.getElementById('pinError');
+
+        // Check if user is already authenticated
+        function checkAuth() {
+            const isAuthenticated = sessionStorage.getItem('thwebworks_authenticated');
+            if (isAuthenticated === 'true') {
+                showMainContent();
+            }
+        }
+
+        // Show main content and hide auth overlay
+        function showMainContent() {
+            authOverlay.classList.add('hidden');
+            mainContent.classList.remove('hidden');
+        }
+
+        // Handle PIN form submission
+        pinForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const enteredPin = pinInput.value;
+            
+            if (enteredPin === CORRECT_PIN) {
+                sessionStorage.setItem('thwebworks_authenticated', 'true');
+                showMainContent();
+                pinError.classList.add('hidden');
+            } else {
+                pinError.classList.remove('hidden');
+                pinInput.value = '';
+                pinInput.focus();
+            }
+        });
+
+        // Auto-focus PIN input when page loads
+        pinInput.focus();
+
+        // Check authentication status on page load
+        checkAuth();
+
+        // Prevent right-click context menu (optional security measure)
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Prevent F12, Ctrl+Shift+I, Ctrl+U (optional security measures)
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || 
+                (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                (e.ctrlKey && e.key === 'u')) {
+                e.preventDefault();
+            }
+        });
+
     // --- Creative Brief Wizard Step Config ---
     // Each section is clearly commented for modular editing.
     const wizardSteps = [
@@ -44,7 +143,7 @@
             icon: '',
             fields: [
                 // Branding block (logo, mission, subheader)
-                { type: 'branding', logo: '../Images/THLogo_trans.webp', mission: 'Premium web development for businesses that want to stand out.', subheader: 'Let’s build your dream website together.' },
+                { type: 'branding', logo: '../Images/THLogo_trans.webp', mission: 'Premium web development for businesses that want to stand out.', subheader: 'Let\'s build your dream website together.' },
                 // Supporting text only
                 { type: 'intro', label: '', description: 'This guided process will help us understand your vision and requirements. Click Start to begin!' },
                 // CTA button

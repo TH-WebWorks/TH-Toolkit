@@ -9,141 +9,248 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Disclaimer Banner -->
-    <div class="disclaimer-banner">
-        <div class="max-w-7xl mx-auto px-4 py-3 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-center">
-                <div class="flex items-center">
-                    <i class="fas fa-lock text-white mr-2"></i>
-                    <p class="text-white text-sm md:text-base">
-                        <span class="font-semibold">For Clients Only:</span> This is a private collection of example sites. For web development inquiries, please visit <a href="https://www.thwebworks.com" target="_blank" class="underline hover:text-[#f3a515] transition-colors">www.thwebworks.com</a>
-                    </p>
+    <!-- PIN Authentication Overlay -->
+    <div id="authOverlay" class="fixed inset-0 bg-[#1b1e24] z-50 flex items-center justify-center">
+        <div class="bg-[#2b2f35] rounded-lg shadow-lg p-8 max-w-md w-full mx-4 border border-gray-700">
+            <div class="text-center mb-6">
+                <img src="Images/THLogo_trans.webp" alt="T&H WebWorks Logo" class="h-16 mx-auto mb-4">
+                <h2 class="text-2xl font-bold text-white mb-2">Example Sites</h2>
+                <p class="text-gray-400">Enter PIN to access</p>
+            </div>
+            
+            <form id="pinForm" class="space-y-4">
+                <div class="relative">
+                    <input type="password" id="pinInput" maxlength="4" placeholder="Enter 4-digit PIN" 
+                           class="w-full p-4 text-center text-2xl font-mono bg-gray-800 border border-gray-700 rounded-lg focus:border-[#3abbfa] focus:outline-none text-white">
                 </div>
+                
+                <div id="pinError" class="text-red-500 text-sm text-center hidden">
+                    Incorrect PIN. Please try again.
+                </div>
+                
+                <button type="submit" 
+                        class="w-full bg-[#3abbfa] hover:bg-[#2a9ee0] text-white py-3 px-6 rounded-lg font-semibold transition-colors">
+                    Access Sites
+                </button>
+            </form>
+            
+            <div class="mt-6 text-center">
+                <p class="text-gray-500 text-sm">For T&H WebWorks team use only</p>
+                <a href="index.html" class="text-[#3abbfa] hover:text-[#2a9ee0] text-sm mt-2 inline-block">
+                    ← Back to Toolkit
+                </a>
             </div>
         </div>
     </div>
 
-    <!-- Navigation -->
-    <nav class="bg-gray-900 border-b border-gray-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <a href="https://www.thwebworks.com" target="_blank">
-                        <img src="Images/THLogo_trans.webp" alt="T&H WebWorks Logo" class="h-12 w-auto">
-                    </a>
-                </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="https://www.thwebworks.com" target="_blank" class="text-gray-300 hover:text-[#f3a515] transition-colors">
-                        Visit Our Website
-                    </a>
-                    <a href="https://thwebworks.com/contact.html" target="_blank" class="text-gray-300 hover:text-[#71a3c1] transition-colors">
-                        Contact
-                    </a>
-                    <a href="https://thwebworks.com/website-project.html" target="_blank" class="bg-[#71a3c1] hover:bg-[#f3a515] text-white px-4 py-2 rounded-md transition-colors">
-                        Get Started
-                    </a>
+    <!-- Main Content (hidden until authenticated) -->
+    <div id="mainContent" class="hidden">
+        <!-- Disclaimer Banner -->
+        <div class="disclaimer-banner">
+            <div class="max-w-7xl mx-auto px-4 py-3 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-center">
+                    <div class="flex items-center">
+                        <i class="fas fa-lock text-white mr-2"></i>
+                        <p class="text-white text-sm md:text-base">
+                            <span class="font-semibold">For Clients Only:</span> This is a private collection of example sites. For web development inquiries, please visit <a href="https://www.thwebworks.com" target="_blank" class="underline hover:text-[#f3a515] transition-colors">www.thwebworks.com</a>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </nav>
 
-    <main>
-        <!-- Hero Section -->
-        <header class="relative overflow-hidden">
-            <div class="max-w-7xl mx-auto px-4 py-20 sm:px-6 lg:px-8">
-                <div class="text-center">
-                    <h1 class="text-4xl font-bold sm:text-5xl md:text-6xl mb-6">
-                        <span class="gradient-text">Example Sites</span>
-                    </h1>
-                    <p class="text-xl text-gray-400 max-w-3xl mx-auto">
-                        A collection of example websites showcasing our design and development capabilities.
-                    </p>
+        <!-- Navigation -->
+        <nav class="bg-gray-900 border-b border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16">
+                    <div class="flex items-center">
+                        <a href="https://www.thwebworks.com" target="_blank">
+                            <img src="Images/THLogo_trans.webp" alt="T&H WebWorks Logo" class="h-12 w-auto">
+                        </a>
+                    </div>
+                    <div class="hidden md:flex items-center space-x-8">
+                        <a href="https://www.thwebworks.com" target="_blank" class="text-gray-300 hover:text-[#f3a515] transition-colors">
+                            Visit Our Website
+                        </a>
+                        <a href="https://thwebworks.com/contact.html" target="_blank" class="text-gray-300 hover:text-[#71a3c1] transition-colors">
+                            Contact
+                        </a>
+                        <a href="https://thwebworks.com/website-project.html" target="_blank" class="bg-[#71a3c1] hover:bg-[#f3a515] text-white px-4 py-2 rounded-md transition-colors">
+                            Get Started
+                        </a>
+                        <button id="logoutBtn" class="text-gray-300 hover:text-red-400 transition-colors">
+                            <i class="fas fa-sign-out-alt mr-1"></i>Logout
+                        </button>
+                    </div>
                 </div>
             </div>
-        </header>
+        </nav>
 
-        <!-- Examples Section -->
-        <section id="examples" class="py-16">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Service Business Example -->
-                    <a href="service-business/index.html" class="site-card block rounded-lg overflow-hidden">
-                        <div class="p-6">
-                            <div class="flex items-center justify-between mb-4">
-                                <h2 class="text-xl font-semibold text-white">Service Based Business</h2>
-                                <span class="text-[#3abbfa]">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </span>
-                            </div>
-                            <p class="text-gray-400 mb-4">A service based business example website. Features service showcases, client testimonials, and an integrated booking system.</p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex space-x-2">
-                                    <span class="px-2 py-1 bg-[#3abbfa]/20 text-[#3abbfa] rounded text-sm">Services</span>
-                                    <span class="px-2 py-1 bg-[#f3a515]/20 text-[#f3a515] rounded text-sm">Testimonials</span>
-                                </div>
-                                <span class="text-[#3abbfa]">
-                                    <i class="fas fa-arrow-right"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </a>
+        <main>
+            <!-- Hero Section -->
+            <header class="relative overflow-hidden">
+                <div class="max-w-7xl mx-auto px-4 py-20 sm:px-6 lg:px-8">
+                    <div class="text-center">
+                        <h1 class="text-4xl font-bold sm:text-5xl md:text-6xl mb-6">
+                            <span class="gradient-text">Example Sites</span>
+                        </h1>
+                        <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                            A collection of example websites showcasing our design and development capabilities.
+                        </p>
+                    </div>
+                </div>
+            </header>
 
-                    <!-- TechStart Solutions -->
-                    <a href="tech-startup/index.html" class="site-card block rounded-lg overflow-hidden">
-                        <div class="p-6">
-                            <div class="flex items-center justify-between mb-4">
-                                <h2 class="text-xl font-semibold text-white">TechStart Solutions</h2>
-                                <span class="text-[#3abbfa]">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </span>
-                            </div>
-                            <p class="text-gray-400 mb-4">A technology startup's website featuring product showcases, interactive demos, and a blog section.</p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex space-x-2">
-                                    <span class="px-2 py-1 bg-[#3abbfa]/20 text-[#3abbfa] rounded text-sm">Products</span>
-                                    <span class="px-2 py-1 bg-[#f3a515]/20 text-[#f3a515] rounded text-sm">Blog</span>
+            <!-- Examples Section -->
+            <section id="examples" class="py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Service Business Example -->
+                        <a href="service-business/index.html" class="site-card block rounded-lg overflow-hidden">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h2 class="text-xl font-semibold text-white">Service Based Business</h2>
+                                    <span class="text-[#3abbfa]">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </span>
                                 </div>
-                                <span class="text-[#3abbfa]">
-                                    <i class="fas fa-arrow-right"></i>
-                                </span>
+                                <p class="text-gray-400 mb-4">A service based business example website. Features service showcases, client testimonials, and an integrated booking system.</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex space-x-2">
+                                        <span class="px-2 py-1 bg-[#3abbfa]/20 text-[#3abbfa] rounded text-sm">Services</span>
+                                        <span class="px-2 py-1 bg-[#f3a515]/20 text-[#f3a515] rounded text-sm">Testimonials</span>
+                                    </div>
+                                    <span class="text-[#3abbfa]">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
 
-                    <!-- Green Earth Organics -->
-                    <div class="site-card block rounded-lg overflow-hidden">
-                        <div class="p-6">
-                            <div class="flex items-center justify-between mb-4">
-                                <h2 class="text-xl font-semibold text-white">Green Earth Organics</h2>
-                                <span class="coming-soon-badge">Coming Soon</span>
-                            </div>
-                            <p class="text-gray-400 mb-4">An e-commerce website for an organic food delivery service. Features product catalog, online ordering, and delivery tracking.</p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex space-x-2">
-                                    <span class="px-2 py-1 bg-[#3abbfa]/20 text-[#3abbfa] rounded text-sm">E-commerce</span>
-                                    <span class="px-2 py-1 bg-[#f3a515]/20 text-[#f3a515] rounded text-sm">Delivery</span>
+                        <!-- TechStart Solutions -->
+                        <a href="tech-startup/index.html" class="site-card block rounded-lg overflow-hidden">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h2 class="text-xl font-semibold text-white">TechStart Solutions</h2>
+                                    <span class="text-[#3abbfa]">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </span>
                                 </div>
-                                <span class="text-gray-500">
-                                    <i class="fas fa-clock"></i>
-                                </span>
+                                <p class="text-gray-400 mb-4">A technology startup's website featuring product showcases, interactive demos, and a blog section.</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex space-x-2">
+                                        <span class="px-2 py-1 bg-[#3abbfa]/20 text-[#3abbfa] rounded text-sm">Products</span>
+                                        <span class="px-2 py-1 bg-[#f3a515]/20 text-[#f3a515] rounded text-sm">Blog</span>
+                                    </div>
+                                    <span class="text-[#3abbfa]">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Green Earth Organics -->
+                        <div class="site-card block rounded-lg overflow-hidden">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h2 class="text-xl font-semibold text-white">Green Earth Organics</h2>
+                                    <span class="coming-soon-badge">Coming Soon</span>
+                                </div>
+                                <p class="text-gray-400 mb-4">An e-commerce website for an organic food delivery service. Features product catalog, online ordering, and delivery tracking.</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex space-x-2">
+                                        <span class="px-2 py-1 bg-[#3abbfa]/20 text-[#3abbfa] rounded text-sm">E-commerce</span>
+                                        <span class="px-2 py-1 bg-[#f3a515]/20 text-[#f3a515] rounded text-sm">Delivery</span>
+                                    </div>
+                                    <span class="text-gray-500">
+                                        <i class="fas fa-clock"></i>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-    </main>
+            </section>
+        </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 border-t border-gray-800">
-        <div class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400">© 2025 T&H WebWorks. All rights reserved.</p>
-                <a href="https://www.thwebworks.com" target="_blank" class="text-gray-400 hover:text-[#f3a515] transition-colors mt-4 md:mt-0">
-                    www.thwebworks.com
-                </a>
+        <!-- Footer -->
+        <footer class="bg-gray-900 border-t border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400">© 2025 T&H WebWorks. All rights reserved.</p>
+                    <a href="https://www.thwebworks.com" target="_blank" class="text-gray-400 hover:text-[#f3a515] transition-colors mt-4 md:mt-0">
+                        www.thwebworks.com
+                    </a>
+                </div>
             </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
+
+    <script>
+        // PIN Authentication System
+        const CORRECT_PIN = '1234'; // Change this to your desired PIN
+        const authOverlay = document.getElementById('authOverlay');
+        const mainContent = document.getElementById('mainContent');
+        const pinForm = document.getElementById('pinForm');
+        const pinInput = document.getElementById('pinInput');
+        const pinError = document.getElementById('pinError');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        // Check if user is already authenticated
+        function checkAuth() {
+            const isAuthenticated = sessionStorage.getItem('thwebworks_authenticated');
+            if (isAuthenticated === 'true') {
+                showMainContent();
+            }
+        }
+
+        // Show main content and hide auth overlay
+        function showMainContent() {
+            authOverlay.classList.add('hidden');
+            mainContent.classList.remove('hidden');
+        }
+
+        // Handle PIN form submission
+        pinForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const enteredPin = pinInput.value;
+            
+            if (enteredPin === CORRECT_PIN) {
+                sessionStorage.setItem('thwebworks_authenticated', 'true');
+                showMainContent();
+                pinError.classList.add('hidden');
+            } else {
+                pinError.classList.remove('hidden');
+                pinInput.value = '';
+                pinInput.focus();
+            }
+        });
+
+        // Handle logout
+        logoutBtn.addEventListener('click', function() {
+            sessionStorage.removeItem('thwebworks_authenticated');
+            window.location.href = 'index.html';
+        });
+
+        // Auto-focus PIN input when page loads
+        pinInput.focus();
+
+        // Check authentication status on page load
+        checkAuth();
+
+        // Prevent right-click context menu (optional security measure)
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Prevent F12, Ctrl+Shift+I, Ctrl+U (optional security measures)
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || 
+                (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                (e.ctrlKey && e.key === 'u')) {
+                e.preventDefault();
+            }
+        });
+    </script>
 </body>
 </html> 

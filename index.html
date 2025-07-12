@@ -9,190 +9,302 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Disclaimer Banner -->
-    <div class="disclaimer-banner">
-        <div class="max-w-7xl mx-auto px-4 py-3 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-center">
-                <div class="flex items-center">
-                    <i class="fas fa-lock text-white mr-2"></i>
-                    <p class="text-white text-sm md:text-base">
-                        <span class="font-semibold">Internal Use Only:</span> T&H WebWorks team dashboard and toolkit
-                    </p>
+    <!-- PIN Authentication Overlay -->
+    <div id="authOverlay" class="fixed inset-0 bg-[#1b1e24] z-50 flex items-center justify-center">
+        <div class="bg-[#2b2f35] rounded-lg shadow-lg p-8 max-w-md w-full mx-4 border border-gray-700">
+            <div class="text-center mb-6">
+                <img src="Images/THLogo_trans.webp" alt="T&H WebWorks Logo" class="h-16 mx-auto mb-4">
+                <h2 class="text-2xl font-bold text-white mb-2">Internal Toolkit</h2>
+                <p class="text-gray-400">Enter PIN to access</p>
+            </div>
+            
+            <form id="pinForm" class="space-y-4">
+                <div class="relative">
+                    <input type="password" id="pinInput" maxlength="4" placeholder="Enter 4-digit PIN" 
+                           class="w-full p-4 text-center text-2xl font-mono bg-gray-800 border border-gray-700 rounded-lg focus:border-[#3abbfa] focus:outline-none text-white">
                 </div>
+                
+                <div id="pinError" class="text-red-500 text-sm text-center hidden">
+                    Incorrect PIN. Please try again.
+                </div>
+                
+                <button type="submit" 
+                        class="w-full bg-[#3abbfa] hover:bg-[#2a9ee0] text-white py-3 px-6 rounded-lg font-semibold transition-colors">
+                    Access Toolkit
+                </button>
+            </form>
+            
+            <div class="mt-6 text-center">
+                <p class="text-gray-500 text-sm">For T&H WebWorks team use only</p>
             </div>
         </div>
     </div>
 
-    <!-- Navigation -->
-    <nav class="bg-gray-900 border-b border-gray-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <a href="https://www.thwebworks.com" target="_blank">
-                        <img src="Images/THLogo_trans.webp" alt="T&H WebWorks Logo" class="h-12 w-auto">
-                    </a>
-                </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="https://www.thwebworks.com" target="_blank" class="text-gray-300 hover:text-[#f3a515] transition-colors">
-                        Main Website
-                    </a>
-                    <a href="https://thwebworks.com/contact.html" target="_blank" class="text-gray-300 hover:text-[#71a3c1] transition-colors">
-                        Contact
-                    </a>
-                    <a href="https://thwebworks.com/website-project.html" target="_blank" class="bg-[#71a3c1] hover:bg-[#f3a515] text-white px-4 py-2 rounded-md transition-colors">
-                        Get Started
-                    </a>
+    <!-- Main Content (hidden until authenticated) -->
+    <div id="mainContent" class="hidden">
+        <!-- Disclaimer Banner -->
+        <div class="disclaimer-banner">
+            <div class="max-w-7xl mx-auto px-4 py-3 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-center">
+                    <div class="flex items-center">
+                        <i class="fas fa-lock text-white mr-2"></i>
+                        <p class="text-white text-sm md:text-base">
+                            <span class="font-semibold">Internal Use Only:</span> T&H WebWorks team dashboard and toolkit
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </nav>
 
-    <main>
-        <!-- Welcome Header Section -->
-        <header class="relative overflow-hidden">
-            <div class="max-w-7xl mx-auto px-4 py-20 sm:px-6 lg:px-8">
-                <div class="text-center">
-                    <!-- Main Welcome Title -->
-                    <h1 class="text-4xl font-bold sm:text-5xl md:text-6xl mb-6">
-                        <span class="gradient-text">Welcome to the T&H Internal Toolkit</span>
-                    </h1>
-                    <!-- Subtext -->
-                    <p class="text-xl text-gray-400 max-w-3xl mx-auto">
-                        Streamline your workflow. Impress your clients. Close more deals.
-                    </p>
-                </div>
-            </div>
-        </header>
-
-        <!-- Navigation Cards Section -->
-        <section id="tools" class="py-16">
+        <!-- Navigation -->
+        <nav class="bg-gray-900 border-b border-gray-800">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <!-- Responsive Grid Layout -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    
-                    <!-- Consultation Wizard Card -->
-                    <a href="/consultation/index.html" class="tool-card block rounded-lg overflow-hidden">
-                        <div class="p-6">
-                            <div class="flex items-center justify-between mb-4">
-                                <h2 class="text-xl font-semibold text-white">🔍 Consultation Wizard</h2>
-                                <span class="text-[#3abbfa]">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </span>
-                            </div>
-                            <p class="text-gray-400 mb-4">Streamlined consultation process to gather client requirements and generate proposals efficiently.</p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex space-x-2">
-                                    <span class="px-2 py-1 bg-[#3abbfa]/20 text-[#3abbfa] rounded text-sm">Client Intake</span>
-                                    <span class="px-2 py-1 bg-[#f3a515]/20 text-[#f3a515] rounded text-sm">Proposals</span>
-                                </div>
-                                <span class="text-[#3abbfa]">
-                                    <i class="fas fa-arrow-right"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Portfolio Examples Card -->
-                    <a href="sites.html" class="tool-card block rounded-lg overflow-hidden" target="_blank" rel="noopener noreferrer">
-                        <div class="p-6">
-                            <div class="flex items-center justify-between mb-4">
-                                <h2 class="text-xl font-semibold text-white">🖥️ Portfolio Examples</h2>
-                                <span class="text-[#3abbfa]">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </span>
-                            </div>
-                            <p class="text-gray-400 mb-4">Showcase our design and development capabilities with example sites for different industries.</p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex space-x-2">
-                                    <span class="px-2 py-1 bg-[#3abbfa]/20 text-[#3abbfa] rounded text-sm">Examples</span>
-                                    <span class="px-2 py-1 bg-[#f3a515]/20 text-[#f3a515] rounded text-sm">Portfolio</span>
-                                </div>
-                                <span class="text-[#3abbfa]">
-                                    <i class="fas fa-arrow-right"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Lead Tracker Sheet Card -->
-                    <a href="https://docs.google.com/spreadsheets/d/1-NAaAXq7S2YINuRy6jxs9OrnO10MAebCmBZHYUs94jc/edit?usp=sharing" class="tool-card block rounded-lg overflow-hidden" target="_blank" rel="noopener noreferrer">
-                        <div class="p-6">
-                            <div class="flex items-center justify-between mb-4">
-                                <h2 class="text-xl font-semibold text-white">📊 Lead Tracker Sheet</h2>
-                                <span class="text-[#3abbfa]">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </span>
-                            </div>
-                            <p class="text-gray-400 mb-4">Track leads, follow-ups, and conversion rates in our centralized Google Sheet system.</p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex space-x-2">
-                                    <span class="px-2 py-1 bg-[#3abbfa]/20 text-[#3abbfa] rounded text-sm">Leads</span>
-                                    <span class="px-2 py-1 bg-[#f3a515]/20 text-[#f3a515] rounded text-sm">Analytics</span>
-                                </div>
-                                <span class="text-[#3abbfa]">
-                                    <i class="fas fa-arrow-right"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Daily To-Do Doc Card -->
-                    <a href="https://docs.google.com/document/d/1Md6j-UJF-7XtJUeWPdfUbs98OgkgsP2KWn2-v4SWwpY/edit?usp=sharing" class="tool-card block rounded-lg overflow-hidden" target="_blank" rel="noopener noreferrer">
-                        <div class="p-6">
-                            <div class="flex items-center justify-between mb-4">
-                                <h2 class="text-xl font-semibold text-white">📄 Daily To-Do Doc</h2>
-                                <span class="text-[#3abbfa]">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </span>
-                            </div>
-                            <p class="text-gray-400 mb-4">Collaborative daily task management and project tracking in Google Docs.</p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex space-x-2">
-                                    <span class="px-2 py-1 bg-[#3abbfa]/20 text-[#3abbfa] rounded text-sm">Tasks</span>
-                                    <span class="px-2 py-1 bg-[#f3a515]/20 text-[#f3a515] rounded text-sm">Projects</span>
-                                </div>
-                                <span class="text-[#3abbfa]">
-                                    <i class="fas fa-arrow-right"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Future Tools Card -->
-                    <a href="future-tools.html" class="tool-card block rounded-lg overflow-hidden" target="_blank" rel="noopener noreferrer">
-                        <div class="p-6">
-                            <div class="flex items-center justify-between mb-4">
-                                <h2 class="text-xl font-semibold text-white">🛠️ Future Tools</h2>
-                                <span class="coming-soon-badge">Coming Soon</span>
-                            </div>
-                            <p class="text-gray-400 mb-4">Additional tools and resources to enhance team productivity and client management.</p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex space-x-2">
-                                    <span class="px-2 py-1 bg-[#3abbfa]/20 text-[#3abbfa] rounded text-sm">Productivity</span>
-                                    <span class="px-2 py-1 bg-[#f3a515]/20 text-[#f3a515] rounded text-sm">Automation</span>
-                                </div>
-                                <span class="text-gray-500">
-                                    <i class="fas fa-clock"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </a>
-
+                <div class="flex justify-between h-16">
+                    <div class="flex items-center">
+                        <a href="https://www.thwebworks.com" target="_blank">
+                            <img src="Images/THLogo_trans.webp" alt="T&H WebWorks Logo" class="h-12 w-auto">
+                        </a>
+                    </div>
+                    <div class="hidden md:flex items-center space-x-8">
+                        <a href="https://www.thwebworks.com" target="_blank" class="text-gray-300 hover:text-[#f3a515] transition-colors">
+                            Main Website
+                        </a>
+                        <a href="https://thwebworks.com/contact.html" target="_blank" class="text-gray-300 hover:text-[#71a3c1] transition-colors">
+                            Contact
+                        </a>
+                        <a href="https://thwebworks.com/website-project.html" target="_blank" class="bg-[#71a3c1] hover:bg-[#f3a515] text-white px-4 py-2 rounded-md transition-colors">
+                            Get Started
+                        </a>
+                        <button id="logoutBtn" class="text-gray-300 hover:text-red-400 transition-colors">
+                            <i class="fas fa-sign-out-alt mr-1"></i>Logout
+                        </button>
+                    </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </nav>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 border-t border-gray-800">
-        <div class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400">© 2025 T&H WebWorks. Internal toolkit for team use only.</p>
-                <a href="https://www.thwebworks.com" target="_blank" class="text-gray-400 hover:text-[#f3a515] transition-colors mt-4 md:mt-0">
-                    www.thwebworks.com
-                </a>
+        <main>
+            <!-- Welcome Header Section -->
+            <header class="relative overflow-hidden">
+                <div class="max-w-7xl mx-auto px-4 py-20 sm:px-6 lg:px-8">
+                    <div class="text-center">
+                        <!-- Main Welcome Title -->
+                        <h1 class="text-4xl font-bold sm:text-5xl md:text-6xl mb-6">
+                            <span class="gradient-text">Welcome to the T&H Internal Toolkit</span>
+                        </h1>
+                        <!-- Subtext -->
+                        <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                            Streamline your workflow. Impress your clients. Close more deals.
+                        </p>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Navigation Cards Section -->
+            <section id="tools" class="py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <!-- Responsive Grid Layout -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        
+                        <!-- Consultation Wizard Card -->
+                        <a href="consult.html" class="tool-card block rounded-lg overflow-hidden">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h2 class="text-xl font-semibold text-white">🔍 Consultation Wizard</h2>
+                                    <span class="text-[#3abbfa]">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </span>
+                                </div>
+                                <p class="text-gray-400 mb-4">Streamlined consultation process to gather client requirements and generate proposals efficiently.</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex space-x-2">
+                                        <span class="px-2 py-1 bg-[#3abbfa]/20 text-[#3abbfa] rounded text-sm">Client Intake</span>
+                                        <span class="px-2 py-1 bg-[#f3a515]/20 text-[#f3a515] rounded text-sm">Proposals</span>
+                                    </div>
+                                    <span class="text-[#3abbfa]">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Portfolio Examples Card -->
+                        <a href="sites.html" class="tool-card block rounded-lg overflow-hidden" target="_blank" rel="noopener noreferrer">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h2 class="text-xl font-semibold text-white">🖥️ Portfolio Examples</h2>
+                                    <span class="text-[#3abbfa]">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </span>
+                                </div>
+                                <p class="text-gray-400 mb-4">Showcase our design and development capabilities with example sites for different industries.</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex space-x-2">
+                                        <span class="px-2 py-1 bg-[#3abbfa]/20 text-[#3abbfa] rounded text-sm">Examples</span>
+                                        <span class="px-2 py-1 bg-[#f3a515]/20 text-[#f3a515] rounded text-sm">Portfolio</span>
+                                    </div>
+                                    <span class="text-[#3abbfa]">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Lead Tracker Sheet Card -->
+                        <a href="https://docs.google.com/spreadsheets/d/1-NAaAXq7S2YINuRy6jxs9OrnO10MAebCmBZHYUs94jc/edit?usp=sharing" class="tool-card block rounded-lg overflow-hidden" target="_blank" rel="noopener noreferrer">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h2 class="text-xl font-semibold text-white">📊 Lead Tracker Sheet</h2>
+                                    <span class="text-[#3abbfa]">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </span>
+                                </div>
+                                <p class="text-gray-400 mb-4">Track leads, follow-ups, and conversion rates in our centralized Google Sheet system.</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex space-x-2">
+                                        <span class="px-2 py-1 bg-[#3abbfa]/20 text-[#3abbfa] rounded text-sm">Leads</span>
+                                        <span class="px-2 py-1 bg-[#f3a515]/20 text-[#f3a515] rounded text-sm">Analytics</span>
+                                    </div>
+                                    <span class="text-[#3abbfa]">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Daily To-Do Doc Card -->
+                        <a href="https://docs.google.com/document/d/1Md6j-UJF-7XtJUeWPdfUbs98OgkgsP2KWn2-v4SWwpY/edit?usp=sharing" class="tool-card block rounded-lg overflow-hidden" target="_blank" rel="noopener noreferrer">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h2 class="text-xl font-semibold text-white">📄 Daily To-Do Doc</h2>
+                                    <span class="text-[#3abbfa]">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </span>
+                                </div>
+                                <p class="text-gray-400 mb-4">Collaborative daily task management and project tracking in Google Docs.</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex space-x-2">
+                                        <span class="px-2 py-1 bg-[#3abbfa]/20 text-[#3abbfa] rounded text-sm">Tasks</span>
+                                        <span class="px-2 py-1 bg-[#f3a515]/20 text-[#f3a515] rounded text-sm">Projects</span>
+                                    </div>
+                                    <span class="text-[#3abbfa]">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Future Tools Card -->
+                        <a href="future-tools.html" class="tool-card block rounded-lg overflow-hidden" target="_blank" rel="noopener noreferrer">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h2 class="text-xl font-semibold text-white">🛠️ Future Tools</h2>
+                                    <span class="coming-soon-badge">Coming Soon</span>
+                                </div>
+                                <p class="text-gray-400 mb-4">Additional tools and resources to enhance team productivity and client management.</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex space-x-2">
+                                        <span class="px-2 py-1 bg-[#3abbfa]/20 text-[#3abbfa] rounded text-sm">Productivity</span>
+                                        <span class="px-2 py-1 bg-[#f3a515]/20 text-[#f3a515] rounded text-sm">Automation</span>
+                                    </div>
+                                    <span class="text-gray-500">
+                                        <i class="fas fa-clock"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 border-t border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400">© 2025 T&H WebWorks. Internal toolkit for team use only.</p>
+                    <a href="https://www.thwebworks.com" target="_blank" class="text-gray-400 hover:text-[#f3a515] transition-colors mt-4 md:mt-0">
+                        www.thwebworks.com
+                    </a>
+                </div>
             </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
+
+    <script>
+        // PIN Authentication System
+        const CORRECT_PIN = '1234'; // Change this to your desired PIN
+        const authOverlay = document.getElementById('authOverlay');
+        const mainContent = document.getElementById('mainContent');
+        const pinForm = document.getElementById('pinForm');
+        const pinInput = document.getElementById('pinInput');
+        const pinError = document.getElementById('pinError');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        // Check if user is already authenticated
+        function checkAuth() {
+            const isAuthenticated = sessionStorage.getItem('thwebworks_authenticated');
+            if (isAuthenticated === 'true') {
+                showMainContent();
+            }
+        }
+
+        // Show main content and hide auth overlay
+        function showMainContent() {
+            authOverlay.classList.add('hidden');
+            mainContent.classList.remove('hidden');
+        }
+
+        // Show auth overlay and hide main content
+        function showAuthOverlay() {
+            authOverlay.classList.remove('hidden');
+            mainContent.classList.add('hidden');
+            pinInput.value = '';
+            pinInput.focus();
+        }
+
+        // Handle PIN form submission
+        pinForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const enteredPin = pinInput.value;
+            
+            if (enteredPin === CORRECT_PIN) {
+                sessionStorage.setItem('thwebworks_authenticated', 'true');
+                showMainContent();
+                pinError.classList.add('hidden');
+            } else {
+                pinError.classList.remove('hidden');
+                pinInput.value = '';
+                pinInput.focus();
+            }
+        });
+
+        // Handle logout
+        logoutBtn.addEventListener('click', function() {
+            sessionStorage.removeItem('thwebworks_authenticated');
+            showAuthOverlay();
+        });
+
+        // Auto-focus PIN input when page loads
+        pinInput.focus();
+
+        // Check authentication status on page load
+        checkAuth();
+
+        // Prevent right-click context menu (optional security measure)
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Prevent F12, Ctrl+Shift+I, Ctrl+U (optional security measures)
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || 
+                (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                (e.ctrlKey && e.key === 'u')) {
+                e.preventDefault();
+            }
+        });
+    </script>
 </body>
 </html>
