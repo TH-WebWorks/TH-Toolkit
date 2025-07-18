@@ -1,0 +1,116 @@
+<!-- Step 2: Business Type Selection -->
+<div class="form-step active">
+    <!-- Step Header -->
+    <div class="text-center mb-8">
+        <h2 class="step-title text-3xl mb-2">What Type of Business Are You?</h2>
+        <h3 class="text-xl text-text-muted mb-4">Select your business category</h3>
+        <p class="step-description max-w-2xl mx-auto">This helps us create a website layout that's perfect for your industry.</p>
+    </div>
+    
+    <!-- Business Type Options -->
+    <div class="form-group">
+        <label class="form-label flex items-center gap-2">
+            <i class="fas fa-building text-primary"></i>
+            Business Type <span class="text-error">*</span>
+        </label>
+        <p class="form-description text-sm text-text-muted mb-3">Choose the category that best describes your business</p>
+        <div class="input-group grid-cols-1 md:grid-cols-2">
+            <label class="input-option" data-value="service-business">
+                <input type="radio" name="businessType" value="service-business" required>
+                <div class="option-label">
+                    <div class="option-icon">
+                        <i class="fas fa-wrench"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold">Service Business</div>
+                        <div class="text-sm text-text-muted">Professional services (consulting, legal, etc.)</div>
+                    </div>
+                </div>
+            </label>
+            
+            <label class="input-option" data-value="trades">
+                <input type="radio" name="businessType" value="trades" required>
+                <div class="option-label">
+                    <div class="option-icon">
+                        <i class="fas fa-hammer"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold">Trades</div>
+                        <div class="text-sm text-text-muted">Construction, plumbing, electrical, etc.</div>
+                    </div>
+                </div>
+            </label>
+            
+            <label class="input-option" data-value="consulting">
+                <input type="radio" name="businessType" value="consulting" required>
+                <div class="option-label">
+                    <div class="option-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold">Consulting</div>
+                        <div class="text-sm text-text-muted">Business consulting & advisory</div>
+                    </div>
+                </div>
+            </label>
+            
+            <label class="input-option" data-value="education">
+                <input type="radio" name="businessType" value="education" required>
+                <div class="option-label">
+                    <div class="option-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold">Education</div>
+                        <div class="text-sm text-text-muted">Schools, training, courses</div>
+                    </div>
+                </div>
+            </label>
+            
+            <label class="input-option" data-value="real-estate-agency">
+                <input type="radio" name="businessType" value="real-estate-agency" required>
+                <div class="option-label">
+                    <div class="option-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold">Real Estate Agency</div>
+                        <div class="text-sm text-text-muted">Real estate agencies & agents</div>
+                    </div>
+                </div>
+            </label>
+            
+            <label class="input-option" data-value="other">
+                <input type="radio" name="businessType" value="other" required>
+                <div class="option-label">
+                    <div class="option-icon">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold">Other</div>
+                        <div class="text-sm text-text-muted">Other business type</div>
+                    </div>
+                </div>
+            </label>
+        </div>
+        
+        <!-- Other Input Field -->
+        <div class="mt-4">
+            <input type="text" name="businessTypeOther" placeholder="Other (please specify)" 
+                   class="input-option w-full p-4 text-white">
+        </div>
+    </div>
+    
+    <!-- Navigation Buttons -->
+    <div class="btn-group mt-12">
+        <button type="button" class="btn btn-secondary" data-action="prev">
+            <i class="fas fa-arrow-left mr-2"></i>Previous
+        </button>
+        <button type="button" class="btn btn-secondary btn-sm" data-action="reset">
+            <i class="fas fa-refresh mr-2"></i>Start Over
+        </button>
+        <button type="button" class="btn btn-primary" data-action="next">
+            Next<i class="fas fa-arrow-right ml-2"></i>
+        </button>
+    </div>
+</div> 

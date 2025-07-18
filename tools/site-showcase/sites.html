@@ -6,14 +6,14 @@
     <title>Example Sites - T&H WebWorks</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../../styles.css">
 </head>
 <body>
     <!-- PIN Authentication Overlay -->
     <div id="authOverlay" class="fixed inset-0 bg-[#1b1e24] z-50 flex items-center justify-center">
         <div class="bg-[#2b2f35] rounded-lg shadow-lg p-8 max-w-md w-full mx-4 border border-gray-700">
             <div class="text-center mb-6">
-                <img src="Images/THLogo_trans.webp" alt="T&H WebWorks Logo" class="h-16 mx-auto mb-4">
+                <img src="../../Images/THLogo_trans.webp" alt="T&H WebWorks Logo" class="h-16 mx-auto mb-4">
                 <h2 class="text-2xl font-bold text-white mb-2">Example Sites</h2>
                 <p class="text-gray-400">Enter PIN to access</p>
             </div>
@@ -36,7 +36,7 @@
             
             <div class="mt-6 text-center">
                 <p class="text-gray-500 text-sm">For T&H WebWorks team use only</p>
-                <a href="index.html" class="text-[#3abbfa] hover:text-[#2a9ee0] text-sm mt-2 inline-block">
+                <a href="../../index.html" class="text-[#3abbfa] hover:text-[#2a9ee0] text-sm mt-2 inline-block">
                     ← Back to Toolkit
                 </a>
             </div>
@@ -65,7 +65,7 @@
                 <div class="flex justify-between h-16">
                     <div class="flex items-center">
                         <a href="https://www.thwebworks.com" target="_blank">
-                            <img src="Images/THLogo_trans.webp" alt="T&H WebWorks Logo" class="h-12 w-auto">
+                            <img src="../../Images/THLogo_trans.webp" alt="T&H WebWorks Logo" class="h-12 w-auto">
                         </a>
                     </div>
                     <div class="hidden md:flex items-center space-x-8">
@@ -106,7 +106,7 @@
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <!-- Service Business Example -->
-                        <a href="service-business/index.html" class="site-card block rounded-lg overflow-hidden">
+                        <a href="../../service-business/index.html" class="site-card block rounded-lg overflow-hidden">
                             <div class="p-6">
                                 <div class="flex items-center justify-between mb-4">
                                     <h2 class="text-xl font-semibold text-white">Service Based Business</h2>
@@ -128,7 +128,7 @@
                         </a>
 
                         <!-- TechStart Solutions -->
-                        <a href="tech-startup/index.html" class="site-card block rounded-lg overflow-hidden">
+                        <a href="../../tech-startup/index.html" class="site-card block rounded-lg overflow-hidden">
                             <div class="p-6">
                                 <div class="flex items-center justify-between mb-4">
                                     <h2 class="text-xl font-semibold text-white">TechStart Solutions</h2>
@@ -229,7 +229,7 @@
         // Handle logout
         logoutBtn.addEventListener('click', function() {
             sessionStorage.removeItem('thwebworks_authenticated');
-            window.location.href = 'index.html';
+            window.location.href = '../../index.html';
         });
 
         // Auto-focus PIN input when page loads

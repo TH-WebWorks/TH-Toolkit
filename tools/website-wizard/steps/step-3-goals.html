@@ -1,0 +1,168 @@
+<!-- Step 3: Website Goals -->
+<div class="form-step active">
+    <!-- Step Header -->
+    <div class="text-center mb-8">
+        <h2 class="step-title text-3xl mb-2">What Are Your Website Goals?</h2>
+        <h3 class="text-xl text-text-muted mb-4">Define your primary objectives</h3>
+        <p class="step-description max-w-2xl mx-auto">Understanding your goals helps us prioritize features and design elements that will drive results.</p>
+    </div>
+    
+    <!-- Goals Options -->
+    <div class="form-group">
+        <label class="form-label flex items-center gap-2">
+            <i class="fas fa-target text-primary"></i>
+            Primary Goals <span class="text-error">*</span>
+        </label>
+        <p class="form-description text-sm text-text-muted mb-3">Select all that apply to your business (max 5)</p>
+        <div class="input-group grid-cols-1">
+            <label class="input-option" data-value="Lead Generation">
+                <input type="checkbox" name="goals" value="Lead Generation">
+                <div class="option-label">
+                    <div class="option-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold">Lead Generation</div>
+                        <div class="text-sm text-text-muted">Generate new leads and inquiries</div>
+                    </div>
+                </div>
+            </label>
+            
+            <label class="input-option" data-value="Online Booking">
+                <input type="checkbox" name="goals" value="Online Booking">
+                <div class="option-label">
+                    <div class="option-icon">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold">Online Booking</div>
+                        <div class="text-sm text-text-muted">Allow customers to book appointments</div>
+                    </div>
+                </div>
+            </label>
+            
+            <label class="input-option" data-value="Selling Products">
+                <input type="checkbox" name="goals" value="Selling Products">
+                <div class="option-label">
+                    <div class="option-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold">Selling Products</div>
+                        <div class="text-sm text-text-muted">Sell products or services online</div>
+                    </div>
+                </div>
+            </label>
+            
+            <label class="input-option" data-value="Portfolio Display">
+                <input type="checkbox" name="goals" value="Portfolio Display">
+                <div class="option-label">
+                    <div class="option-icon">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold">Portfolio Display</div>
+                        <div class="text-sm text-text-muted">Showcase your work or products</div>
+                    </div>
+                </div>
+            </label>
+            
+            <label class="input-option" data-value="Event Promotion">
+                <input type="checkbox" name="goals" value="Event Promotion">
+                <div class="option-label">
+                    <div class="option-icon">
+                        <i class="fas fa-calendar-days"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold">Event Promotion</div>
+                        <div class="text-sm text-text-muted">Promote events and activities</div>
+                    </div>
+                </div>
+            </label>
+            
+            <label class="input-option" data-value="Content Marketing">
+                <input type="checkbox" name="goals" value="Content Marketing">
+                <div class="option-label">
+                    <div class="option-icon">
+                        <i class="fas fa-file-text"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold">Content Marketing</div>
+                        <div class="text-sm text-text-muted">Share valuable content and insights</div>
+                    </div>
+                </div>
+            </label>
+            
+            <label class="input-option" data-value="SEO Visibility">
+                <input type="checkbox" name="goals" value="SEO Visibility">
+                <div class="option-label">
+                    <div class="option-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold">SEO Visibility</div>
+                        <div class="text-sm text-text-muted">Improve search engine rankings</div>
+                    </div>
+                </div>
+            </label>
+            
+            <label class="input-option" data-value="Brand Trust">
+                <input type="checkbox" name="goals" value="Brand Trust">
+                <div class="option-label">
+                    <div class="option-icon">
+                        <i class="fas fa-shield"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold">Brand Trust</div>
+                        <div class="text-sm text-text-muted">Build credibility and trust</div>
+                    </div>
+                </div>
+            </label>
+            
+            <label class="input-option" data-value="Client Login">
+                <input type="checkbox" name="goals" value="Client Login">
+                <div class="option-label">
+                    <div class="option-icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold">Client Login</div>
+                        <div class="text-sm text-text-muted">Provide client portal access</div>
+                    </div>
+                </div>
+            </label>
+            
+            <label class="input-option" data-value="Other">
+                <input type="checkbox" name="goals" value="Other">
+                <div class="option-label">
+                    <div class="option-icon">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold">Other</div>
+                        <div class="text-sm text-text-muted">Other specific goals</div>
+                    </div>
+                </div>
+            </label>
+        </div>
+        
+        <!-- Other Input Field -->
+        <div class="mt-4">
+            <input type="text" name="goalsOther" placeholder="Other (please specify)" 
+                   class="input-option w-full p-4 text-white">
+        </div>
+    </div>
+    
+    <!-- Navigation Buttons -->
+    <div class="btn-group mt-12">
+        <button type="button" class="btn btn-secondary" data-action="prev">
+            <i class="fas fa-arrow-left mr-2"></i>Previous
+        </button>
+        <button type="button" class="btn btn-secondary btn-sm" data-action="reset">
+            <i class="fas fa-refresh mr-2"></i>Start Over
+        </button>
+        <button type="button" class="btn btn-primary" data-action="next">
+            Next<i class="fas fa-arrow-right ml-2"></i>
+        </button>
+    </div>
+</div> 

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Website Consultation Wizard - Professional consultation for T&H WebWorks">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Website Consultation Wizard - T&H WebWorks</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="main-container">
+    <!-- PIN Authentication Overlay -->
+    <div id="authOverlay" class="auth-overlay fixed inset-0 z-50 flex items-center justify-center">
+        <div class="auth-card p-8 max-w-md w-full mx-4">
+            <div class="text-center mb-8">
+                <img src="../../Images/THLogo_trans.webp" alt="T&H WebWorks Logo" class="h-24 w-auto mx-auto mb-6 object-contain">
+                <h2 class="text-3xl font-bold text-gradient mb-3">Website Consultation Wizard</h2>
+                <p class="text-text-muted text-lg">Enter PIN to access professional consultation</p>
+            </div>
+            
+            <form id="pinForm" class="space-y-6">
+                <div class="relative">
+                    <input type="password" id="pinInput" maxlength="4" placeholder="PIN" 
+                           class="auth-input w-full p-6 text-center text-3xl font-mono text-white">
+                </div>
+                
+                <div id="pinError" class="text-error text-sm text-center hidden">
+                    Incorrect PIN. Please try again.
+                </div>
+                
+                <button type="submit" class="auth-btn w-full py-4 px-8 text-white text-lg">
+                    Access Wizard
+                </button>
+            </form>
+            
+            <div class="mt-8 text-center">
+                <p class="text-text-muted text-sm">For T&H WebWorks team use only</p>
+                <a href="../../index.html" class="text-primary hover:text-primary-light text-sm mt-3 inline-block transition-colors">
+                    ← Back to Toolkit
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content (hidden until authenticated) -->
+    <div id="mainContent" class="hidden">
+        <main class="flex flex-col lg:flex-row min-h-screen">
+            <!-- Form Panel -->
+            <div class="flex-1 flex flex-col items-center justify-center py-12 px-6">
+                <div class="form-panel w-full max-w-3xl p-8 md:p-10 relative">
+                <!-- Progress Bar -->
+                    <div class="progress-container">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-sm font-semibold text-primary">Step <span id="progressStep">1</span> of <span id="progressTotal">8</span></span>
+                            <span class="text-sm text-text-muted" id="progressLabel">Welcome</span>
+                    </div>
+                        <div class="w-full h-3 bg-dark-lighter rounded-full overflow-hidden">
+                            <div id="progressBar" class="progress-bar h-3 transition-all duration-500" style="width: 12.5%"></div>
+                    </div>
+                </div>
+                <!-- Dynamic Form -->
+                <form id="wizardForm" class="space-y-8"></form>
+            </div>
+            </div>
+
+            <!-- Live Preview Panel -->
+            <div id="previewPanel" class="preview-panel w-full lg:w-1/2 p-8">
+                <div class="sticky top-8">
+                    <h3 class="text-xl font-semibold text-white mb-6 flex items-center">
+                        <span class="text-primary mr-3">👁️</span>
+                        Live Preview
+                    </h3>
+                    <div id="sitePreview" class="site-preview">
+                        <div class="preview-header">
+                            <div class="preview-dots">
+                                <div class="preview-dot red"></div>
+                                <div class="preview-dot yellow"></div>
+                                <div class="preview-dot green"></div>
+                            </div>
+                            <span class="text-xs text-gray-600 ml-3">example.com</span>
+                        </div>
+                        <div class="preview-content">
+                            <div class="preview-placeholder">
+                                <div class="text-center">
+                                    <div class="text-6xl mb-4">🎨</div>
+                                    <div class="text-lg font-medium">Start building your site</div>
+                                    <div class="text-sm text-gray-500 mt-2">Select your business type to begin</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Preview Info -->
+                    <div id="previewInfo" class="preview-info">
+                        <h4 class="font-semibold text-primary mb-3 text-lg">Site Configuration</h4>
+                        <div id="previewDetails" class="text-sm text-text-muted space-y-2">
+                            <p>Select options to see your site configuration</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- External JavaScript Files -->
+    <script src="state.js"></script>
+    <script src="wizard.js"></script>
+    <script src="preview.js"></script>
+    <!-- Individual Layout Files -->
+    <script src="layout/layout-service-business.js"></script>
+    <script src="layout/layout-trades.js"></script>
+    <script src="layout/layout-consulting.js"></script>
+    <script src="layout/layout-education.js"></script>
+    <script src="layout/layout-real-estate.js"></script>
+    <script src="layout/layout-other.js"></script>
+    <script src="layout/layout-tech.js"></script>
+</body>
+</html> 

@@ -1,0 +1,66 @@
+<!-- Step 7: Color & Branding -->
+<div class="form-step active">
+    <!-- Step Header -->
+    <div class="text-center mb-8">
+        <h2 class="step-title text-3xl mb-2">What Colors Represent Your Brand?</h2>
+        <h3 class="text-xl text-text-muted mb-4">Choose your color palette</h3>
+        <p class="step-description max-w-2xl mx-auto">Your brand colors will be used throughout your website to create a cohesive visual identity.</p>
+    </div>
+    
+    <!-- Primary Color -->
+    <div class="form-group">
+        <label class="form-label flex items-center gap-2">
+            <i class="fas fa-palette text-primary"></i>
+            Primary Color
+        </label>
+        <p class="form-description text-sm text-text-muted mb-3">Your main brand color (used for buttons, links, and highlights)</p>
+        <div class="flex items-center gap-4">
+            <input type="color" name="primaryColor" 
+                   class="w-16 h-16 p-0 border-none bg-transparent rounded-lg cursor-pointer hover:scale-110 transition-transform duration-200" 
+                   value="#3abbfa">
+            <input type="text" name="primaryColor" placeholder="#3abbfa" 
+                   class="input-option flex-1 p-4 text-white" 
+                   value="#3abbfa">
+        </div>
+    </div>
+    
+    <!-- Secondary Color -->
+    <div class="form-group">
+        <label class="form-label flex items-center gap-2">
+            <i class="fas fa-palette text-primary"></i>
+            Secondary Color
+        </label>
+        <p class="form-description text-sm text-text-muted mb-3">Your accent color (used for highlights and secondary elements)</p>
+        <div class="flex items-center gap-4">
+            <input type="color" name="secondaryColor" 
+                   class="w-16 h-16 p-0 border-none bg-transparent rounded-lg cursor-pointer hover:scale-110 transition-transform duration-200" 
+                   value="#f39c12">
+            <input type="text" name="secondaryColor" placeholder="#f39c12" 
+                   class="input-option flex-1 p-4 text-white" 
+                   value="#f39c12">
+        </div>
+    </div>
+    
+    <!-- Color Preview -->
+    <div class="form-group">
+        <label class="form-label">Color Preview</label>
+        <div class="flex gap-4 items-center">
+            <div class="w-12 h-12 rounded-lg border-2 border-white shadow-lg" id="primaryColorPreview" style="background-color: #3abbfa;"></div>
+            <div class="w-12 h-12 rounded-lg border-2 border-white shadow-lg" id="secondaryColorPreview" style="background-color: #f39c12;"></div>
+            <span class="text-text-muted text-sm">Your brand colors will look like this</span>
+        </div>
+    </div>
+    
+    <!-- Navigation Buttons -->
+    <div class="btn-group mt-12">
+        <button type="button" class="btn btn-secondary" data-action="prev">
+            <i class="fas fa-arrow-left mr-2"></i>Previous
+        </button>
+        <button type="button" class="btn btn-secondary btn-sm" data-action="reset">
+            <i class="fas fa-refresh mr-2"></i>Start Over
+        </button>
+        <button type="button" class="btn btn-primary" data-action="next">
+            Next<i class="fas fa-arrow-right ml-2"></i>
+        </button>
+    </div>
+</div> 
