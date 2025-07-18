@@ -1853,7 +1853,8 @@
                     details.innerHTML = '<p>Select your business type to see your site configuration</p>';
                 } else {
                     const template = previewTemplates[formData.businessType] || previewTemplates['service-business'];
-                    const primaryColor = formData.primaryColor || template.color;
+                    const primaryColor = formData.primaryColor || '#3abbfa';
+                    const secondaryColor = formData.secondaryColor || '#f39c12';
                     const designStyle = formData.designStyle || 'Modern & Clean';
                     
                     // Generate preview HTML based on business type
@@ -1992,9 +1993,11 @@
         // --- BUSINESS TYPE PREVIEW GENERATOR ---
         function generateBusinessTypePreview(template, primaryColor, designStyle) {
             const businessName = template.name;
+            const secondaryColor = formData.secondaryColor || '#f39c12';
             const colors = {
                 primary: primaryColor,
-                accent: template.color || primaryColor
+                secondary: secondaryColor,
+                accent: secondaryColor
             };
             
             // Generate unique layout based on business type
@@ -2021,7 +2024,7 @@
             return `
                 <div class="bg-white text-gray-800 font-sans">
                     <!-- Header -->
-                    <header class="bg-gradient-to-r from-${colors.primary} to-${colors.primary} text-white p-4">
+                    <header style="background: ${colors.primary}; color: white; padding: 1rem;">
                         <div class="max-w-6xl mx-auto flex justify-between items-center">
                             <div>
                                 <h1 class="text-xl font-bold">${template.name}</h1>
@@ -2037,12 +2040,12 @@
                     </header>
                     
                     <!-- Hero Section -->
-                    <section class="bg-gradient-to-br from-${colors.primary} to-${colors.primary} text-white py-16 text-center">
+                    <section style="background: linear-gradient(135deg, ${colors.primary} 0%, ${colors.primary} 100%); color: white; padding: 64px 20px; text-align: center;">
                         <div class="max-w-4xl mx-auto px-4">
-                            <div class="text-6xl mb-6">${template.heroImage}</div>
+                            <div style="font-size: 64px; margin-bottom: 24px;">${template.heroImage}</div>
                             <h2 class="text-3xl font-bold mb-4">Professional Services</h2>
                             <p class="text-xl mb-8 opacity-90">Quality solutions you can trust</p>
-                            <button class="bg-white text-${colors.primary} px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
+                            <button style="background: white; color: ${colors.primary}; padding: 12px 32px; border-radius: 9999px; font-weight: 600; border: none; cursor: pointer; transition: background 0.3s ease;">
                                 Get Started
                             </button>
                         </div>
@@ -2053,18 +2056,18 @@
                         <div class="max-w-6xl mx-auto px-4">
                             <h3 class="text-2xl font-bold text-center mb-12 text-gray-800">Our Services</h3>
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                                <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                                    <div class="text-4xl mb-4">🔧</div>
+                                <div class="bg-white p-6 rounded-lg shadow-md text-center accent-element" style="border-left: 4px solid ${colors.secondary};">
+                                    <div style="font-size: 48px; margin-bottom: 16px;">🔧</div>
                                     <h4 class="font-semibold mb-2">Service 1</h4>
                                     <p class="text-gray-600 text-sm">Professional service description</p>
                                 </div>
-                                <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                                    <div class="text-4xl mb-4">⚡</div>
+                                <div class="bg-white p-6 rounded-lg shadow-md text-center accent-element" style="border-left: 4px solid ${colors.secondary};">
+                                    <div style="font-size: 48px; margin-bottom: 16px;">⚡</div>
                                     <h4 class="font-semibold mb-2">Service 2</h4>
                                     <p class="text-gray-600 text-sm">Fast and reliable solutions</p>
                                 </div>
-                                <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                                    <div class="text-4xl mb-4">📋</div>
+                                <div class="bg-white p-6 rounded-lg shadow-md text-center accent-element" style="border-left: 4px solid ${colors.secondary};">
+                                    <div style="font-size: 48px; margin-bottom: 16px;">📋</div>
                                     <h4 class="font-semibold mb-2">Service 3</h4>
                                     <p class="text-gray-600 text-sm">Comprehensive service package</p>
                                 </div>
@@ -2084,7 +2087,7 @@
             return `
                 <div class="bg-white text-gray-800 font-sans">
                     <!-- Header -->
-                    <header class="bg-${colors.primary} text-white p-4">
+                    <header style="background: ${colors.primary}; color: white; padding: 1rem;">
                         <div class="max-w-6xl mx-auto flex justify-between items-center">
                             <div>
                                 <h1 class="text-xl font-bold">${template.name}</h1>
@@ -2100,12 +2103,12 @@
                     </header>
                     
                     <!-- Hero Section -->
-                    <section class="bg-gradient-to-r from-${colors.primary} to-${colors.primary} text-white py-16 text-center">
+                    <section style="background: linear-gradient(135deg, ${colors.primary} 0%, ${colors.primary} 100%); color: white; padding: 64px 20px; text-align: center;">
                         <div class="max-w-4xl mx-auto px-4">
-                            <div class="text-6xl mb-6">${template.heroImage}</div>
+                            <div style="font-size: 64px; margin-bottom: 24px;">${template.heroImage}</div>
                             <h2 class="text-3xl font-bold mb-4">Quality Workmanship</h2>
                             <p class="text-xl mb-8 opacity-90">Licensed, insured, and guaranteed work</p>
-                            <button class="bg-white text-${colors.primary} px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
+                            <button style="background: white; color: ${colors.primary}; padding: 12px 32px; border-radius: 9999px; font-weight: 600; border: none; cursor: pointer; transition: background 0.3s ease;">
                                 Get Free Quote
                             </button>
                         </div>
@@ -2116,18 +2119,18 @@
                         <div class="max-w-6xl mx-auto px-4">
                             <h3 class="text-2xl font-bold text-center mb-12 text-gray-800">Our Services</h3>
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                                <div class="bg-white p-6 rounded-lg shadow-md text-center border-l-4 border-${colors.primary}">
-                                    <div class="text-4xl mb-4">🏠</div>
+                                <div class="bg-white p-6 rounded-lg shadow-md text-center accent-element" style="border-left: 4px solid ${colors.secondary};">
+                                    <div style="font-size: 48px; margin-bottom: 16px;">🏠</div>
                                     <h4 class="font-semibold mb-2">Residential</h4>
                                     <p class="text-gray-600 text-sm">Home repairs and renovations</p>
                                 </div>
-                                <div class="bg-white p-6 rounded-lg shadow-md text-center border-l-4 border-${colors.primary}">
-                                    <div class="text-4xl mb-4">🏢</div>
+                                <div class="bg-white p-6 rounded-lg shadow-md text-center accent-element" style="border-left: 4px solid ${colors.secondary};">
+                                    <div style="font-size: 48px; margin-bottom: 16px;">🏢</div>
                                     <h4 class="font-semibold mb-2">Commercial</h4>
                                     <p class="text-gray-600 text-sm">Business and office work</p>
                                 </div>
-                                <div class="bg-white p-6 rounded-lg shadow-md text-center border-l-4 border-${colors.primary}">
-                                    <div class="text-4xl mb-4">🚨</div>
+                                <div class="bg-white p-6 rounded-lg shadow-md text-center accent-element" style="border-left: 4px solid ${colors.secondary};">
+                                    <div style="font-size: 48px; margin-bottom: 16px;">🚨</div>
                                     <h4 class="font-semibold mb-2">Emergency</h4>
                                     <p class="text-gray-600 text-sm">24/7 emergency service</p>
                                 </div>
@@ -2147,7 +2150,7 @@
             return `
                 <div class="bg-white text-gray-800 font-sans">
                     <!-- Header -->
-                    <header class="bg-gradient-to-r from-${colors.primary} to-${colors.primary} text-white p-4">
+                    <header style="background: ${colors.primary}; color: white; padding: 1rem;">
                         <div class="max-w-6xl mx-auto flex justify-between items-center">
                             <div>
                                 <h1 class="text-xl font-bold">${template.name}</h1>
@@ -2163,12 +2166,12 @@
                     </header>
                     
                     <!-- Hero Section -->
-                    <section class="bg-gradient-to-br from-${colors.primary} to-${colors.primary} text-white py-16 text-center">
+                    <section style="background: linear-gradient(135deg, ${colors.primary} 0%, ${colors.primary} 100%); color: white; padding: 64px 20px; text-align: center;">
                         <div class="max-w-4xl mx-auto px-4">
-                            <div class="text-6xl mb-6">${template.heroImage}</div>
+                            <div style="font-size: 64px; margin-bottom: 24px;">${template.heroImage}</div>
                             <h2 class="text-3xl font-bold mb-4">Strategic Business Solutions</h2>
                             <p class="text-xl mb-8 opacity-90">Expert consulting to drive your business growth</p>
-                            <button class="bg-white text-${colors.primary} px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
+                            <button style="background: white; color: ${colors.primary}; padding: 12px 32px; border-radius: 9999px; font-weight: 600; border: none; cursor: pointer; transition: background 0.3s ease;">
                                 Schedule Consultation
                             </button>
                         </div>
@@ -2179,8 +2182,8 @@
                         <div class="max-w-6xl mx-auto px-4">
                             <h3 class="text-2xl font-bold text-center mb-12 text-gray-800">Our Expertise</h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                <div class="bg-white p-8 rounded-lg shadow-md">
-                                    <div class="text-4xl mb-4">📈</div>
+                                <div class="bg-white p-8 rounded-lg shadow-md accent-element" style="border-left: 4px solid ${colors.secondary};">
+                                    <div style="font-size: 48px; margin-bottom: 16px;">📈</div>
                                     <h4 class="font-semibold mb-3 text-lg">Business Strategy</h4>
                                     <p class="text-gray-600 mb-4">Comprehensive strategic planning and execution</p>
                                     <ul class="text-gray-600 text-sm space-y-1">
@@ -2189,8 +2192,8 @@
                                         <li>• Growth strategies</li>
                                     </ul>
                                 </div>
-                                <div class="bg-white p-8 rounded-lg shadow-md">
-                                    <div class="text-4xl mb-4">💼</div>
+                                <div class="bg-white p-8 rounded-lg shadow-md accent-element" style="border-left: 4px solid ${colors.secondary};">
+                                    <div style="font-size: 48px; margin-bottom: 16px;">💼</div>
                                     <h4 class="font-semibold mb-3 text-lg">Digital Transformation</h4>
                                     <p class="text-gray-600 mb-4">Modernize your business with technology</p>
                                     <ul class="text-gray-600 text-sm space-y-1">
@@ -3266,11 +3269,30 @@
                     const otherInput = document.getElementById(`other-${t.name}`);
                     if (otherInput) otherInput.style.display = 'none';
                 }
+            } else if (t.type === 'text' && (t.name === 'primaryColor' || t.name === 'secondaryColor')) {
+                // Handle color text input validation and sync
+                const hexRegex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+                if (hexRegex.test(t.value)) {
+                    // Sync the color picker with the text input
+                    const colorInput = document.querySelector(`input[type="color"][name="${t.name}"]`);
+                    if (colorInput) {
+                        colorInput.value = t.value;
+                    }
+                    formData[t.name] = t.value;
+                    // Update colors immediately for color inputs
+                    updateColorsImmediately(t.name, t.value);
+                }
             } else {
                 formData[t.name] = t.value;
             }
             
-            // IMMEDIATE visual feedback for specific options
+            // For color inputs, handle separately to avoid conflicts
+            if (t.type === 'text' && (t.name === 'primaryColor' || t.name === 'secondaryColor')) {
+                // Colors are handled by updateColorsImmediately, no need for full preview update
+                return;
+            }
+            
+            // IMMEDIATE visual feedback for specific options (but not for colors)
             handleImmediateVisualChanges(t);
             
             // Update preview with delay for better UX
@@ -3295,7 +3317,24 @@
             if (t.type === 'checkbox' && t.name === 'sendEmailCopy') {
                 formData[t.name] = t.checked;
             }
+            
+            // Handle color picker changes
+            if (t.type === 'color') {
+                // Sync the text input with the color picker
+                const textInput = document.querySelector(`input[type="text"][name="${t.name}"]`);
+                if (textInput) {
+                    textInput.value = t.value;
+                }
+                formData[t.name] = t.value;
+                updateColorsImmediately(t.name, t.value);
+                // Don't trigger full preview update for color changes
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
         });
+        
+
         
         // --- Handle Immediate Visual Changes for Each Option ---
         function handleImmediateVisualChanges(target) {
@@ -3322,7 +3361,8 @@
                     // Change header color immediately
                     const header = previewContent.querySelector('header');
                     if (header) {
-                        header.style.background = template.color;
+                        const currentPrimaryColor = formData.primaryColor || '#3abbfa';
+                        header.style.background = currentPrimaryColor;
                         header.style.transition = 'background 0.5s ease';
                     }
                 }
@@ -3340,8 +3380,8 @@
             }
             
             // Color Changes - Immediate color updates
-            if (target.name === 'primaryColor') {
-                updateColorsImmediately(target.value);
+            if (target.name === 'primaryColor' || target.name === 'secondaryColor') {
+                updateColorsImmediately(target.name, target.value);
             }
         }
         
@@ -3560,17 +3600,18 @@
             const isMinimalist = style.includes('Minimalist');
             const isLuxury = style.includes('Luxury');
             
-            // Update header style
+            // Update header style - respect user's selected primary color
             const header = previewContent.querySelector('header');
             if (header) {
+                const userPrimaryColor = formData.primaryColor || '#3abbfa';
                 if (isModern) {
-                    header.style.background = 'linear-gradient(135deg, #3abbfa, #2a9ee0)';
+                    header.style.background = `linear-gradient(135deg, ${userPrimaryColor}, ${userPrimaryColor})`;
                 } else if (isLuxury) {
-                    header.style.background = 'linear-gradient(45deg, #3abbfa, #2a9ee0, #1a8ed0)';
+                    header.style.background = `linear-gradient(45deg, ${userPrimaryColor}, ${userPrimaryColor}, ${userPrimaryColor})`;
                 } else if (isMinimalist) {
-                    header.style.background = '#3abbfa';
+                    header.style.background = userPrimaryColor;
                 } else {
-                    header.style.background = '#3abbfa';
+                    header.style.background = userPrimaryColor;
                 }
                 header.style.transition = 'background 0.5s ease';
             }
@@ -3601,37 +3642,81 @@
         }
         
         // --- Update Colors Immediately ---
-        function updateColorsImmediately(color) {
+        function updateColorsImmediately(colorType, color) {
+            console.log(`Updating ${colorType} to ${color}`);
+            console.log('Current formData colors:', { primary: formData.primaryColor, secondary: formData.secondaryColor });
+            
             const preview = document.getElementById('sitePreview');
             const previewContent = preview.querySelector('.preview-content');
             
-            // Update header
-            const header = previewContent.querySelector('header');
-            if (header) {
-                header.style.background = color;
-                header.style.transition = 'background 0.5s ease';
-            }
+            // Ensure formData is updated with the new color
+            formData[colorType] = color;
             
-            // Update buttons
-            const buttons = previewContent.querySelectorAll('button');
-            buttons.forEach(button => {
-                if (button.style.background !== 'transparent') {
+            // Get both colors from form data (now with updated value)
+            const primaryColor = formData.primaryColor || '#3abbfa';
+            const secondaryColor = formData.secondaryColor || '#f39c12';
+            
+            console.log('After update - formData colors:', { primary: primaryColor, secondary: secondaryColor });
+            
+            if (colorType === 'primaryColor') {
+                console.log(`Applying primary color: ${color}`);
+                // Update header with primary color
+                const header = previewContent.querySelector('header');
+                if (header) {
+                    header.style.background = color;
+                    header.style.transition = 'background 0.5s ease';
+                }
+                
+                // Update main CTA buttons with primary color
+                const buttons = previewContent.querySelectorAll('button');
+                buttons.forEach(button => {
+                    if (button.style.background !== 'transparent' && !button.classList.contains('secondary-btn')) {
+                        button.style.background = color;
+                        button.style.transition = 'background 0.3s ease';
+                    }
+                });
+                
+                // Update hero section background
+                const heroSection = previewContent.querySelector('section[style*="padding: 60px"], section[style*="padding: 64px"]');
+                if (heroSection) {
+                    heroSection.style.background = `linear-gradient(135deg, ${color} 0%, ${color} 100%)`;
+                    heroSection.style.transition = 'background 0.5s ease';
+                }
+                
+            } else if (colorType === 'secondaryColor') {
+                console.log(`Applying secondary color: ${color}`);
+                // Update secondary elements with secondary color
+                const secondaryButtons = previewContent.querySelectorAll('button.secondary-btn');
+                secondaryButtons.forEach(button => {
                     button.style.background = color;
                     button.style.transition = 'background 0.3s ease';
-                }
-            });
-            
-            // Update feature icons
-            const featureIcons = previewContent.querySelectorAll('div[style*="font-size: 48px"]');
-            featureIcons.forEach(icon => {
-                const parent = icon.parentElement;
-                if (parent && parent.style.borderRadius) {
-                    parent.style.border = `2px solid ${color}`;
-                }
-            });
+                });
+                
+                // Update accent elements like icons and highlights
+                const accentElements = previewContent.querySelectorAll('.accent-element, [style*="border-left"]');
+                accentElements.forEach(element => {
+                    element.style.borderColor = color;
+                    element.style.transition = 'border-color 0.3s ease';
+                });
+                
+                // Update feature icons with secondary color
+                const featureIcons = previewContent.querySelectorAll('div[style*="font-size: 48px"], div[style*="font-size: 64px"]');
+                featureIcons.forEach(icon => {
+                    const parent = icon.parentElement;
+                    if (parent && parent.style.borderRadius) {
+                        parent.style.border = `2px solid ${color}`;
+                        parent.style.transition = 'border-color 0.3s ease';
+                    }
+                });
+            }
             
             // Add color change animation
             addColorChangeEffect(color);
+            
+            // Ensure colors persist by setting a flag
+            previewContent.setAttribute('data-colors-updated', 'true');
+            previewContent.setAttribute('data-primary-color', primaryColor);
+            previewContent.setAttribute('data-secondary-color', secondaryColor);
         }
         
         // --- Add Interactive Elements ---
@@ -3922,12 +4007,13 @@
             if (target.dataset.action === 'next') {
                 // Add animation
                 target.style.transform = 'scale(0.95)';
+                const originalBackground = target.style.background;
                 target.style.background = '#2a9ee0';
                 target.innerHTML = '✓ Processing...';
                 
                 setTimeout(() => {
                     target.style.transform = 'scale(1)';
-                    target.style.background = '#3abbfa';
+                    target.style.background = originalBackground;
                     target.innerHTML = 'Continue';
                     nextStep();
                 }, 500);
