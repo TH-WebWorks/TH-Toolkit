@@ -38,7 +38,7 @@ function generateEducationLayout(template, colors, designStyle, businessName, st
     const hasPayment = state.features && state.features.includes('Payment Processing');
     const hasTestimonials = state.pagesTrust && state.pagesTrust.includes('Testimonials');
     const hasContact = state.pagesCore && state.pagesCore.includes('Contact');
-    const hasNewsletter = state.features && state.features.includes('Newsletter Signup');
+    // Newsletter is now handled in Step 4 (pagesEngage), not in features
     
     return `
         <div class="w-full max-w-6xl mx-auto" style="font-family: ${getEducationFontFamily(designStyle)};">
@@ -50,14 +50,16 @@ function generateEducationLayout(template, colors, designStyle, businessName, st
                         <span class="font-semibold text-gray-900">${businessName}</span>
                     </div>
                     <div class="hidden md:flex items-center space-x-6">
-                        <a href="#" class="text-gray-600 hover:text-gray-900">Home</a>
-                        <a href="#" class="text-gray-600 hover:text-gray-900">Courses</a>
-                        <a href="#" class="text-gray-600 hover:text-gray-900">About</a>
-                        <a href="#" class="text-gray-600 hover:text-gray-900">Faculty</a>
-                        ${hasContact ? '<a href="#" class="text-gray-600 hover:text-gray-900">Contact</a>' : ''}
+                        ${state.pagesCore && state.pagesCore.includes('Home') ? '<a href="#" class="text-gray-600 hover:text-gray-900">Home</a>' : ''}
+                        ${state.pagesCore && state.pagesCore.includes('Services') ? '<a href="#" class="text-gray-600 hover:text-gray-900">Courses</a>' : ''}
+                        ${state.pagesCore && state.pagesCore.includes('About') ? '<a href="#" class="text-gray-600 hover:text-gray-900">About</a>' : ''}
+                        ${state.pagesCore && state.pagesCore.includes('Contact') ? '<a href="#" class="text-gray-600 hover:text-gray-900">Contact</a>' : ''}
+                        ${state.pagesEngage && state.pagesEngage.includes('Resources') ? '<a href="#" class="text-gray-600 hover:text-gray-900">Resources</a>' : ''}
+                        ${state.pagesEngage && state.pagesEngage.includes('Events') ? '<a href="#" class="text-gray-600 hover:text-gray-900">Events</a>' : ''}
+                        ${state.features && state.features.includes('Live Chat') ? '<a href="#" class="text-gray-600 hover:text-gray-900 flex items-center gap-2"><i class="fas fa-comments"></i> Chat</a>' : ''}
                     </div>
                     ${hasBooking ? `
-                        <button class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
                             Enroll Now
                         </button>
                     ` : ''}
@@ -65,7 +67,7 @@ function generateEducationLayout(template, colors, designStyle, businessName, st
             </nav>
 
             <!-- Hero Section -->
-            <section class="bg-gradient-to-r from-green-50 to-blue-50 py-16 px-6">
+            <section class="bg-gradient-to-r from-blue-50 to-indigo-50 py-16 px-6">
                 <div class="max-w-4xl mx-auto text-center">
                     <h1 class="text-4xl md:text-6xl font-bold mb-6" style="color: ${colors.primary};">
                         Unlock Your Potential
@@ -75,7 +77,7 @@ function generateEducationLayout(template, colors, designStyle, businessName, st
                         Expert instructors, flexible learning, and proven results.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <button class="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition-colors font-semibold">
+                        <button class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
                             Explore Courses
                         </button>
                         <button class="border border-gray-300 text-gray-700 px-8 py-3 rounded-lg hover:bg-gray-50 transition-colors font-semibold">
@@ -99,21 +101,21 @@ function generateEducationLayout(template, colors, designStyle, businessName, st
                             <div class="w-12 h-12 rounded-lg mb-4 flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-xl">💻</span>
                             </div>
-                            <h3 class="text-xl font-semibold mb-2">Web Development</h3>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-900">Web Development</h3>
                             <p class="text-gray-600">Master modern web technologies and build amazing websites.</p>
                         </div>
                         <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition-shadow">
                             <div class="w-12 h-12 rounded-lg mb-4 flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-xl">📊</span>
                             </div>
-                            <h3 class="text-xl font-semibold mb-2">Data Science</h3>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-900">Data Science</h3>
                             <p class="text-gray-600">Learn to analyze data and make informed business decisions.</p>
                         </div>
                         <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition-shadow">
                             <div class="w-12 h-12 rounded-lg mb-4 flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-xl">🎨</span>
                             </div>
-                            <h3 class="text-xl font-semibold mb-2">Digital Design</h3>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-900">Digital Design</h3>
                             <p class="text-gray-600">Create stunning visuals and user experiences.</p>
                         </div>
                     </div>
@@ -134,28 +136,28 @@ function generateEducationLayout(template, colors, designStyle, businessName, st
                             <div class="w-16 h-16 rounded-full mb-4 mx-auto flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-2xl">👨‍🏫</span>
                             </div>
-                            <h3 class="text-lg font-semibold mb-2">Expert Instructors</h3>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">Expert Instructors</h3>
                             <p class="text-gray-600">Industry professionals with real-world experience</p>
                         </div>
                         <div class="text-center">
                             <div class="w-16 h-16 rounded-full mb-4 mx-auto flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-2xl">📱</span>
                             </div>
-                            <h3 class="text-lg font-semibold mb-2">Flexible Learning</h3>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">Flexible Learning</h3>
                             <p class="text-gray-600">Online and in-person options available</p>
                         </div>
                         <div class="text-center">
                             <div class="w-16 h-16 rounded-full mb-4 mx-auto flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-2xl">🎓</span>
                             </div>
-                            <h3 class="text-lg font-semibold mb-2">Certification</h3>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">Certification</h3>
                             <p class="text-gray-600">Industry-recognized certificates upon completion</p>
                         </div>
                         <div class="text-center">
                             <div class="w-16 h-16 rounded-full mb-4 mx-auto flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-2xl">🤝</span>
                             </div>
-                            <h3 class="text-lg font-semibold mb-2">Support</h3>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">Support</h3>
                             <p class="text-gray-600">24/7 support and mentorship</p>
                         </div>
                     </div>
@@ -208,23 +210,7 @@ function generateEducationLayout(template, colors, designStyle, businessName, st
             </section>
             ` : ''}
 
-            ${hasNewsletter ? `
-            <!-- Newsletter Signup -->
-            <section class="py-16 px-6 bg-green-600">
-                <div class="max-w-4xl mx-auto text-center">
-                    <h2 class="text-3xl font-bold text-white mb-4">Stay Updated</h2>
-                    <p class="text-green-100 mb-8 max-w-2xl mx-auto">
-                        Get the latest course updates and educational resources delivered to your inbox.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-                        <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 rounded-lg border-0 focus:ring-2 focus:ring-white">
-                        <button class="bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-                            Subscribe
-                        </button>
-                    </div>
-                </div>
-            </section>
-            ` : ''}
+
 
             <!-- Footer -->
             <footer class="bg-gray-900 text-white py-12 px-6">

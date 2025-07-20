@@ -36,9 +36,12 @@ window.renderTradesPreview = function(state) {
 function generateTradesLayout(template, colors, designStyle, businessName, state) {
     const hasBooking = state.features && state.features.includes('Online Scheduler');
     const hasPayment = state.features && state.features.includes('Payment Processing');
+    const hasResources = state.pagesEngage && state.pagesEngage.includes('Resources');
+    const hasEvents = state.pagesEngage && state.pagesEngage.includes('Events');
+    const hasNewsletter = state.pagesEngage && state.pagesEngage.includes('Newsletter');
     const hasTestimonials = state.pagesTrust && state.pagesTrust.includes('Testimonials');
     const hasContact = state.pagesCore && state.pagesCore.includes('Contact');
-    const hasNewsletter = state.features && state.features.includes('Newsletter Signup');
+    // Newsletter is now handled in Step 4 (pagesEngage), not in features
     
     return `
         <div class="w-full max-w-6xl mx-auto" style="font-family: ${getTradesFontFamily(designStyle)};">
@@ -50,14 +53,16 @@ function generateTradesLayout(template, colors, designStyle, businessName, state
                         <span class="font-semibold text-gray-900">${businessName}</span>
                     </div>
                     <div class="hidden md:flex items-center space-x-6">
-                        <a href="#" class="text-gray-600 hover:text-gray-900">Home</a>
-                        <a href="#" class="text-gray-600 hover:text-gray-900">Services</a>
-                        <a href="#" class="text-gray-600 hover:text-gray-900">Projects</a>
-                        <a href="#" class="text-gray-600 hover:text-gray-900">About</a>
-                        ${hasContact ? '<a href="#" class="text-gray-600 hover:text-gray-900">Contact</a>' : ''}
+                        ${state.pagesCore && state.pagesCore.includes('Home') ? '<a href="#" class="text-gray-600 hover:text-gray-900">Home</a>' : ''}
+                        ${state.pagesCore && state.pagesCore.includes('Services') ? '<a href="#" class="text-gray-600 hover:text-gray-900">Services</a>' : ''}
+                        ${state.pagesCore && state.pagesCore.includes('About') ? '<a href="#" class="text-gray-600 hover:text-gray-900">About</a>' : ''}
+                        ${state.pagesCore && state.pagesCore.includes('Contact') ? '<a href="#" class="text-gray-600 hover:text-gray-900">Contact</a>' : ''}
+                        ${hasResources ? '<a href="#" class="text-gray-600 hover:text-gray-900">Resources</a>' : ''}
+                        ${hasEvents ? '<a href="#" class="text-gray-600 hover:text-gray-900">Events</a>' : ''}
+                        ${hasBooking ? '<a href="#" class="text-gray-600 hover:text-gray-900">Get Quote</a>' : ''}
                     </div>
                     ${hasBooking ? `
-                        <button class="bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition-colors">
+                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
                             Get Quote
                         </button>
                     ` : ''}
@@ -65,18 +70,18 @@ function generateTradesLayout(template, colors, designStyle, businessName, state
             </nav>
 
             <!-- Hero Section -->
-            <section class="bg-gradient-to-r from-orange-50 to-yellow-50 py-16 px-6">
+            <section class="bg-gradient-to-r from-blue-50 to-indigo-50 py-16 px-6">
                 <div class="max-w-4xl mx-auto text-center">
                     <h1 class="text-4xl md:text-6xl font-bold mb-6" style="color: ${colors.primary};">
-                        Quality Work, Guaranteed
+                        Professional Trade Services You Can Trust
                     </h1>
                     <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-                        Professional trade services with years of experience. 
-                        We get the job done right, on time, every time.
+                        We provide exceptional trade services and deliver results that exceed expectations. 
+                        Your project success is our priority.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <button class="bg-orange-600 text-white px-8 py-3 rounded-lg hover:bg-orange-700 transition-colors font-semibold">
-                            Get Free Quote
+                        <button class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
+                            Get Started
                         </button>
                         <button class="border border-gray-300 text-gray-700 px-8 py-3 rounded-lg hover:bg-gray-50 transition-colors font-semibold">
                             View Projects
@@ -99,21 +104,21 @@ function generateTradesLayout(template, colors, designStyle, businessName, state
                             <div class="w-12 h-12 rounded-lg mb-4 flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-xl">🔨</span>
                             </div>
-                            <h3 class="text-xl font-semibold mb-2">Construction</h3>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-900">Construction</h3>
                             <p class="text-gray-600">Full construction services from foundation to finish.</p>
                         </div>
                         <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition-shadow">
                             <div class="w-12 h-12 rounded-lg mb-4 flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-xl">🔌</span>
                             </div>
-                            <h3 class="text-xl font-semibold mb-2">Electrical</h3>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-900">Electrical</h3>
                             <p class="text-gray-600">Professional electrical work and installations.</p>
                         </div>
                         <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition-shadow">
                             <div class="w-12 h-12 rounded-lg mb-4 flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-xl">🚿</span>
                             </div>
-                            <h3 class="text-xl font-semibold mb-2">Plumbing</h3>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-900">Plumbing</h3>
                             <p class="text-gray-600">Expert plumbing services and repairs.</p>
                         </div>
                     </div>
@@ -134,28 +139,28 @@ function generateTradesLayout(template, colors, designStyle, businessName, state
                             <div class="w-16 h-16 rounded-full mb-4 mx-auto flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-2xl">⭐</span>
                             </div>
-                            <h3 class="text-lg font-semibold mb-2">Licensed & Insured</h3>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">Licensed & Insured</h3>
                             <p class="text-gray-600">Fully licensed and insured for your protection</p>
                         </div>
                         <div class="text-center">
                             <div class="w-16 h-16 rounded-full mb-4 mx-auto flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-2xl">⏰</span>
                             </div>
-                            <h3 class="text-lg font-semibold mb-2">On Time</h3>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">On Time</h3>
                             <p class="text-gray-600">We respect your schedule</p>
                         </div>
                         <div class="text-center">
                             <div class="w-16 h-16 rounded-full mb-4 mx-auto flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-2xl">💰</span>
                             </div>
-                            <h3 class="text-lg font-semibold mb-2">Fair Pricing</h3>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">Fair Pricing</h3>
                             <p class="text-gray-600">Competitive rates, no hidden fees</p>
                         </div>
                         <div class="text-center">
                             <div class="w-16 h-16 rounded-full mb-4 mx-auto flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-2xl">🛠️</span>
                             </div>
-                            <h3 class="text-lg font-semibold mb-2">Quality Work</h3>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">Quality Work</h3>
                             <p class="text-gray-600">Built to last, guaranteed</p>
                         </div>
                     </div>
@@ -210,21 +215,23 @@ function generateTradesLayout(template, colors, designStyle, businessName, state
 
             ${hasNewsletter ? `
             <!-- Newsletter Signup -->
-            <section class="py-16 px-6 bg-orange-600">
+            <section class="py-16 px-6 bg-blue-600">
                 <div class="max-w-4xl mx-auto text-center">
                     <h2 class="text-3xl font-bold text-white mb-4">Stay Updated</h2>
-                    <p class="text-orange-100 mb-8 max-w-2xl mx-auto">
+                    <p class="text-blue-100 mb-8 max-w-2xl mx-auto">
                         Get tips and updates about home maintenance and improvements.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
                         <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 rounded-lg border-0 focus:ring-2 focus:ring-white">
-                        <button class="bg-white text-orange-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                        <button class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
                             Subscribe
                         </button>
                     </div>
                 </div>
             </section>
             ` : ''}
+
+
 
             <!-- Footer -->
             <footer class="bg-gray-900 text-white py-12 px-6">

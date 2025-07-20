@@ -38,7 +38,7 @@ function generateRealEstateLayout(template, colors, designStyle, businessName, s
     const hasPayment = state.features && state.features.includes('Payment Processing');
     const hasTestimonials = state.pagesTrust && state.pagesTrust.includes('Testimonials');
     const hasContact = state.pagesCore && state.pagesCore.includes('Contact');
-    const hasNewsletter = state.features && state.features.includes('Newsletter Signup');
+    // Newsletter is now handled in Step 4 (pagesEngage), not in features
     
     return `
         <div class="w-full max-w-6xl mx-auto" style="font-family: ${getRealEstateFontFamily(designStyle)};">
@@ -50,14 +50,16 @@ function generateRealEstateLayout(template, colors, designStyle, businessName, s
                         <span class="font-semibold text-gray-900">${businessName}</span>
                     </div>
                     <div class="hidden md:flex items-center space-x-6">
-                        <a href="#" class="text-gray-600 hover:text-gray-900">Home</a>
-                        <a href="#" class="text-gray-600 hover:text-gray-900">Properties</a>
-                        <a href="#" class="text-gray-600 hover:text-gray-900">Agents</a>
-                        <a href="#" class="text-gray-600 hover:text-gray-900">About</a>
-                        ${hasContact ? '<a href="#" class="text-gray-600 hover:text-gray-900">Contact</a>' : ''}
+                        ${state.pagesCore && state.pagesCore.includes('Home') ? '<a href="#" class="text-gray-600 hover:text-gray-900">Home</a>' : ''}
+                        ${state.pagesCore && state.pagesCore.includes('Services') ? '<a href="#" class="text-gray-600 hover:text-gray-900">Properties</a>' : ''}
+                        ${state.pagesCore && state.pagesCore.includes('About') ? '<a href="#" class="text-gray-600 hover:text-gray-900">About</a>' : ''}
+                        ${state.pagesCore && state.pagesCore.includes('Contact') ? '<a href="#" class="text-gray-600 hover:text-gray-900">Contact</a>' : ''}
+                        ${state.pagesEngage && state.pagesEngage.includes('Resources') ? '<a href="#" class="text-gray-600 hover:text-gray-900">Resources</a>' : ''}
+                        ${state.pagesEngage && state.pagesEngage.includes('Events') ? '<a href="#" class="text-gray-600 hover:text-gray-900">Events</a>' : ''}
+                        ${state.features && state.features.includes('Live Chat') ? '<a href="#" class="text-gray-600 hover:text-gray-900 flex items-center gap-2"><i class="fas fa-comments"></i> Chat</a>' : ''}
                     </div>
                     ${hasBooking ? `
-                        <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors">
+                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
                             Schedule Viewing
                         </button>
                     ` : ''}
@@ -65,7 +67,7 @@ function generateRealEstateLayout(template, colors, designStyle, businessName, s
             </nav>
 
             <!-- Hero Section -->
-            <section class="bg-gradient-to-r from-red-50 to-orange-50 py-16 px-6">
+            <section class="bg-gradient-to-r from-blue-50 to-indigo-50 py-16 px-6">
                 <div class="max-w-4xl mx-auto text-center">
                     <h1 class="text-4xl md:text-6xl font-bold mb-6" style="color: ${colors.primary};">
                         Find Your Dream Home
@@ -75,7 +77,7 @@ function generateRealEstateLayout(template, colors, designStyle, businessName, s
                         Expert agents ready to help you find the perfect home.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <button class="bg-red-600 text-white px-8 py-3 rounded-lg hover:bg-red-700 transition-colors font-semibold">
+                        <button class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
                             Search Properties
                         </button>
                         <button class="border border-gray-300 text-gray-700 px-8 py-3 rounded-lg hover:bg-gray-50 transition-colors font-semibold">
@@ -100,7 +102,7 @@ function generateRealEstateLayout(template, colors, designStyle, businessName, s
                                 <span class="text-gray-500">Property Image</span>
                             </div>
                             <div class="p-6">
-                                <h3 class="text-xl font-semibold mb-2">Modern Downtown Condo</h3>
+                                <h3 class="text-xl font-semibold mb-2 text-gray-900">Modern Downtown Condo</h3>
                                 <p class="text-gray-600 mb-4">2 bed, 2 bath • 1,200 sq ft</p>
                                 <p class="text-2xl font-bold text-red-600 mb-4">$450,000</p>
                                 <button class="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition-colors">
@@ -113,7 +115,7 @@ function generateRealEstateLayout(template, colors, designStyle, businessName, s
                                 <span class="text-gray-500">Property Image</span>
                             </div>
                             <div class="p-6">
-                                <h3 class="text-xl font-semibold mb-2">Family Home in Suburbs</h3>
+                                <h3 class="text-xl font-semibold mb-2 text-gray-900">Family Home in Suburbs</h3>
                                 <p class="text-gray-600 mb-4">4 bed, 3 bath • 2,500 sq ft</p>
                                 <p class="text-2xl font-bold text-red-600 mb-4">$750,000</p>
                                 <button class="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition-colors">
@@ -126,7 +128,7 @@ function generateRealEstateLayout(template, colors, designStyle, businessName, s
                                 <span class="text-gray-500">Property Image</span>
                             </div>
                             <div class="p-6">
-                                <h3 class="text-xl font-semibold mb-2">Luxury Waterfront Villa</h3>
+                                <h3 class="text-xl font-semibold mb-2 text-gray-900">Luxury Waterfront Villa</h3>
                                 <p class="text-gray-600 mb-4">5 bed, 4 bath • 4,000 sq ft</p>
                                 <p class="text-2xl font-bold text-red-600 mb-4">$1,200,000</p>
                                 <button class="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition-colors">
@@ -152,28 +154,28 @@ function generateRealEstateLayout(template, colors, designStyle, businessName, s
                             <div class="w-16 h-16 rounded-full mb-4 mx-auto flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-2xl">🏠</span>
                             </div>
-                            <h3 class="text-lg font-semibold mb-2">Expert Agents</h3>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">Expert Agents</h3>
                             <p class="text-gray-600">Licensed professionals with local expertise</p>
                         </div>
                         <div class="text-center">
                             <div class="w-16 h-16 rounded-full mb-4 mx-auto flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-2xl">📱</span>
                             </div>
-                            <h3 class="text-lg font-semibold mb-2">24/7 Support</h3>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">24/7 Support</h3>
                             <p class="text-gray-600">Always here when you need us</p>
                         </div>
                         <div class="text-center">
                             <div class="w-16 h-16 rounded-full mb-4 mx-auto flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-2xl">💰</span>
                             </div>
-                            <h3 class="text-lg font-semibold mb-2">Best Deals</h3>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">Best Deals</h3>
                             <p class="text-gray-600">Competitive pricing and market insights</p>
                         </div>
                         <div class="text-center">
                             <div class="w-16 h-16 rounded-full mb-4 mx-auto flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-2xl">🤝</span>
                             </div>
-                            <h3 class="text-lg font-semibold mb-2">Trusted Partner</h3>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">Trusted Partner</h3>
                             <p class="text-gray-600">Your success is our priority</p>
                         </div>
                     </div>
@@ -226,23 +228,7 @@ function generateRealEstateLayout(template, colors, designStyle, businessName, s
             </section>
             ` : ''}
 
-            ${hasNewsletter ? `
-            <!-- Newsletter Signup -->
-            <section class="py-16 px-6 bg-red-600">
-                <div class="max-w-4xl mx-auto text-center">
-                    <h2 class="text-3xl font-bold text-white mb-4">Stay Updated</h2>
-                    <p class="text-red-100 mb-8 max-w-2xl mx-auto">
-                        Get the latest property listings and market insights delivered to your inbox.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-                        <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 rounded-lg border-0 focus:ring-2 focus:ring-white">
-                        <button class="bg-white text-red-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-                            Subscribe
-                        </button>
-                    </div>
-                </div>
-            </section>
-            ` : ''}
+
 
             <!-- Footer -->
             <footer class="bg-gray-900 text-white py-12 px-6">

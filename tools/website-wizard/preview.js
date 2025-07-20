@@ -80,6 +80,35 @@ window.updatePreview = function() {
     
     // Update preview details
     updatePreviewDetails();
+    
+    // Handle live chat widget
+    handleLiveChatWidget();
+    
+    // Apply current design style
+    const currentFormData = window.formData || {};
+    if (currentFormData.designStyle) {
+        applyDesignStyleImmediately(currentFormData.designStyle);
+    }
+    
+    // Apply current colors
+    if (currentFormData.primaryColor) {
+        updateColorsImmediately('primaryColor', currentFormData.primaryColor);
+    }
+    if (currentFormData.secondaryColor) {
+        updateColorsImmediately('secondaryColor', currentFormData.secondaryColor);
+    }
+    if (currentFormData.backgroundColor) {
+        updateColorsImmediately('backgroundColor', currentFormData.backgroundColor);
+    }
+    if (currentFormData.textColor) {
+        updateColorsImmediately('textColor', currentFormData.textColor);
+    }
+    if (currentFormData.footerBackgroundColor) {
+        updateColorsImmediately('footerBackgroundColor', currentFormData.footerBackgroundColor);
+    }
+    if (currentFormData.footerTextColor) {
+        updateColorsImmediately('footerTextColor', currentFormData.footerTextColor);
+    }
 };
 
 function showDefaultPreview() {
@@ -182,9 +211,54 @@ function handleImmediateVisualChanges(change) {
     } else if (name === 'designStyle') {
         // Design style changed - update preview styling
         applyDesignStyleImmediately(value);
-    } else if (name === 'primaryColor' || name === 'secondaryColor') {
+    } else if (name === 'primaryColor' || name === 'secondaryColor' || name === 'backgroundColor' || name === 'headingTextColor' || name === 'bodyTextColor' || name === 'footerBackgroundColor' || name === 'footerTextColor') {
         // Color changed - update preview colors
         updateColorsImmediately(name, value);
+    } else if (name === 'pagesCore' || name === 'pagesTrust' || name === 'pagesEngage') {
+        // Page selections changed - update preview immediately
+        setTimeout(() => updatePreview(), 100);
+    } else if (name === 'features') {
+        // Features changed - handle live chat widget
+        handleLiveChatWidget(value);
+    }
+}
+
+function handleLiveChatWidget(value) {
+    const previewContent = document.querySelector('.preview-content');
+    if (!previewContent) return;
+    
+    // Get current formData to check if Live Chat is selected
+    const formData = window.formData || {};
+    const hasLiveChat = formData.features && formData.features.includes('Live Chat');
+    
+    // Remove existing chat widget if any
+    const existingWidget = previewContent.querySelector('.live-chat-widget');
+    if (existingWidget) {
+        existingWidget.remove();
+    }
+    
+    // Add chat button to header navigation if Live Chat is selected
+    if (hasLiveChat) {
+        // Find the navigation area in the preview
+        const nav = previewContent.querySelector('nav');
+        if (nav) {
+            const navLinks = nav.querySelector('.hidden.md\\:flex.items-center.space-x-6');
+            if (navLinks) {
+                // Check if chat button already exists
+                const existingChatBtn = navLinks.querySelector('.chat-nav-button');
+                if (!existingChatBtn) {
+                    const chatButton = document.createElement('a');
+                    chatButton.href = '#';
+                    chatButton.className = 'chat-nav-button text-gray-600 hover:text-gray-900 flex items-center gap-2';
+                    chatButton.innerHTML = '<i class="fas fa-comments"></i> Chat';
+                    chatButton.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        alert('Live chat feature coming soon! Please call us for immediate assistance.');
+                    });
+                    navLinks.appendChild(chatButton);
+                }
+            }
+        }
     }
 }
 
@@ -192,18 +266,39 @@ function applyDesignStyleImmediately(style) {
     const previewContent = document.querySelector('.preview-content');
     if (!previewContent) return;
     
-    // Apply design style changes to preview
+    // Remove all existing theme classes
+    previewContent.classList.remove(
+        'theme-modern-clean',
+        'theme-bold-creative',
+        'theme-professional-corporate',
+        'theme-warm-friendly',
+        'theme-minimalist',
+        'theme-luxury-premium'
+    );
+    
+    // Apply the appropriate theme class based on design style
     switch (style) {
         case 'Modern & Clean':
-            previewContent.style.fontFamily = "'Inter', sans-serif";
+            previewContent.classList.add('theme-modern-clean');
             break;
         case 'Bold & Creative':
-            previewContent.style.fontWeight = 'bold';
+            previewContent.classList.add('theme-bold-creative');
             break;
         case 'Professional & Corporate':
-            previewContent.style.fontFamily = "'Georgia', serif";
+            previewContent.classList.add('theme-professional-corporate');
             break;
-        // Add more style applications as needed
+        case 'Warm & Friendly':
+            previewContent.classList.add('theme-warm-friendly');
+            break;
+        case 'Minimalist':
+            previewContent.classList.add('theme-minimalist');
+            break;
+        case 'Luxury & Premium':
+            previewContent.classList.add('theme-luxury-premium');
+            break;
+        default:
+            // No theme class for default
+            break;
     }
 }
 
@@ -211,8 +306,162 @@ function updateColorsImmediately(colorType, color) {
     const previewContent = document.querySelector('.preview-content');
     if (!previewContent) return;
     
+    // Handle bulk color update
+    if (colorType === 'all' && typeof color === 'object') {
+        Object.keys(color).forEach(key => {
+            updateColorsImmediately(key, color[key]);
+        });
+        return;
+    }
+    
+    // Get current formData to access all colors
+    const formData = window.formData || {};
+    const primaryColor = formData.primaryColor || '#3abbfa';
+    const secondaryColor = formData.secondaryColor || '#f39c12';
+    const backgroundColor = formData.backgroundColor || '#ffffff';
+    const headingTextColor = formData.headingTextColor || '#333333';
+    const bodyTextColor = formData.bodyTextColor || '#666666';
+    const footerBackgroundColor = formData.footerBackgroundColor || '#2c3e50';
+    const footerTextColor = formData.footerTextColor || '#ffffff';
+    
     // Update CSS custom properties for immediate color changes
-    document.documentElement.style.setProperty(`--${colorType.replace('Color', '')}`, color);
+    if (colorType === 'primaryColor') {
+        previewContent.style.setProperty('--theme-primary', color);
+        previewContent.style.setProperty('--theme-accent', color);
+    } else if (colorType === 'secondaryColor') {
+        previewContent.style.setProperty('--theme-secondary', color);
+    } else if (colorType === 'backgroundColor') {
+        previewContent.style.setProperty('--theme-background', color);
+    } else if (colorType === 'textColor') {
+        previewContent.style.setProperty('--theme-text', color);
+    } else if (colorType === 'footerBackgroundColor') {
+        previewContent.style.setProperty('--theme-footer-bg', color);
+    } else if (colorType === 'footerTextColor') {
+        previewContent.style.setProperty('--theme-footer-text', color);
+    }
+    
+    // Apply colors to specific elements based on color type
+    if (colorType === 'primaryColor') {
+        // Update primary color elements
+        const primaryElements = previewContent.querySelectorAll('.bg-blue-600, .bg-blue-700, [style*="background: #3abbfa"], [style*="background-color: #3abbfa"]');
+        primaryElements.forEach(element => {
+            element.style.background = color;
+            element.style.backgroundColor = color;
+        });
+        
+        // Update icons and buttons
+        const iconElements = previewContent.querySelectorAll('.w-8.h-8.rounded-full, .w-12.h-12.rounded-lg, .w-16.h-16.rounded-full, .w-20.h-20.rounded-full');
+        iconElements.forEach(element => {
+            element.style.background = color;
+            element.style.backgroundColor = color;
+        });
+        
+    } else if (colorType === 'secondaryColor') {
+        // Update secondary color elements
+        const secondaryElements = previewContent.querySelectorAll('[style*="background: #f39c12"], [style*="background-color: #f39c12"]');
+        secondaryElements.forEach(element => {
+            element.style.background = color;
+            element.style.backgroundColor = color;
+        });
+        
+    } else if (colorType === 'backgroundColor') {
+        // Update background color
+        previewContent.style.background = color;
+        previewContent.style.backgroundColor = color;
+        
+        // Update body background
+        const body = previewContent.querySelector('body') || previewContent;
+        body.style.background = color;
+        body.style.backgroundColor = color;
+        
+    } else if (colorType === 'headingTextColor') {
+        // Update heading text color
+        const headingElements = previewContent.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        headingElements.forEach(element => {
+            element.style.color = color;
+        });
+    } else if (colorType === 'bodyTextColor') {
+        // Update body text color
+        const bodyElements = previewContent.querySelectorAll('p, span, div');
+        bodyElements.forEach(element => {
+            // Don't override elements that should keep their specific colors
+            if (!element.style.color || element.style.color === '#666666' || element.style.color === 'rgb(102, 102, 102)') {
+                element.style.color = color;
+            }
+        });
+    } else if (colorType === 'footerBackgroundColor') {
+        // Update footer background color
+        const footerElements = previewContent.querySelectorAll('footer, .footer, [class*="footer"], .bg-gray-900, .bg-gray-800');
+        footerElements.forEach(element => {
+            element.style.background = color;
+            element.style.backgroundColor = color;
+        });
+    } else if (colorType === 'footerTextColor') {
+        // Update footer text color
+        const footerElements = previewContent.querySelectorAll('footer, .footer, [class*="footer"]');
+        footerElements.forEach(element => {
+            const textElements = element.querySelectorAll('p, h1, h2, h3, h4, h5, h6, span, div, a, li');
+            textElements.forEach(textElement => {
+                // Don't override elements that should keep their specific colors (like links)
+                if (!textElement.style.color || textElement.style.color === '#ffffff' || textElement.style.color === 'rgb(255, 255, 255)') {
+                    textElement.style.color = color;
+                }
+            });
+        });
+    }
+    
+    // Update color preview swatches in the wizard
+    const primaryPreview = document.getElementById('primaryColorPreview');
+    const secondaryPreview = document.getElementById('secondaryColorPreview');
+    const backgroundPreview = document.getElementById('backgroundColorPreview');
+    const textPreview = document.getElementById('textColorPreview');
+    const footerBackgroundPreview = document.getElementById('footerBackgroundColorPreview');
+    const footerTextPreview = document.getElementById('footerTextColorPreview');
+    
+    if (primaryPreview && colorType === 'primaryColor') {
+        primaryPreview.style.backgroundColor = color;
+    }
+    if (secondaryPreview && colorType === 'secondaryColor') {
+        secondaryPreview.style.backgroundColor = color;
+    }
+    if (backgroundPreview && colorType === 'backgroundColor') {
+        backgroundPreview.style.backgroundColor = color;
+    }
+    if (textPreview && colorType === 'textColor') {
+        textPreview.style.backgroundColor = color;
+    }
+    if (footerBackgroundPreview && colorType === 'footerBackgroundColor') {
+        footerBackgroundPreview.style.backgroundColor = color;
+    }
+    if (footerTextPreview && colorType === 'footerTextColor') {
+        footerTextPreview.style.backgroundColor = color;
+    }
+    
+    // Update color input fields to match
+    const colorInputs = {
+        primaryColor: document.querySelector('input[name="primaryColor"][type="text"]'),
+        secondaryColor: document.querySelector('input[name="secondaryColor"][type="text"]'),
+        backgroundColor: document.querySelector('input[name="backgroundColor"][type="text"]'),
+        textColor: document.querySelector('input[name="textColor"][type="text"]'),
+        footerBackgroundColor: document.querySelector('input[name="footerBackgroundColor"][type="text"]'),
+        footerTextColor: document.querySelector('input[name="footerTextColor"][type="text"]')
+    };
+    
+    const colorPickers = {
+        primaryColor: document.querySelector('input[name="primaryColor"][type="color"]'),
+        secondaryColor: document.querySelector('input[name="secondaryColor"][type="color"]'),
+        backgroundColor: document.querySelector('input[name="backgroundColor"][type="color"]'),
+        textColor: document.querySelector('input[name="textColor"][type="color"]'),
+        footerBackgroundColor: document.querySelector('input[name="footerBackgroundColor"][type="color"]'),
+        footerTextColor: document.querySelector('input[name="footerTextColor"][type="color"]')
+    };
+    
+    if (colorInputs[colorType]) {
+        colorInputs[colorType].value = color;
+    }
+    if (colorPickers[colorType]) {
+        colorPickers[colorType].value = color;
+    }
 }
 
 // === PREVIEW RENDERING FUNCTIONS ===

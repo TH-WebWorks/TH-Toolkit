@@ -13,91 +13,110 @@
             <i class="fas fa-building text-primary"></i>
             Business Type <span class="text-error">*</span>
         </label>
-        <p class="form-description text-sm text-text-muted mb-3">Choose the category that best describes your business</p>
-        <div class="input-group grid-cols-1 md:grid-cols-2">
-            <label class="input-option" data-value="service-business">
+        <p class="form-description text-sm text-text-muted mb-6">Choose the category that best describes your business</p>
+        
+        <div class="business-type-grid">
+            <label class="business-type-card" data-value="service-business">
                 <input type="radio" name="businessType" value="service-business" required>
-                <div class="option-label">
-                    <div class="option-icon">
+                <div class="card-content">
+                    <div class="card-icon">
                         <i class="fas fa-wrench"></i>
                     </div>
-                    <div>
-                        <div class="font-semibold">Service Business</div>
-                        <div class="text-sm text-text-muted">Professional services (consulting, legal, etc.)</div>
+                    <div class="card-text">
+                        <h4 class="card-title">Service Business</h4>
+                        <p class="card-description">Professional services (consulting, legal, etc.)</p>
+                    </div>
+                    <div class="card-checkmark">
+                        <i class="fas fa-check"></i>
                     </div>
                 </div>
             </label>
             
-            <label class="input-option" data-value="trades">
+            <label class="business-type-card" data-value="trades">
                 <input type="radio" name="businessType" value="trades" required>
-                <div class="option-label">
-                    <div class="option-icon">
+                <div class="card-content">
+                    <div class="card-icon">
                         <i class="fas fa-hammer"></i>
                     </div>
-                    <div>
-                        <div class="font-semibold">Trades</div>
-                        <div class="text-sm text-text-muted">Construction, plumbing, electrical, etc.</div>
+                    <div class="card-text">
+                        <h4 class="card-title">Trades</h4>
+                        <p class="card-description">Construction, plumbing, electrical, etc.</p>
+                    </div>
+                    <div class="card-checkmark">
+                        <i class="fas fa-check"></i>
                     </div>
                 </div>
             </label>
             
-            <label class="input-option" data-value="consulting">
+            <label class="business-type-card" data-value="consulting">
                 <input type="radio" name="businessType" value="consulting" required>
-                <div class="option-label">
-                    <div class="option-icon">
+                <div class="card-content">
+                    <div class="card-icon">
                         <i class="fas fa-lightbulb"></i>
                     </div>
-                    <div>
-                        <div class="font-semibold">Consulting</div>
-                        <div class="text-sm text-text-muted">Business consulting & advisory</div>
+                    <div class="card-text">
+                        <h4 class="card-title">Consulting</h4>
+                        <p class="card-description">Business consulting & advisory</p>
+                    </div>
+                    <div class="card-checkmark">
+                        <i class="fas fa-check"></i>
                     </div>
                 </div>
             </label>
             
-            <label class="input-option" data-value="education">
+            <label class="business-type-card" data-value="education">
                 <input type="radio" name="businessType" value="education" required>
-                <div class="option-label">
-                    <div class="option-icon">
+                <div class="card-content">
+                    <div class="card-icon">
                         <i class="fas fa-graduation-cap"></i>
                     </div>
-                    <div>
-                        <div class="font-semibold">Education</div>
-                        <div class="text-sm text-text-muted">Schools, training, courses</div>
+                    <div class="card-text">
+                        <h4 class="card-title">Education</h4>
+                        <p class="card-description">Schools, training, courses</p>
+                    </div>
+                    <div class="card-checkmark">
+                        <i class="fas fa-check"></i>
                     </div>
                 </div>
             </label>
             
-            <label class="input-option" data-value="real-estate-agency">
+            <label class="business-type-card" data-value="real-estate-agency">
                 <input type="radio" name="businessType" value="real-estate-agency" required>
-                <div class="option-label">
-                    <div class="option-icon">
+                <div class="card-content">
+                    <div class="card-icon">
                         <i class="fas fa-home"></i>
                     </div>
-                    <div>
-                        <div class="font-semibold">Real Estate Agency</div>
-                        <div class="text-sm text-text-muted">Real estate agencies & agents</div>
+                    <div class="card-text">
+                        <h4 class="card-title">Real Estate Agency</h4>
+                        <p class="card-description">Real estate agencies & agents</p>
+                    </div>
+                    <div class="card-checkmark">
+                        <i class="fas fa-check"></i>
                     </div>
                 </div>
             </label>
             
-            <label class="input-option" data-value="other">
+            <label class="business-type-card" data-value="other">
                 <input type="radio" name="businessType" value="other" required>
-                <div class="option-label">
-                    <div class="option-icon">
+                <div class="card-content">
+                    <div class="card-icon">
                         <i class="fas fa-plus"></i>
                     </div>
-                    <div>
-                        <div class="font-semibold">Other</div>
-                        <div class="text-sm text-text-muted">Other business type</div>
+                    <div class="card-text">
+                        <h4 class="card-title">Other</h4>
+                        <p class="card-description">Other business type</p>
+                    </div>
+                    <div class="card-checkmark">
+                        <i class="fas fa-check"></i>
                     </div>
                 </div>
             </label>
         </div>
         
         <!-- Other Input Field -->
-        <div class="mt-4">
+        <div class="other-input-container mt-6">
             <input type="text" name="businessTypeOther" placeholder="Other (please specify)" 
-                   class="input-option w-full p-4 text-white">
+                   class="other-input">
         </div>
     </div>
     

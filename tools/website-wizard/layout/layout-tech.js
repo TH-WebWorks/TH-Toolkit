@@ -29,7 +29,7 @@ function generateTechLayout(template, colors, designStyle, businessName, state) 
     const hasPayment = state.features && state.features.includes('Payment Processing');
     const hasAnalytics = state.features && state.features.includes('Analytics');
     const hasLiveChat = state.features && state.features.includes('Live Chat');
-    const hasNewsletter = state.features && state.features.includes('Newsletter Signup');
+    // Newsletter is now handled in Step 4 (pagesEngage), not in features
     const hasTestimonials = state.pagesTrust && state.pagesTrust.includes('Testimonials');
     
     return `
@@ -192,23 +192,7 @@ function generateTechLayout(template, colors, designStyle, businessName, state) 
             </section>
             ` : ''}
 
-            ${hasNewsletter ? `
-            <!-- Newsletter Signup -->
-            <section class="py-20 px-6 bg-blue-600">
-                <div class="max-w-4xl mx-auto text-center">
-                    <h2 class="text-4xl font-bold text-white mb-4">Stay Ahead of the Curve</h2>
-                    <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-                        Get the latest insights on technology trends and product updates.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-                        <input type="email" placeholder="Enter your email" class="flex-1 px-6 py-4 rounded-lg border-0 focus:ring-2 focus:ring-white text-lg">
-                        <button class="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-lg">
-                            Subscribe
-                        </button>
-                    </div>
-                </div>
-            </section>
-            ` : ''}
+
 
             <!-- Footer -->
             <footer class="bg-gray-900 text-white py-16 px-6">

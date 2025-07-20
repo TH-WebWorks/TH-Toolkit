@@ -38,7 +38,7 @@ function generateOtherLayout(template, colors, designStyle, businessName, state)
     const hasPayment = state.features && state.features.includes('Payment Processing');
     const hasTestimonials = state.pagesTrust && state.pagesTrust.includes('Testimonials');
     const hasContact = state.pagesCore && state.pagesCore.includes('Contact');
-    const hasNewsletter = state.features && state.features.includes('Newsletter Signup');
+    // Newsletter is now handled in Step 4 (pagesEngage), not in features
     
     return `
         <div class="w-full max-w-6xl mx-auto" style="font-family: ${getOtherFontFamily(designStyle)};">
@@ -56,7 +56,7 @@ function generateOtherLayout(template, colors, designStyle, businessName, state)
                         ${hasContact ? '<a href="#" class="text-gray-600 hover:text-gray-900">Contact</a>' : ''}
                     </div>
                     ${hasBooking ? `
-                        <button class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors">
+                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
                             Get Started
                         </button>
                     ` : ''}
@@ -64,7 +64,7 @@ function generateOtherLayout(template, colors, designStyle, businessName, state)
             </nav>
 
             <!-- Hero Section -->
-            <section class="bg-gradient-to-r from-gray-50 to-blue-50 py-16 px-6">
+            <section class="bg-gradient-to-r from-blue-50 to-indigo-50 py-16 px-6">
                 <div class="max-w-4xl mx-auto text-center">
                     <h1 class="text-4xl md:text-6xl font-bold mb-6" style="color: ${colors.primary};">
                         Welcome to ${businessName}
@@ -74,7 +74,7 @@ function generateOtherLayout(template, colors, designStyle, businessName, state)
                         Quality, reliability, and customer satisfaction are our priorities.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <button class="bg-gray-600 text-white px-8 py-3 rounded-lg hover:bg-gray-700 transition-colors font-semibold">
+                        <button class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
                             Learn More
                         </button>
                         <button class="border border-gray-300 text-gray-700 px-8 py-3 rounded-lg hover:bg-gray-50 transition-colors font-semibold">
@@ -98,21 +98,21 @@ function generateOtherLayout(template, colors, designStyle, businessName, state)
                             <div class="w-12 h-12 rounded-lg mb-4 flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-xl">⭐</span>
                             </div>
-                            <h3 class="text-xl font-semibold mb-2">Service 1</h3>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-900">Service 1</h3>
                             <p class="text-gray-600">Professional service with attention to detail and quality results.</p>
                         </div>
                         <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition-shadow">
                             <div class="w-12 h-12 rounded-lg mb-4 flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-xl">⚡</span>
                             </div>
-                            <h3 class="text-xl font-semibold mb-2">Service 2</h3>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-900">Service 2</h3>
                             <p class="text-gray-600">Fast and efficient service delivery with guaranteed satisfaction.</p>
                         </div>
                         <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition-shadow">
                             <div class="w-12 h-12 rounded-lg mb-4 flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-xl">🎯</span>
                             </div>
-                            <h3 class="text-xl font-semibold mb-2">Service 3</h3>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-900">Service 3</h3>
                             <p class="text-gray-600">Targeted solutions that address your specific needs and goals.</p>
                         </div>
                     </div>
@@ -133,28 +133,28 @@ function generateOtherLayout(template, colors, designStyle, businessName, state)
                             <div class="w-16 h-16 rounded-full mb-4 mx-auto flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-2xl">⭐</span>
                             </div>
-                            <h3 class="text-lg font-semibold mb-2">Quality Work</h3>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">Quality Work</h3>
                             <p class="text-gray-600">We never compromise on quality</p>
                         </div>
                         <div class="text-center">
                             <div class="w-16 h-16 rounded-full mb-4 mx-auto flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-2xl">⏰</span>
                             </div>
-                            <h3 class="text-lg font-semibold mb-2">On Time</h3>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">On Time</h3>
                             <p class="text-gray-600">We respect your time</p>
                         </div>
                         <div class="text-center">
                             <div class="w-16 h-16 rounded-full mb-4 mx-auto flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-2xl">💰</span>
                             </div>
-                            <h3 class="text-lg font-semibold mb-2">Fair Pricing</h3>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">Fair Pricing</h3>
                             <p class="text-gray-600">Transparent and competitive rates</p>
                         </div>
                         <div class="text-center">
                             <div class="w-16 h-16 rounded-full mb-4 mx-auto flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-2xl">🤝</span>
                             </div>
-                            <h3 class="text-lg font-semibold mb-2">Support</h3>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">Support</h3>
                             <p class="text-gray-600">We're here when you need us</p>
                         </div>
                     </div>
@@ -207,23 +207,7 @@ function generateOtherLayout(template, colors, designStyle, businessName, state)
             </section>
             ` : ''}
 
-            ${hasNewsletter ? `
-            <!-- Newsletter Signup -->
-            <section class="py-16 px-6 bg-gray-600">
-                <div class="max-w-4xl mx-auto text-center">
-                    <h2 class="text-3xl font-bold text-white mb-4">Stay Updated</h2>
-                    <p class="text-gray-100 mb-8 max-w-2xl mx-auto">
-                        Get the latest updates and insights delivered to your inbox.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-                        <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 rounded-lg border-0 focus:ring-2 focus:ring-white">
-                        <button class="bg-white text-gray-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-                            Subscribe
-                        </button>
-                    </div>
-                </div>
-            </section>
-            ` : ''}
+
 
             <!-- Footer -->
             <footer class="bg-gray-900 text-white py-12 px-6">

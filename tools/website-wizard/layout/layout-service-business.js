@@ -1,6 +1,13 @@
 // === SERVICE BUSINESS LAYOUT GENERATOR ===
 // Dedicated layout for professional service businesses
 
+// Utility function for color adjustment
+function adjustColor(color, amount) {
+    return '#' + color.replace(/^#/, '').replace(/../g, color => 
+        ('0' + Math.min(255, Math.max(0, parseInt(color, 16) + amount)).toString(16)).substr(-2)
+    );
+}
+
 window.renderServiceBusinessPreview = function(state) {
     console.log('renderServiceBusinessPreview called with state:', state);
     const previewContent = document.querySelector('.preview-content');
@@ -36,14 +43,19 @@ window.renderServiceBusinessPreview = function(state) {
 function generateServiceBusinessLayout(template, colors, designStyle, businessName, state) {
     const hasBooking = state.features && state.features.includes('Online Scheduler');
     const hasStore = state.features && state.features.includes('Payment Processing');
-    const hasBlog = state.pagesEngage && state.pagesEngage.includes('Resources');
+    const hasResources = state.pagesEngage && state.pagesEngage.includes('Resources');
+    const hasEvents = state.pagesEngage && state.pagesEngage.includes('Events');
+    const hasNewsletter = state.pagesEngage && state.pagesEngage.includes('Newsletter');
     const hasTestimonials = state.pagesTrust && state.pagesTrust.includes('Testimonials');
+    const hasFAQ = state.pagesTrust && state.pagesTrust.includes('FAQ');
+    const hasCaseStudies = state.pagesTrust && state.pagesTrust.includes('Case Studies');
+    const hasTeam = state.pagesTrust && state.pagesTrust.includes('Team');
     const hasContact = state.pagesCore && state.pagesCore.includes('Contact');
     const hasAnalytics = state.features && state.features.includes('Analytics');
     const hasLiveChat = state.features && state.features.includes('Live Chat');
     const hasPayment = state.features && state.features.includes('Payment Processing');
     const hasScheduler = state.features && state.features.includes('Online Scheduler');
-    const hasNewsletter = state.features && state.features.includes('Newsletter Signup');
+    // Newsletter is now handled in Step 4 (pagesEngage), not in features
     
     return `
         <div class="w-full max-w-6xl mx-auto" style="font-family: ${getServiceBusinessFontFamily(designStyle)};">
@@ -55,14 +67,16 @@ function generateServiceBusinessLayout(template, colors, designStyle, businessNa
                         <span class="font-semibold text-gray-900">${businessName}</span>
                     </div>
                     <div class="hidden md:flex items-center space-x-6">
-                        <a href="#" class="text-gray-600 hover:text-gray-900">Home</a>
-                        <a href="#" class="text-gray-600 hover:text-gray-900">Services</a>
-                        <a href="#" class="text-gray-600 hover:text-gray-900">About</a>
-                        ${hasContact ? '<a href="#" class="text-gray-600 hover:text-gray-900">Contact</a>' : ''}
+                        ${state.pagesCore && state.pagesCore.includes('Home') ? '<a href="#" class="text-gray-600 hover:text-gray-900">Home</a>' : ''}
+                        ${state.pagesCore && state.pagesCore.includes('Services') ? '<a href="#" class="text-gray-600 hover:text-gray-900">Services</a>' : ''}
+                        ${state.pagesCore && state.pagesCore.includes('About') ? '<a href="#" class="text-gray-600 hover:text-gray-900">About</a>' : ''}
+                        ${state.pagesCore && state.pagesCore.includes('Contact') ? '<a href="#" class="text-gray-600 hover:text-gray-900">Contact</a>' : ''}
+                        ${hasResources ? '<a href="#" class="text-gray-600 hover:text-gray-900">Resources</a>' : ''}
+                        ${hasEvents ? '<a href="#" class="text-gray-600 hover:text-gray-900">Events</a>' : ''}
                         ${hasBooking ? '<a href="#" class="text-gray-600 hover:text-gray-900">Book Now</a>' : ''}
                     </div>
                     ${hasBooking ? `
-                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <button class="text-white px-4 py-2 rounded-lg transition-colors font-semibold" style="background: ${colors.primary};" onmouseover="this.style.background='${adjustColor(colors.primary, -20)}'" onmouseout="this.style.background='${colors.primary}'">
                             Book Consultation
                         </button>
                     ` : ''}
@@ -80,7 +94,7 @@ function generateServiceBusinessLayout(template, colors, designStyle, businessNa
                         Your success is our priority.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <button class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
+                        <button class="text-white px-8 py-3 rounded-lg transition-colors font-semibold" style="background: ${colors.primary};" onmouseover="this.style.background='${adjustColor(colors.primary, -20)}'" onmouseout="this.style.background='${colors.primary}'">
                             Get Started
                         </button>
                         <button class="border border-gray-300 text-gray-700 px-8 py-3 rounded-lg hover:bg-gray-50 transition-colors font-semibold">
@@ -104,21 +118,21 @@ function generateServiceBusinessLayout(template, colors, designStyle, businessNa
                             <div class="w-12 h-12 rounded-lg mb-4 flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-xl">🔧</span>
                             </div>
-                            <h3 class="text-xl font-semibold mb-2">Service 1</h3>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-900">Service 1</h3>
                             <p class="text-gray-600">Professional service with attention to detail and quality results.</p>
                         </div>
                         <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition-shadow">
                             <div class="w-12 h-12 rounded-lg mb-4 flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-xl">⚡</span>
                             </div>
-                            <h3 class="text-xl font-semibold mb-2">Service 2</h3>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-900">Service 2</h3>
                             <p class="text-gray-600">Fast and efficient service delivery with guaranteed satisfaction.</p>
                         </div>
                         <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition-shadow">
                             <div class="w-12 h-12 rounded-lg mb-4 flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-xl">🎯</span>
                             </div>
-                            <h3 class="text-xl font-semibold mb-2">Service 3</h3>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-900">Service 3</h3>
                             <p class="text-gray-600">Targeted solutions that address your specific needs and goals.</p>
                         </div>
                     </div>
@@ -139,28 +153,28 @@ function generateServiceBusinessLayout(template, colors, designStyle, businessNa
                             <div class="w-16 h-16 rounded-full mb-4 mx-auto flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-2xl">⭐</span>
                             </div>
-                            <h3 class="text-lg font-semibold mb-2">Quality Work</h3>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">Quality Work</h3>
                             <p class="text-gray-600">We never compromise on quality</p>
                         </div>
                         <div class="text-center">
                             <div class="w-16 h-16 rounded-full mb-4 mx-auto flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-2xl">⏰</span>
                             </div>
-                            <h3 class="text-lg font-semibold mb-2">On Time</h3>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">On Time</h3>
                             <p class="text-gray-600">We respect your time</p>
                         </div>
                         <div class="text-center">
                             <div class="w-16 h-16 rounded-full mb-4 mx-auto flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-2xl">💰</span>
                             </div>
-                            <h3 class="text-lg font-semibold mb-2">Fair Pricing</h3>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">Fair Pricing</h3>
                             <p class="text-gray-600">Transparent and competitive rates</p>
                         </div>
                         <div class="text-center">
                             <div class="w-16 h-16 rounded-full mb-4 mx-auto flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-2xl">🤝</span>
                             </div>
-                            <h3 class="text-lg font-semibold mb-2">Support</h3>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">Support</h3>
                             <p class="text-gray-600">We're here when you need us</p>
                         </div>
                     </div>
@@ -213,23 +227,131 @@ function generateServiceBusinessLayout(template, colors, designStyle, businessNa
             </section>
             ` : ''}
 
+            ${hasFAQ ? `
+            <!-- FAQ -->
+            <section class="py-16 px-6 bg-gray-50">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+                        <p class="text-gray-600 max-w-2xl mx-auto">
+                            Find answers to common questions about our services and processes.
+                        </p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-lg font-semibold mb-3 text-gray-900">What services do you offer?</h3>
+                            <p class="text-gray-600">We provide comprehensive professional services tailored to your specific needs and goals.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-lg font-semibold mb-3 text-gray-900">How long does a typical project take?</h3>
+                            <p class="text-gray-600">Project timelines vary based on complexity, but we always provide clear estimates upfront.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-lg font-semibold mb-3 text-gray-900">Do you offer ongoing support?</h3>
+                            <p class="text-gray-600">Yes, we provide comprehensive support and maintenance services to ensure your continued success.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-lg font-semibold mb-3 text-gray-900">What are your pricing options?</h3>
+                            <p class="text-gray-600">We offer flexible pricing plans designed to fit various budgets and project requirements.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            ` : ''}
+
+            ${hasCaseStudies ? `
+            <!-- Case Studies -->
+            <section class="py-16 px-6 bg-white">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4">Success Stories</h2>
+                        <p class="text-gray-600 max-w-2xl mx-auto">
+                            Discover how we've helped businesses achieve their goals and drive results.
+                        </p>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <div class="w-12 h-12 rounded-lg mb-4 flex items-center justify-center" style="background: ${colors.primary};">
+                                <span class="text-white text-xl">📈</span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-900">TechCorp Growth</h3>
+                            <p class="text-gray-600 mb-4">Increased revenue by 150% through strategic optimization.</p>
+                            <div class="text-sm text-gray-500">Industry: Technology</div>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <div class="w-12 h-12 rounded-lg mb-4 flex items-center justify-center" style="background: ${colors.primary};">
+                                <span class="text-white text-xl">🎯</span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-900">Marketing Success</h3>
+                            <p class="text-gray-600 mb-4">Improved conversion rates by 200% with targeted campaigns.</p>
+                            <div class="text-sm text-gray-500">Industry: Marketing</div>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <div class="w-12 h-12 rounded-lg mb-4 flex items-center justify-center" style="background: ${colors.primary};">
+                                <span class="text-white text-xl">🚀</span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-900">Startup Launch</h3>
+                            <p class="text-gray-600 mb-4">Successfully launched and scaled a new business venture.</p>
+                            <div class="text-sm text-gray-500">Industry: Startup</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            ` : ''}
+
+            ${hasTeam ? `
+            <!-- Team -->
+            <section class="py-16 px-6 bg-gray-50">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4">Meet Our Team</h2>
+                        <p class="text-gray-600 max-w-2xl mx-auto">
+                            Our experienced professionals are dedicated to delivering exceptional results.
+                        </p>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="text-center">
+                            <div class="w-24 h-24 bg-gray-300 rounded-full mx-auto mb-4"></div>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">John Smith</h3>
+                            <p class="text-gray-600 mb-2">CEO & Founder</p>
+                            <p class="text-sm text-gray-500">15+ years of industry experience</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-24 h-24 bg-gray-300 rounded-full mx-auto mb-4"></div>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">Sarah Johnson</h3>
+                            <p class="text-gray-600 mb-2">Operations Director</p>
+                            <p class="text-sm text-gray-500">Expert in process optimization</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-24 h-24 bg-gray-300 rounded-full mx-auto mb-4"></div>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">Mike Davis</h3>
+                            <p class="text-gray-600 mb-2">Lead Consultant</p>
+                            <p class="text-sm text-gray-500">Specialist in growth strategies</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            ` : ''}
+
             ${hasNewsletter ? `
             <!-- Newsletter Signup -->
-            <section class="py-16 px-6 bg-blue-600">
+            <section class="py-16 px-6 text-white" style="background: ${colors.primary};">
                 <div class="max-w-4xl mx-auto text-center">
                     <h2 class="text-3xl font-bold text-white mb-4">Stay Updated</h2>
-                    <p class="text-blue-100 mb-8 max-w-2xl mx-auto">
+                    <p class="text-white opacity-90 mb-8 max-w-2xl mx-auto">
                         Get the latest insights and tips delivered to your inbox.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
                         <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 rounded-lg border-0 focus:ring-2 focus:ring-white">
-                        <button class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                        <button class="bg-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors" style="color: ${colors.primary};">
                             Subscribe
                         </button>
                     </div>
                 </div>
             </section>
             ` : ''}
+
+
 
             <!-- Footer -->
             <footer class="bg-gray-900 text-white py-12 px-6">

@@ -73,9 +73,14 @@ function initializeFormData() {
         pagesEngage: [],
         pagesCommerce: [],
         features: [],
-        designStyle: '',
+        designStyle: 'Modern & Clean',
         primaryColor: '#3abbfa',
         secondaryColor: '#f39c12',
+        backgroundColor: '#ffffff',
+        headingTextColor: '#333333',
+        bodyTextColor: '#666666',
+        footerBackgroundColor: '#2c3e50',
+        footerTextColor: '#ffffff',
         contactName: '',
         email: '',
         phone: '',
@@ -98,22 +103,71 @@ function initializeFormData() {
     });
     
     console.log('Form data initialized:', formData);
+    
+    // Apply default design style to preview if available
+    if (typeof updatePreview === 'function') {
+        updatePreview();
+    }
 }
 
 // Reset wizard state
 function resetWizard() {
+    // Clear localStorage
+    localStorage.removeItem('consultationWizardData');
+    
+    // Reset all form data
     window.formData = {};
     formData = window.formData;
     currentStep = 0;
     previewEnabled = false;
+    
+    // Initialize with fresh defaults
     initializeFormData();
+    
+    // Update form panel classes for step-based styling
+    const formPanel = document.querySelector('.form-panel');
+    if (formPanel) {
+        formPanel.classList.remove('step-1');
+        formPanel.classList.add('step-1');
+    }
+    
+    // Reset all visual states
+    document.querySelectorAll('.input-option.selected, .business-type-card.selected').forEach(el => {
+        el.classList.remove('selected');
+    });
+    
+    document.querySelectorAll('.color-preset-btn.active').forEach(el => {
+        el.classList.remove('active');
+    });
+    
+    document.querySelectorAll('.scheme-preset-btn.active').forEach(el => {
+        el.classList.remove('active');
+    });
+    
+    // Reset form inputs
+    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+        radio.checked = false;
+    });
+    
+    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+        checkbox.checked = false;
+    });
+    
+    document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], textarea').forEach(input => {
+        input.value = '';
+    });
+    
+    // Re-render everything
     renderStep(currentStep);
+    updateProgressIndicator();
     updatePreviewVisibility();
-    // Reset progress bar and label
-    document.getElementById('progressStep').textContent = 1;
-    document.getElementById('progressTotal').textContent = wizardSteps.length;
-    document.getElementById('progressLabel').textContent = wizardSteps[0].title || 'Welcome';
-    document.getElementById('progressBar').style.width = `${(1/wizardSteps.length)*100}%`;
+    
+    // Update preview with fresh defaults
+    if (typeof updatePreview === 'function') {
+        updatePreview();
+    }
+    
+    console.log('Wizard completely reset to step 1');
 }
 
 // Update preview visibility based on current step
@@ -124,9 +178,17 @@ function updatePreviewVisibility() {
         if (currentStep >= 1) {
             previewPanel.style.display = 'block';
             previewPanel.classList.remove('hidden');
+            // Add visible class after a small delay for smooth animation
+            setTimeout(() => {
+                previewPanel.classList.add('visible');
+            }, 50);
         } else {
-            previewPanel.style.display = 'none';
-            previewPanel.classList.add('hidden');
+            previewPanel.classList.remove('visible');
+            // Hide after animation completes
+            setTimeout(() => {
+                previewPanel.style.display = 'none';
+                previewPanel.classList.add('hidden');
+            }, 500);
         }
     }
 }
@@ -171,7 +233,8 @@ function selectRadioOption(name, value) {
     const options = document.querySelectorAll(`input[name="${name}"]`);
     if (options) {
         options.forEach(option => {
-            const optionDiv = option.closest('.input-option');
+            // Support both old input-option and new business-type-card classes
+            const optionDiv = option.closest('.input-option, .business-type-card');
             if (!optionDiv) return;
             if (option.value === value) {
                 option.checked = true;
@@ -195,21 +258,28 @@ function toggleCheckboxOption(name, value) {
     
     const optionInput = document.querySelector(`input[name="${name}"][value="${value}"]`);
     if (!optionInput) return;
+    
     const optionDiv = optionInput.closest('.input-option');
     if (!optionDiv) return;
+    
     const checkbox = optionDiv.querySelector('input[type="checkbox"]');
     if (!checkbox) return;
-    if (checkbox.checked) {
-        // Uncheck
+    
+    // Check if the value is already in the array
+    const isCurrentlySelected = formData[name].includes(value);
+    
+    if (isCurrentlySelected) {
+        // Remove from array
+        formData[name] = formData[name].filter(v => v !== value);
         checkbox.checked = false;
         optionDiv.classList.remove('selected');
-        formData[name] = formData[name].filter(v => v !== value);
     } else {
-        // Check
+        // Add to array
+        formData[name].push(value);
         checkbox.checked = true;
         optionDiv.classList.add('selected');
-        formData[name].push(value);
     }
+    
     // IMMEDIATE visual feedback for specific options
     handleImmediateVisualChanges({ name, value });
     updatePreview();
@@ -238,8 +308,8 @@ async function renderStep(idx) {
         // Populate form data
         populateFormData();
         
-        // Add interactive elements
-        addInteractiveElements();
+            // Add interactive elements
+    addInteractiveElements();
         
         // Special handling for summary step
         if (idx === 8) { // Step 9 (index 8)
@@ -275,8 +345,8 @@ function getStepSlug(idx) {
 function populateFormData() {
     // Populate form fields with existing data
     Object.keys(formData).forEach(key => {
-        const element = document.querySelector(`[name="${key}"]`);
-        if (element) {
+        const elements = document.querySelectorAll(`[name="${key}"]`);
+        elements.forEach(element => {
             if (element.type === 'checkbox') {
                 element.checked = formData[key] === true || (Array.isArray(formData[key]) && formData[key].includes(element.value));
             } else if (element.type === 'radio') {
@@ -286,7 +356,7 @@ function populateFormData() {
             }
             
             // Update visual state for input options
-            const optionDiv = element.closest('.input-option');
+            const optionDiv = element.closest('.input-option, .business-type-card');
             if (optionDiv) {
                 if (element.checked || (element.type === 'radio' && formData[key] === element.value)) {
                     optionDiv.classList.add('selected');
@@ -294,22 +364,89 @@ function populateFormData() {
                     optionDiv.classList.remove('selected');
                 }
             }
-        }
+        });
     });
     
-    // Update color previews
+    // Update color previews and active states
     updateColorPreviews();
 }
 
 function updateColorPreviews() {
     const primaryPreview = document.getElementById('primaryColorPreview');
     const secondaryPreview = document.getElementById('secondaryColorPreview');
+    const backgroundPreview = document.getElementById('backgroundColorPreview');
+    const textPreview = document.getElementById('textColorPreview');
+    const footerBackgroundPreview = document.getElementById('footerBackgroundColorPreview');
+    const footerTextPreview = document.getElementById('footerTextColorPreview');
     
     if (primaryPreview && formData.primaryColor) {
         primaryPreview.style.backgroundColor = formData.primaryColor;
     }
     if (secondaryPreview && formData.secondaryColor) {
         secondaryPreview.style.backgroundColor = formData.secondaryColor;
+    }
+    if (backgroundPreview && formData.backgroundColor) {
+        backgroundPreview.style.backgroundColor = formData.backgroundColor;
+    }
+    if (textPreview && formData.textColor) {
+        textPreview.style.backgroundColor = formData.textColor;
+    }
+    if (footerBackgroundPreview && formData.footerBackgroundColor) {
+        footerBackgroundPreview.style.backgroundColor = formData.footerBackgroundColor;
+    }
+    if (footerTextPreview && formData.footerTextColor) {
+        footerTextPreview.style.backgroundColor = formData.footerTextColor;
+    }
+    
+    // Update active states for color preset buttons
+    updateColorPresetActiveStates();
+}
+
+function updateColorPresetActiveStates() {
+    // Clear all active states first
+    document.querySelectorAll('.color-preset-btn').forEach(btn => btn.classList.remove('active'));
+    
+    // Set active states based on current form data
+    if (formData.primaryColor) {
+        const primaryBtn = document.querySelector(`.color-preset-btn[data-color="${formData.primaryColor}"]`);
+        if (primaryBtn && primaryBtn.closest('.form-group').querySelector('input[name="primaryColor"]')) {
+            primaryBtn.classList.add('active');
+        }
+    }
+    
+    if (formData.secondaryColor) {
+        const secondaryBtn = document.querySelector(`.color-preset-btn[data-color="${formData.secondaryColor}"]`);
+        if (secondaryBtn && secondaryBtn.closest('.form-group').querySelector('input[name="secondaryColor"]')) {
+            secondaryBtn.classList.add('active');
+        }
+    }
+    
+    if (formData.backgroundColor) {
+        const backgroundBtn = document.querySelector(`.color-preset-btn[data-color="${formData.backgroundColor}"]`);
+        if (backgroundBtn && backgroundBtn.closest('.form-group').querySelector('input[name="backgroundColor"]')) {
+            backgroundBtn.classList.add('active');
+        }
+    }
+    
+    if (formData.textColor) {
+        const textBtn = document.querySelector(`.color-preset-btn[data-color="${formData.textColor}"]`);
+        if (textBtn && textBtn.closest('.form-group').querySelector('input[name="textColor"]')) {
+            textBtn.classList.add('active');
+        }
+    }
+    
+    if (formData.footerBackgroundColor) {
+        const footerBgBtn = document.querySelector(`.color-preset-btn[data-color="${formData.footerBackgroundColor}"]`);
+        if (footerBgBtn && footerBgBtn.closest('.form-group').querySelector('input[name="footerBackgroundColor"]')) {
+            footerBgBtn.classList.add('active');
+        }
+    }
+    
+    if (formData.footerTextColor) {
+        const footerTextBtn = document.querySelector(`.color-preset-btn[data-color="${formData.footerTextColor}"]`);
+        if (footerTextBtn && footerTextBtn.closest('.form-group').querySelector('input[name="footerTextColor"]')) {
+            footerTextBtn.classList.add('active');
+        }
     }
 }
 
@@ -360,6 +497,16 @@ function populateSummary() {
 function goToStep(idx) {
     if (idx >= 0 && idx < wizardSteps.length) {
         currentStep = idx;
+        
+        // Update form panel classes for step-based styling
+        const formPanel = document.querySelector('.form-panel');
+        if (formPanel) {
+            formPanel.classList.remove('step-1');
+            if (currentStep === 0) {
+                formPanel.classList.add('step-1');
+            }
+        }
+        
         renderStep(currentStep);
         updateProgressIndicator();
         updatePreviewVisibility();
@@ -479,6 +626,12 @@ document.addEventListener('DOMContentLoaded', function() {
     renderStep(currentStep);
     updateProgressIndicator();
     
+    // Set initial step class
+    const formPanel = document.querySelector('.form-panel');
+    if (formPanel && currentStep === 0) {
+        formPanel.classList.add('step-1');
+    }
+    
     // Add form event listeners
     setupFormEventListeners();
 });
@@ -526,8 +679,9 @@ function setupFormEventListeners() {
         const target = e.target;
         
         // Handle radio option clicks
-        if (target.closest('.input-option') && target.closest('.input-option').querySelector('input[type="radio"]')) {
-            const optionDiv = target.closest('.input-option');
+        if ((target.closest('.input-option') || target.closest('.business-type-card')) && 
+            (target.closest('.input-option') || target.closest('.business-type-card')).querySelector('input[type="radio"]')) {
+            const optionDiv = target.closest('.input-option, .business-type-card');
             const radio = optionDiv.querySelector('input[type="radio"]');
             const name = radio.name;
             const value = radio.value;
@@ -543,8 +697,247 @@ function setupFormEventListeners() {
             const name = checkbox.name;
             const value = checkbox.value;
             
+            // Prevent default to avoid double handling
+            e.preventDefault();
+            e.stopPropagation();
+            
             toggleCheckboxOption(name, value);
             saveFormData();
+        }
+        
+        // Handle color preset button clicks
+        if (target.classList.contains('color-preset-btn')) {
+            const color = target.dataset.color;
+            const formGroup = target.closest('.form-group');
+            
+            // Try to find the input by looking in the same form group first
+            const primaryInput = formGroup.querySelector('input[name="primaryColor"]');
+            const secondaryInput = formGroup.querySelector('input[name="secondaryColor"]');
+            const backgroundInput = formGroup.querySelector('input[name="backgroundColor"]');
+            const textInput = formGroup.querySelector('input[name="textColor"]');
+            const footerBackgroundInput = formGroup.querySelector('input[name="footerBackgroundColor"]');
+            const footerTextInput = formGroup.querySelector('input[name="footerTextColor"]');
+            
+            // Debug logging for troubleshooting
+            // console.log('Color preset button clicked:', {
+            //     color,
+            //     formGroup: formGroup,
+            //     primaryInput: !!primaryInput,
+            //     secondaryInput: !!secondaryInput,
+            //     backgroundInput: !!backgroundInput,
+            //     textInput: !!textInput,
+            //     footerBackgroundInput: !!footerBackgroundInput,
+            //     footerTextInput: !!footerTextInput
+            // });
+            
+            if (primaryInput) {
+                // Update primary color
+                formData.primaryColor = color;
+                const colorInput = document.querySelector('input[name="primaryColor"][type="color"]');
+                const textInput = document.querySelector('input[name="primaryColor"][type="text"]');
+                if (colorInput) colorInput.value = color;
+                if (textInput) textInput.value = color;
+                
+                // Update active state
+                formGroup.querySelectorAll('.color-preset-btn').forEach(btn => btn.classList.remove('active'));
+                target.classList.add('active');
+                
+                // Update preview
+                handleImmediateVisualChanges({ name: 'primaryColor', value: color });
+                saveFormData();
+            } else if (secondaryInput) {
+                // Update secondary color
+                formData.secondaryColor = color;
+                const colorInput = document.querySelector('input[name="secondaryColor"][type="color"]');
+                const textInput = document.querySelector('input[name="secondaryColor"][type="text"]');
+                if (colorInput) colorInput.value = color;
+                if (textInput) textInput.value = color;
+                
+                // Update active state
+                formGroup.querySelectorAll('.color-preset-btn').forEach(btn => btn.classList.remove('active'));
+                target.classList.add('active');
+                
+                // Update preview
+                handleImmediateVisualChanges({ name: 'secondaryColor', value: color });
+                saveFormData();
+            } else if (backgroundInput) {
+                // Update background color
+                formData.backgroundColor = color;
+                const colorInput = document.querySelector('input[name="backgroundColor"][type="color"]');
+                const textInput = document.querySelector('input[name="backgroundColor"][type="text"]');
+                if (colorInput) colorInput.value = color;
+                if (textInput) textInput.value = color;
+                
+                // Update active state
+                formGroup.querySelectorAll('.color-preset-btn').forEach(btn => btn.classList.remove('active'));
+                target.classList.add('active');
+                
+                // Update preview
+                handleImmediateVisualChanges({ name: 'backgroundColor', value: color });
+                saveFormData();
+            } else if (textInput) {
+                // Update text color
+                formData.textColor = color;
+                const colorInput = document.querySelector('input[name="textColor"][type="color"]');
+                const textInput = document.querySelector('input[name="textColor"][type="text"]');
+                if (colorInput) colorInput.value = color;
+                if (textInput) textInput.value = color;
+                
+                // Update active state
+                formGroup.querySelectorAll('.color-preset-btn').forEach(btn => btn.classList.remove('active'));
+                target.classList.add('active');
+                
+                // Update preview
+                handleImmediateVisualChanges({ name: 'textColor', value: color });
+                saveFormData();
+            } else if (footerBackgroundInput) {
+                // console.log('Updating footer background color to:', color);
+                // Update footer background color
+                formData.footerBackgroundColor = color;
+                const colorInput = document.querySelector('input[name="footerBackgroundColor"][type="color"]');
+                const textInput = document.querySelector('input[name="footerBackgroundColor"][type="text"]');
+                if (colorInput) colorInput.value = color;
+                if (textInput) textInput.value = color;
+                
+                // Update active state
+                formGroup.querySelectorAll('.color-preset-btn').forEach(btn => btn.classList.remove('active'));
+                target.classList.add('active');
+                
+                // Update preview
+                handleImmediateVisualChanges({ name: 'footerBackgroundColor', value: color });
+                saveFormData();
+            } else if (footerTextInput) {
+                // console.log('Updating footer text color to:', color);
+                // Update footer text color
+                formData.footerTextColor = color;
+                const colorInput = document.querySelector('input[name="footerTextColor"][type="color"]');
+                const textInput = document.querySelector('input[name="footerTextColor"][type="text"]');
+                if (colorInput) colorInput.value = color;
+                if (textInput) textInput.value = color;
+                
+                // Update active state
+                formGroup.querySelectorAll('.color-preset-btn').forEach(btn => btn.classList.remove('active'));
+                target.classList.add('active');
+                
+                // Update preview
+                handleImmediateVisualChanges({ name: 'footerTextColor', value: color });
+                saveFormData();
+            } else {
+                // Fallback: try to determine color type by looking at nearby elements
+                // console.log('No specific color type detected, trying fallback...');
+                
+                // Look for the label text to determine which color this is
+                const label = formGroup.querySelector('.form-label');
+                if (label) {
+                    const labelText = label.textContent.toLowerCase();
+                    // console.log('Label text:', labelText);
+                    
+                    if (labelText.includes('footer background')) {
+                        // console.log('Fallback: Updating footer background color to:', color);
+                        formData.footerBackgroundColor = color;
+                        const colorInput = document.querySelector('input[name="footerBackgroundColor"][type="color"]');
+                        const textInput = document.querySelector('input[name="footerBackgroundColor"][type="text"]');
+                        if (colorInput) colorInput.value = color;
+                        if (textInput) textInput.value = color;
+                        
+                        // Update active state
+                        formGroup.querySelectorAll('.color-preset-btn').forEach(btn => btn.classList.remove('active'));
+                        target.classList.add('active');
+                        
+                        // Update preview
+                        handleImmediateVisualChanges({ name: 'footerBackgroundColor', value: color });
+                        saveFormData();
+                    } else if (labelText.includes('footer text')) {
+                        // console.log('Fallback: Updating footer text color to:', color);
+                        formData.footerTextColor = color;
+                        const colorInput = document.querySelector('input[name="footerTextColor"][type="color"]');
+                        const textInput = document.querySelector('input[name="footerTextColor"][type="text"]');
+                        if (colorInput) colorInput.value = color;
+                        if (textInput) textInput.value = color;
+                        
+                        // Update active state
+                        formGroup.querySelectorAll('.color-preset-btn').forEach(btn => btn.classList.remove('active'));
+                        target.classList.add('active');
+                        
+                        // Update preview
+                        handleImmediateVisualChanges({ name: 'footerTextColor', value: color });
+                        saveFormData();
+                    }
+                }
+            }
+        }
+        
+        // Handle color scheme preset button clicks
+        if (target.classList.contains('scheme-preset-btn')) {
+            console.log('Color scheme button clicked:', target.dataset.scheme);
+            const scheme = target.dataset.scheme;
+            
+            // Define color schemes
+            const schemes = {
+                professional: {
+                    primaryColor: '#3abbfa',
+                    secondaryColor: '#f39c12',
+                    backgroundColor: '#ffffff',
+                    headingTextColor: '#333333',
+                    bodyTextColor: '#666666',
+                    footerBackgroundColor: '#2c3e50',
+                    footerTextColor: '#ffffff'
+                },
+                modern: {
+                    primaryColor: '#2ecc71',
+                    secondaryColor: '#34495e',
+                    backgroundColor: '#f8f9fa',
+                    headingTextColor: '#2c3e50',
+                    bodyTextColor: '#666666',
+                    footerBackgroundColor: '#34495e',
+                    footerTextColor: '#ffffff'
+                },
+                warm: {
+                    primaryColor: '#e67e22',
+                    secondaryColor: '#f39c12',
+                    backgroundColor: '#fefefe',
+                    headingTextColor: '#2c3e50',
+                    bodyTextColor: '#666666',
+                    footerBackgroundColor: '#2c3e50',
+                    footerTextColor: '#ffffff'
+                },
+                elegant: {
+                    primaryColor: '#9b59b6',
+                    secondaryColor: '#34495e',
+                    backgroundColor: '#ffffff',
+                    headingTextColor: '#2c3e50',
+                    bodyTextColor: '#666666',
+                    footerBackgroundColor: '#34495e',
+                    footerTextColor: '#ffffff'
+                }
+            };
+            
+            const selectedScheme = schemes[scheme];
+            if (selectedScheme) {
+                console.log('Applying scheme:', scheme, selectedScheme);
+                
+                // Update active state first
+                document.querySelectorAll('.scheme-preset-btn').forEach(btn => btn.classList.remove('active'));
+                target.classList.add('active');
+                
+                // Update all colors at once to prevent performance issues
+                Object.keys(selectedScheme).forEach(colorKey => {
+                    formData[colorKey] = selectedScheme[colorKey];
+                    
+                    // Update color inputs
+                    const colorInput = document.querySelector(`input[name="${colorKey}"][type="color"]`);
+                    const textInput = document.querySelector(`input[name="${colorKey}"][type="text"]`);
+                    if (colorInput) colorInput.value = selectedScheme[colorKey];
+                    if (textInput) textInput.value = selectedScheme[colorKey];
+                });
+                
+                // Update preview once with all colors
+                updateColorsImmediately('all', selectedScheme);
+                
+                // Save form data
+                saveFormData();
+                console.log('Scheme applied successfully:', scheme);
+            }
         }
         
         // Handle button actions

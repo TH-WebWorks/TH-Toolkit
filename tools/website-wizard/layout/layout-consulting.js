@@ -38,7 +38,7 @@ function generateConsultingLayout(template, colors, designStyle, businessName, s
     const hasPayment = state.features && state.features.includes('Payment Processing');
     const hasTestimonials = state.pagesTrust && state.pagesTrust.includes('Testimonials');
     const hasContact = state.pagesCore && state.pagesCore.includes('Contact');
-    const hasNewsletter = state.features && state.features.includes('Newsletter Signup');
+    // Newsletter is now handled in Step 4 (pagesEngage), not in features
     
     return `
         <div class="w-full max-w-6xl mx-auto" style="font-family: ${getConsultingFontFamily(designStyle)};">
@@ -50,14 +50,16 @@ function generateConsultingLayout(template, colors, designStyle, businessName, s
                         <span class="font-semibold text-gray-900">${businessName}</span>
                     </div>
                     <div class="hidden md:flex items-center space-x-6">
-                        <a href="#" class="text-gray-600 hover:text-gray-900">Home</a>
-                        <a href="#" class="text-gray-600 hover:text-gray-900">Services</a>
-                        <a href="#" class="text-gray-600 hover:text-gray-900">Insights</a>
-                        <a href="#" class="text-gray-600 hover:text-gray-900">About</a>
-                        ${hasContact ? '<a href="#" class="text-gray-600 hover:text-gray-900">Contact</a>' : ''}
+                        ${state.pagesCore && state.pagesCore.includes('Home') ? '<a href="#" class="text-gray-600 hover:text-gray-900">Home</a>' : ''}
+                        ${state.pagesCore && state.pagesCore.includes('Services') ? '<a href="#" class="text-gray-600 hover:text-gray-900">Services</a>' : ''}
+                        ${state.pagesCore && state.pagesCore.includes('About') ? '<a href="#" class="text-gray-600 hover:text-gray-900">About</a>' : ''}
+                        ${state.pagesCore && state.pagesCore.includes('Contact') ? '<a href="#" class="text-gray-600 hover:text-gray-900">Contact</a>' : ''}
+                        ${state.pagesEngage && state.pagesEngage.includes('Resources') ? '<a href="#" class="text-gray-600 hover:text-gray-900">Resources</a>' : ''}
+                        ${state.pagesEngage && state.pagesEngage.includes('Events') ? '<a href="#" class="text-gray-600 hover:text-gray-900">Events</a>' : ''}
+                        ${state.features && state.features.includes('Live Chat') ? '<a href="#" class="text-gray-600 hover:text-gray-900 flex items-center gap-2"><i class="fas fa-comments"></i> Chat</a>' : ''}
                     </div>
                     ${hasBooking ? `
-                        <button class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
                             Schedule Consultation
                         </button>
                     ` : ''}
@@ -65,7 +67,7 @@ function generateConsultingLayout(template, colors, designStyle, businessName, s
             </nav>
 
             <!-- Hero Section -->
-            <section class="bg-gradient-to-r from-purple-50 to-indigo-50 py-16 px-6">
+            <section class="bg-gradient-to-r from-blue-50 to-indigo-50 py-16 px-6">
                 <div class="max-w-4xl mx-auto text-center">
                     <h1 class="text-4xl md:text-6xl font-bold mb-6" style="color: ${colors.primary};">
                         Strategic Solutions for Growth
@@ -75,7 +77,7 @@ function generateConsultingLayout(template, colors, designStyle, businessName, s
                         optimize operations, and achieve sustainable growth.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <button class="bg-purple-600 text-white px-8 py-3 rounded-lg hover:bg-purple-700 transition-colors font-semibold">
+                        <button class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
                             Free Strategy Session
                         </button>
                         <button class="border border-gray-300 text-gray-700 px-8 py-3 rounded-lg hover:bg-gray-50 transition-colors font-semibold">
@@ -99,21 +101,21 @@ function generateConsultingLayout(template, colors, designStyle, businessName, s
                             <div class="w-12 h-12 rounded-lg mb-4 flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-xl">📊</span>
                             </div>
-                            <h3 class="text-xl font-semibold mb-2">Strategy Consulting</h3>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-900">Strategy Consulting</h3>
                             <p class="text-gray-600">Develop winning strategies for business growth and market positioning.</p>
                         </div>
                         <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition-shadow">
                             <div class="w-12 h-12 rounded-lg mb-4 flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-xl">⚡</span>
                             </div>
-                            <h3 class="text-xl font-semibold mb-2">Operations Optimization</h3>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-900">Operations Optimization</h3>
                             <p class="text-gray-600">Streamline processes and improve efficiency across your organization.</p>
                         </div>
                         <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition-shadow">
                             <div class="w-12 h-12 rounded-lg mb-4 flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-xl">🎯</span>
                             </div>
-                            <h3 class="text-xl font-semibold mb-2">Performance Management</h3>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-900">Performance Management</h3>
                             <p class="text-gray-600">Build high-performing teams and implement effective management systems.</p>
                         </div>
                     </div>
@@ -134,28 +136,28 @@ function generateConsultingLayout(template, colors, designStyle, businessName, s
                             <div class="w-16 h-16 rounded-full mb-4 mx-auto flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-2xl">🎓</span>
                             </div>
-                            <h3 class="text-lg font-semibold mb-2">Expert Team</h3>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">Expert Team</h3>
                             <p class="text-gray-600">Industry veterans with proven track records</p>
                         </div>
                         <div class="text-center">
                             <div class="w-16 h-16 rounded-full mb-4 mx-auto flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-2xl">📈</span>
                             </div>
-                            <h3 class="text-lg font-semibold mb-2">Results Focused</h3>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">Results Focused</h3>
                             <p class="text-gray-600">Measurable outcomes and ROI</p>
                         </div>
                         <div class="text-center">
                             <div class="w-16 h-16 rounded-full mb-4 mx-auto flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-2xl">🤝</span>
                             </div>
-                            <h3 class="text-lg font-semibold mb-2">Partnership</h3>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">Partnership</h3>
                             <p class="text-gray-600">Long-term relationships built on trust</p>
                         </div>
                         <div class="text-center">
                             <div class="w-16 h-16 rounded-full mb-4 mx-auto flex items-center justify-center" style="background: ${colors.primary};">
                                 <span class="text-white text-2xl">💡</span>
                             </div>
-                            <h3 class="text-lg font-semibold mb-2">Innovation</h3>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">Innovation</h3>
                             <p class="text-gray-600">Cutting-edge strategies and insights</p>
                         </div>
                     </div>
@@ -208,23 +210,7 @@ function generateConsultingLayout(template, colors, designStyle, businessName, s
             </section>
             ` : ''}
 
-            ${hasNewsletter ? `
-            <!-- Newsletter Signup -->
-            <section class="py-16 px-6 bg-purple-600">
-                <div class="max-w-4xl mx-auto text-center">
-                    <h2 class="text-3xl font-bold text-white mb-4">Stay Ahead of the Curve</h2>
-                    <p class="text-purple-100 mb-8 max-w-2xl mx-auto">
-                        Get the latest business insights and industry trends delivered to your inbox.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-                        <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 rounded-lg border-0 focus:ring-2 focus:ring-white">
-                        <button class="bg-white text-purple-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-                            Subscribe
-                        </button>
-                    </div>
-                </div>
-            </section>
-            ` : ''}
+
 
             <!-- Footer -->
             <footer class="bg-gray-900 text-white py-12 px-6">

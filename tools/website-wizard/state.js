@@ -216,6 +216,42 @@ window.wizardSteps = [
                 icon: 'palette'
             },
             { 
+                type: 'color', 
+                name: 'backgroundColor', 
+                label: 'Background Color', 
+                description: 'Main background color for your website',
+                placeholder: '#ffffff or white', 
+                required: false,
+                icon: 'fill-drip'
+            },
+            { 
+                type: 'color', 
+                name: 'textColor', 
+                label: 'Text Color', 
+                description: 'Main text color for content readability',
+                placeholder: '#333333 or dark gray', 
+                required: false,
+                icon: 'font'
+            },
+            { 
+                type: 'color', 
+                name: 'footerBackgroundColor', 
+                label: 'Footer Background Color', 
+                description: 'Background color for the footer section',
+                placeholder: '#2c3e50 or dark blue', 
+                required: false,
+                icon: 'window-minimize'
+            },
+            { 
+                type: 'color', 
+                name: 'footerTextColor', 
+                label: 'Footer Text Color', 
+                description: 'Text color for footer content',
+                placeholder: '#ffffff or white', 
+                required: false,
+                icon: 'font'
+            },
+            { 
                 type: 'text', 
                 name: 'exampleSites', 
                 label: 'Example Websites You Like', 
@@ -424,8 +460,11 @@ function initializeFormData() {
         pagesCommerce: [],
         features: [],
         designStyle: '',
-        primaryColor: '#3abbfa',
-        secondaryColor: '#f39c12',
+            primaryColor: '#3abbfa',
+    secondaryColor: '#f39c12',
+    backgroundColor: '#ffffff',
+    textColor: '#333333',
+    designStyle: 'Modern & Clean',
         contactName: '',
         email: '',
         phone: '',
