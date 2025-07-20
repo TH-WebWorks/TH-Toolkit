@@ -55,11 +55,13 @@ function generateOtherLayout(template, colors, designStyle, businessName, state)
                         <a href="#" class="text-gray-600 hover:text-gray-900">About</a>
                         ${hasContact ? '<a href="#" class="text-gray-600 hover:text-gray-900">Contact</a>' : ''}
                     </div>
-                    ${hasBooking ? `
-                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                            Get Started
-                        </button>
-                    ` : ''}
+                    <div class="flex items-center space-x-4">
+                        ${hasBooking ? `
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                Get Started
+                            </button>
+                        ` : ''}
+                    </div>
                 </div>
             </nav>
 

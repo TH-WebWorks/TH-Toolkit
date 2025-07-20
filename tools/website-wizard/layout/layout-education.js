@@ -58,11 +58,13 @@ function generateEducationLayout(template, colors, designStyle, businessName, st
                         ${state.pagesEngage && state.pagesEngage.includes('Events') ? '<a href="#" class="text-gray-600 hover:text-gray-900">Events</a>' : ''}
                         ${state.features && state.features.includes('Live Chat') ? '<a href="#" class="text-gray-600 hover:text-gray-900 flex items-center gap-2"><i class="fas fa-comments"></i> Chat</a>' : ''}
                     </div>
-                    ${hasBooking ? `
-                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                            Enroll Now
-                        </button>
-                    ` : ''}
+                    <div class="flex items-center space-x-4">
+                        ${hasBooking ? `
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                Enroll Now
+                            </button>
+                        ` : ''}
+                    </div>
                 </div>
             </nav>
 

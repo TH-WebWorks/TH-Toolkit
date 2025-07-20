@@ -59,13 +59,14 @@ function generateTradesLayout(template, colors, designStyle, businessName, state
                         ${state.pagesCore && state.pagesCore.includes('Contact') ? '<a href="#" class="text-gray-600 hover:text-gray-900">Contact</a>' : ''}
                         ${hasResources ? '<a href="#" class="text-gray-600 hover:text-gray-900">Resources</a>' : ''}
                         ${hasEvents ? '<a href="#" class="text-gray-600 hover:text-gray-900">Events</a>' : ''}
-                        ${hasBooking ? '<a href="#" class="text-gray-600 hover:text-gray-900">Get Quote</a>' : ''}
                     </div>
-                    ${hasBooking ? `
-                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                            Get Quote
-                        </button>
-                    ` : ''}
+                    <div class="flex items-center space-x-4">
+                        ${hasBooking ? `
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                Get Quote
+                            </button>
+                        ` : ''}
+                    </div>
                 </div>
             </nav>
 
@@ -232,6 +233,100 @@ function generateTradesLayout(template, colors, designStyle, businessName, state
             ` : ''}
 
 
+
+            ${hasBooking ? `
+            <!-- Online Scheduler Feature -->
+            <section class="py-16 px-6 bg-green-50">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-12">
+                        <div class="w-16 h-16 bg-green-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-white text-2xl">📅</span>
+                        </div>
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4">Schedule Your Service</h2>
+                        <p class="text-gray-600 max-w-2xl mx-auto">
+                            Book your appointment online for fast, reliable service at your convenience.
+                        </p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div>
+                                <h3 class="text-xl font-semibold mb-4 text-gray-900">Available Time Slots</h3>
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between p-3 border border-green-200 rounded-lg hover:bg-green-50 transition-colors cursor-pointer">
+                                        <span class="font-medium">8:00 AM - 10:00 AM</span>
+                                        <span class="text-green-600 text-sm">Available</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 border border-green-200 rounded-lg hover:bg-green-50 transition-colors cursor-pointer">
+                                        <span class="font-medium">1:00 PM - 3:00 PM</span>
+                                        <span class="text-green-600 text-sm">Available</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg bg-gray-50">
+                                        <span class="font-medium text-gray-500">4:00 PM - 6:00 PM</span>
+                                        <span class="text-gray-500 text-sm">Booked</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-4 text-gray-900">Book Service</h3>
+                                <form class="space-y-4">
+                                    <input type="text" placeholder="Your Name" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                    <input type="text" placeholder="Address" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                        <option>Select Service</option>
+                                        <option>Plumbing</option>
+                                        <option>Electrical</option>
+                                        <option>HVAC</option>
+                                    </select>
+                                    <button type="button" class="w-full bg-green-500 text-white py-3 rounded-lg font-semibold hover:bg-green-600 transition-colors">
+                                        Book Appointment
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            ` : ''}
+
+            ${hasPayment ? `
+            <!-- Payment Processing Feature -->
+            <section class="py-16 px-6 bg-purple-50">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-12">
+                        <div class="w-16 h-16 bg-purple-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-white text-2xl">💳</span>
+                        </div>
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4">Easy Online Payment</h2>
+                        <p class="text-gray-600 max-w-2xl mx-auto">
+                            Pay securely online after service completion. Multiple payment options available.
+                        </p>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                            <div class="w-12 h-12 bg-purple-100 rounded-lg mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-purple-600 text-xl">🔒</span>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">Secure Payments</h3>
+                            <p class="text-gray-600 text-sm">Bank-level security for all transactions</p>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                            <div class="w-12 h-12 bg-purple-100 rounded-lg mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-purple-600 text-xl">📧</span>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">Digital Receipts</h3>
+                            <p class="text-gray-600 text-sm">Instant email receipts and invoices</p>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                            <div class="w-12 h-12 bg-purple-100 rounded-lg mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-purple-600 text-xl">💰</span>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">Flexible Options</h3>
+                            <p class="text-gray-600 text-sm">Credit, debit, and digital wallet payments</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            ` : ''}
 
             <!-- Footer -->
             <footer class="bg-gray-900 text-white py-12 px-6">

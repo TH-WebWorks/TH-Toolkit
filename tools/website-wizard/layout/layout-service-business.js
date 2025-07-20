@@ -73,13 +73,14 @@ function generateServiceBusinessLayout(template, colors, designStyle, businessNa
                         ${state.pagesCore && state.pagesCore.includes('Contact') ? '<a href="#" class="text-gray-600 hover:text-gray-900">Contact</a>' : ''}
                         ${hasResources ? '<a href="#" class="text-gray-600 hover:text-gray-900">Resources</a>' : ''}
                         ${hasEvents ? '<a href="#" class="text-gray-600 hover:text-gray-900">Events</a>' : ''}
-                        ${hasBooking ? '<a href="#" class="text-gray-600 hover:text-gray-900">Book Now</a>' : ''}
                     </div>
-                    ${hasBooking ? `
-                        <button class="text-white px-4 py-2 rounded-lg transition-colors font-semibold" style="background: ${colors.primary};" onmouseover="this.style.background='${adjustColor(colors.primary, -20)}'" onmouseout="this.style.background='${colors.primary}'">
-                            Book Consultation
-                        </button>
-                    ` : ''}
+                    <div class="flex items-center space-x-4">
+                        ${hasBooking ? `
+                            <button class="text-white px-4 py-2 rounded-lg transition-colors font-semibold" style="background: ${colors.primary};" onmouseover="this.style.background='${adjustColor(colors.primary, -20)}'" onmouseout="this.style.background='${colors.primary}'">
+                                Book Now
+                            </button>
+                        ` : ''}
+                    </div>
                 </div>
             </nav>
 
@@ -327,6 +328,343 @@ function generateServiceBusinessLayout(template, colors, designStyle, businessNa
                             <h3 class="text-lg font-semibold mb-2 text-gray-900">Mike Davis</h3>
                             <p class="text-gray-600 mb-2">Lead Consultant</p>
                             <p class="text-sm text-gray-500">Specialist in growth strategies</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            ` : ''}
+
+            ${hasScheduler ? `
+            <!-- Online Scheduler Feature -->
+            <section class="py-16 px-6 bg-green-50">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-12">
+                        <div class="w-16 h-16 bg-green-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-white text-2xl">📅</span>
+                        </div>
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4">Book Your Appointment Online</h2>
+                        <p class="text-gray-600 max-w-2xl mx-auto">
+                            Schedule your consultation at your convenience with our easy-to-use online booking system.
+                        </p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div>
+                                <h3 class="text-xl font-semibold mb-4 text-gray-900">Available Time Slots</h3>
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between p-3 border border-green-200 rounded-lg hover:bg-green-50 transition-colors cursor-pointer">
+                                        <span class="font-medium">9:00 AM - 10:00 AM</span>
+                                        <span class="text-green-600 text-sm">Available</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 border border-green-200 rounded-lg hover:bg-green-50 transition-colors cursor-pointer">
+                                        <span class="font-medium">11:00 AM - 12:00 PM</span>
+                                        <span class="text-green-600 text-sm">Available</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg bg-gray-50">
+                                        <span class="font-medium text-gray-500">2:00 PM - 3:00 PM</span>
+                                        <span class="text-gray-500 text-sm">Booked</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-4 text-gray-900">Book Now</h3>
+                                <form class="space-y-4">
+                                    <input type="text" placeholder="Your Name" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                    <input type="email" placeholder="Email Address" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                        <option>Select Service</option>
+                                        <option>Service 1</option>
+                                        <option>Service 2</option>
+                                    </select>
+                                    <button type="button" class="w-full bg-green-500 text-white py-3 rounded-lg font-semibold hover:bg-green-600 transition-colors">
+                                        Confirm Booking
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            ` : ''}
+
+            ${hasPayment ? `
+            <!-- Payment Processing Feature -->
+            <section class="py-16 px-6 bg-purple-50">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-12">
+                        <div class="w-16 h-16 bg-purple-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-white text-2xl">💳</span>
+                        </div>
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4">Secure Online Payments</h2>
+                        <p class="text-gray-600 max-w-2xl mx-auto">
+                            Pay for services securely online with our encrypted payment system. Multiple payment options available.
+                        </p>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                            <div class="w-12 h-12 bg-purple-100 rounded-lg mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-purple-600 text-xl">🔒</span>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">Secure & Safe</h3>
+                            <p class="text-gray-600 text-sm">256-bit SSL encryption protects all transactions</p>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                            <div class="w-12 h-12 bg-purple-100 rounded-lg mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-purple-600 text-xl">💰</span>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">Multiple Options</h3>
+                            <p class="text-gray-600 text-sm">Credit cards, PayPal, bank transfers accepted</p>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                            <div class="w-12 h-12 bg-purple-100 rounded-lg mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-purple-600 text-xl">⚡</span>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900">Instant Processing</h3>
+                            <p class="text-gray-600 text-sm">Payments processed immediately, no delays</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            ` : ''}
+
+            ${state.features && state.features.includes('Google Maps') ? `
+            <!-- Google Maps Feature -->
+            <section class="py-16 px-6 bg-red-50">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-12">
+                        <div class="w-16 h-16 bg-red-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-white text-2xl">📍</span>
+                        </div>
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4">Find Our Location</h2>
+                        <p class="text-gray-600 max-w-2xl mx-auto">
+                            Visit us at our convenient location. Get directions and view our office on the interactive map.
+                        </p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-white rounded-xl shadow-lg p-6">
+                            <h3 class="text-xl font-semibold mb-4 text-gray-900">Office Information</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <span class="text-red-600 text-sm">📍</span>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-900">Address</div>
+                                        <div class="text-gray-600">123 Business Street, Suite 100<br>City, State 12345</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div class="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <span class="text-red-600 text-sm">🕒</span>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-900">Business Hours</div>
+                                        <div class="text-gray-600">Mon-Fri: 9:00 AM - 6:00 PM<br>Sat: 10:00 AM - 4:00 PM</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div class="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <span class="text-red-600 text-sm">🚗</span>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-900">Parking</div>
+                                        <div class="text-gray-600">Free parking available in our lot</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-200 rounded-xl h-64 flex items-center justify-center">
+                            <div class="text-center text-gray-500">
+                                <div class="text-4xl mb-2">🗺️</div>
+                                <div class="font-medium">Interactive Map</div>
+                                <div class="text-sm">Google Maps integration would appear here</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            ` : ''}
+
+            ${state.features && state.features.includes('Client Dashboard') ? `
+            <!-- Client Dashboard Feature -->
+            <section class="py-16 px-6 bg-orange-50">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-12">
+                        <div class="w-16 h-16 bg-orange-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-white text-2xl">👤</span>
+                        </div>
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4">Client Portal Access</h2>
+                        <p class="text-gray-600 max-w-2xl mx-auto">
+                            Access your personalized dashboard to track project progress, view documents, and communicate with our team.
+                        </p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto">
+                        <div class="grid md:grid-cols-3 gap-6 mb-8">
+                            <div class="text-center p-4 bg-orange-50 rounded-lg">
+                                <div class="text-2xl font-bold text-orange-600">12</div>
+                                <div class="text-sm text-gray-600">Active Projects</div>
+                            </div>
+                            <div class="text-center p-4 bg-orange-50 rounded-lg">
+                                <div class="text-2xl font-bold text-orange-600">98%</div>
+                                <div class="text-sm text-gray-600">Completion Rate</div>
+                            </div>
+                            <div class="text-center p-4 bg-orange-50 rounded-lg">
+                                <div class="text-2xl font-bold text-orange-600">24/7</div>
+                                <div class="text-sm text-gray-600">Portal Access</div>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                    <span class="font-medium">Project Alpha - Phase 2</span>
+                                </div>
+                                <span class="text-sm text-gray-500">85% Complete</span>
+                            </div>
+                            <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                    <span class="font-medium">Website Redesign</span>
+                                </div>
+                                <span class="text-sm text-gray-500">60% Complete</span>
+                            </div>
+                            <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+                                    <span class="font-medium">Marketing Campaign</span>
+                                </div>
+                                <span class="text-sm text-gray-500">Planning</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            ` : ''}
+
+            ${hasAnalytics ? `
+            <!-- Analytics Feature -->
+            <section class="py-16 px-6 bg-indigo-50">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-12">
+                        <div class="w-16 h-16 bg-indigo-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-white text-2xl">📊</span>
+                        </div>
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4">Advanced Analytics Dashboard</h2>
+                        <p class="text-gray-600 max-w-2xl mx-auto">
+                            Track your business performance with comprehensive analytics and insights.
+                        </p>
+                    </div>
+                    <div class="grid md:grid-cols-4 gap-6 mb-8">
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                            <div class="text-3xl font-bold text-indigo-600">2,847</div>
+                            <div class="text-sm text-gray-600 mt-1">Total Visitors</div>
+                            <div class="text-xs text-green-500 mt-2">↗ +12.5%</div>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                            <div class="text-3xl font-bold text-indigo-600">18.2%</div>
+                            <div class="text-sm text-gray-600 mt-1">Conversion Rate</div>
+                            <div class="text-xs text-green-500 mt-2">↗ +3.1%</div>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                            <div class="text-3xl font-bold text-indigo-600">4m 32s</div>
+                            <div class="text-sm text-gray-600 mt-1">Avg. Session</div>
+                            <div class="text-xs text-green-500 mt-2">↗ +8.7%</div>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                            <div class="text-3xl font-bold text-indigo-600">$12,450</div>
+                            <div class="text-sm text-gray-600 mt-1">Revenue</div>
+                            <div class="text-xs text-green-500 mt-2">↗ +24.3%</div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-900">Performance Chart</h3>
+                        <div class="h-32 bg-gradient-to-r from-indigo-100 to-indigo-200 rounded-lg flex items-end justify-around p-4">
+                            <div class="w-8 bg-indigo-500 rounded-t" style="height: 60%;"></div>
+                            <div class="w-8 bg-indigo-500 rounded-t" style="height: 80%;"></div>
+                            <div class="w-8 bg-indigo-500 rounded-t" style="height: 45%;"></div>
+                            <div class="w-8 bg-indigo-500 rounded-t" style="height: 90%;"></div>
+                            <div class="w-8 bg-indigo-500 rounded-t" style="height: 75%;"></div>
+                            <div class="w-8 bg-indigo-500 rounded-t" style="height: 95%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            ` : ''}
+
+            ${state.features && state.features.includes('Social Media Integration') ? `
+            <!-- Social Media Integration Feature -->
+            <section class="py-16 px-6 bg-pink-50">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-12">
+                        <div class="w-16 h-16 bg-pink-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-white text-2xl">📱</span>
+                        </div>
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4">Stay Connected</h2>
+                        <p class="text-gray-600 max-w-2xl mx-auto">
+                            Follow us on social media for updates, tips, and behind-the-scenes content.
+                        </p>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="bg-white rounded-xl shadow-lg p-6">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center">
+                                    <span class="text-white text-sm">📘</span>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-gray-900">Facebook</div>
+                                    <div class="text-sm text-gray-500">2.1k followers</div>
+                                </div>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="p-3 bg-gray-50 rounded-lg">
+                                    <div class="text-sm text-gray-600">"Great service and excellent results! Highly recommended."</div>
+                                    <div class="text-xs text-gray-400 mt-1">2 hours ago</div>
+                                </div>
+                                <div class="p-3 bg-gray-50 rounded-lg">
+                                    <div class="text-sm text-gray-600">"New blog post: 5 Tips for Success"</div>
+                                    <div class="text-xs text-gray-400 mt-1">1 day ago</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-lg p-6">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 bg-blue-400 rounded-lg flex items-center justify-center">
+                                    <span class="text-white text-sm">🐦</span>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-gray-900">Twitter</div>
+                                    <div class="text-sm text-gray-500">1.8k followers</div>
+                                </div>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="p-3 bg-gray-50 rounded-lg">
+                                    <div class="text-sm text-gray-600">"Just completed another successful project! 🎉"</div>
+                                    <div class="text-xs text-gray-400 mt-1">3 hours ago</div>
+                                </div>
+                                <div class="p-3 bg-gray-50 rounded-lg">
+                                    <div class="text-sm text-gray-600">"Industry insights: Market trends 2024"</div>
+                                    <div class="text-xs text-gray-400 mt-1">6 hours ago</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-lg p-6">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+                                    <span class="text-white text-sm">📷</span>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-gray-900">Instagram</div>
+                                    <div class="text-sm text-gray-500">3.2k followers</div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div class="bg-gray-200 aspect-square rounded-lg flex items-center justify-center">
+                                    <span class="text-gray-400 text-2xl">📸</span>
+                                </div>
+                                <div class="bg-gray-200 aspect-square rounded-lg flex items-center justify-center">
+                                    <span class="text-gray-400 text-2xl">📸</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

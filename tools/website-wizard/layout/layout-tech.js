@@ -194,6 +194,137 @@ function generateTechLayout(template, colors, designStyle, businessName, state) 
 
 
 
+            ${state.features && state.features.includes('Online Scheduler') ? `
+            <!-- Online Scheduler Feature -->
+            <section class="py-16 px-6 bg-green-50">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-12">
+                        <div class="w-16 h-16 bg-green-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-white text-2xl">📅</span>
+                        </div>
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4">Schedule a Demo</h2>
+                        <p class="text-gray-600 max-w-2xl mx-auto">
+                            Book a personalized demo of our technology solutions at your convenience.
+                        </p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div>
+                                <h3 class="text-xl font-semibold mb-4 text-gray-900">Available Demo Slots</h3>
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between p-3 border border-green-200 rounded-lg hover:bg-green-50 transition-colors cursor-pointer">
+                                        <span class="font-medium">9:00 AM - 10:00 AM</span>
+                                        <span class="text-green-600 text-sm">Available</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 border border-green-200 rounded-lg hover:bg-green-50 transition-colors cursor-pointer">
+                                        <span class="font-medium">2:00 PM - 3:00 PM</span>
+                                        <span class="text-green-600 text-sm">Available</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-4 text-gray-900">Schedule Demo</h3>
+                                <form class="space-y-4">
+                                    <input type="text" placeholder="Company Name" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                    <input type="email" placeholder="Email Address" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                        <option>Select Solution</option>
+                                        <option>Enterprise Software</option>
+                                        <option>Cloud Services</option>
+                                    </select>
+                                    <button type="button" class="w-full bg-green-500 text-white py-3 rounded-lg font-semibold hover:bg-green-600 transition-colors">
+                                        Book Demo
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            ` : ''}
+
+            ${hasPayment ? `
+            <!-- Payment Processing Feature -->
+            <section class="py-16 px-6 bg-purple-50">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-12">
+                        <div class="w-16 h-16 bg-purple-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-white text-2xl">💳</span>
+                        </div>
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4">Subscription & Billing</h2>
+                        <p class="text-gray-600 max-w-2xl mx-auto">
+                            Choose your plan and manage your subscription with our secure payment system.
+                        </p>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                            <h3 class="text-lg font-semibold mb-4 text-gray-900">Starter</h3>
+                            <div class="text-3xl font-bold text-purple-600 mb-2">$29</div>
+                            <div class="text-sm text-gray-600 mb-4">per month</div>
+                            <button class="w-full bg-purple-500 text-white py-2 rounded-lg font-semibold hover:bg-purple-600 transition-colors">
+                                Choose Plan
+                            </button>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center border-2 border-purple-500">
+                            <h3 class="text-lg font-semibold mb-4 text-gray-900">Professional</h3>
+                            <div class="text-3xl font-bold text-purple-600 mb-2">$99</div>
+                            <div class="text-sm text-gray-600 mb-4">per month</div>
+                            <button class="w-full bg-purple-500 text-white py-2 rounded-lg font-semibold hover:bg-purple-600 transition-colors">
+                                Choose Plan
+                            </button>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                            <h3 class="text-lg font-semibold mb-4 text-gray-900">Enterprise</h3>
+                            <div class="text-3xl font-bold text-purple-600 mb-2">$299</div>
+                            <div class="text-sm text-gray-600 mb-4">per month</div>
+                            <button class="w-full bg-purple-500 text-white py-2 rounded-lg font-semibold hover:bg-purple-600 transition-colors">
+                                Choose Plan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            ` : ''}
+
+            ${hasAnalytics ? `
+            <!-- Analytics Feature -->
+            <section class="py-16 px-6 bg-indigo-50">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-12">
+                        <div class="w-16 h-16 bg-indigo-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-white text-2xl">📊</span>
+                        </div>
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4">Real-Time Analytics Dashboard</h2>
+                        <p class="text-gray-600 max-w-2xl mx-auto">
+                            Monitor your system performance and user engagement with advanced analytics.
+                        </p>
+                    </div>
+                    <div class="grid md:grid-cols-4 gap-6 mb-8">
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                            <div class="text-3xl font-bold text-indigo-600">99.9%</div>
+                            <div class="text-sm text-gray-600 mt-1">Uptime</div>
+                            <div class="text-xs text-green-500 mt-2">↗ +0.1%</div>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                            <div class="text-3xl font-bold text-indigo-600">1.2M</div>
+                            <div class="text-sm text-gray-600 mt-1">API Calls</div>
+                            <div class="text-xs text-green-500 mt-2">↗ +15.3%</div>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                            <div class="text-3xl font-bold text-indigo-600">2.3s</div>
+                            <div class="text-sm text-gray-600 mt-1">Response Time</div>
+                            <div class="text-xs text-green-500 mt-2">↗ -12%</div>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                            <div class="text-3xl font-bold text-indigo-600">847</div>
+                            <div class="text-sm text-gray-600 mt-1">Active Users</div>
+                            <div class="text-xs text-green-500 mt-2">↗ +23%</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            ` : ''}
+
             <!-- Footer -->
             <footer class="bg-gray-900 text-white py-16 px-6">
                 <div class="max-w-6xl mx-auto">
