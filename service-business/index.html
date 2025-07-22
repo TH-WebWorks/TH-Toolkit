@@ -36,8 +36,7 @@
             <div class="nav-container">
                 <a href="index.html" class="nav-logo">
                     <i class="fas fa-tools"></i>
-                    <span>Premier Service Solutions</span>
-                </a>
+                  <span>Premier Service Solutions</span>                 </a>
                 
                 <div class="nav-menu" id="nav-menu">
                     <a href="index.html" class="nav-link">Home</a>
@@ -160,6 +159,22 @@
                         <li>Smart Home Integration</li>
                     </ul>
                     <a href="services.html#electrical" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Maintenance</h3>
+                    <p>Comprehensive maintenance programs and emergency repair services to keep your systems running efficiently.</p>
+                    <ul class="service-list">
+                        <li>Preventive Maintenance</li>
+                        <li>Emergency Repairs</li>
+                        <li>System Diagnostics</li>
+                        <li>Performance Optimization</li>
+                        <li>Warranty Service</li>
+                    </ul>
+                    <a href="services.html#maintenance" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
@@ -317,6 +332,47 @@
             </div>
             
             <div class="contact-content">
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="service">Service Needed</label>
+                            <select id="service" name="service">
+                                <option value="">Select a service</option>
+                                <option value="hvac">HVAC Services</option>
+                                <option value="plumbing">Plumbing Services</option>
+                                <option value="electrical">Electrical Services</option>
+                                <option value="emergency">Emergency Service</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Describe your project or issue..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <i class="fas fa-paper-plane"></i>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+                
                 <div class="contact-info">
                     <div class="contact-item">
                         <div class="contact-icon">
@@ -361,47 +417,6 @@
                             <span>Saturday: 8:00 AM - 5:00 PM</span>
                         </div>
                     </div>
-                </div>
-                
-                <div class="contact-form">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Full Name *</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email">Email Address *</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="phone">Phone Number *</label>
-                            <input type="tel" id="phone" name="phone" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="service">Service Needed</label>
-                            <select id="service" name="service">
-                                <option value="">Select a service</option>
-                                <option value="hvac">HVAC Services</option>
-                                <option value="plumbing">Plumbing Services</option>
-                                <option value="electrical">Electrical Services</option>
-                                <option value="emergency">Emergency Service</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" placeholder="Describe your project or issue..."></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary btn-large">
-                            <i class="fas fa-paper-plane"></i>
-                            Send Message
-                        </button>
-                    </form>
                 </div>
             </div>
         </div>
