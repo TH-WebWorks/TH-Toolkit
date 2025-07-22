@@ -7,8 +7,9 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../../styles.css">
+    <link rel="icon" type="image/png" href="../../favicon.png">
 </head>
-<body>
+<body class="min-h-screen flex flex-col">
     <!-- PIN Authentication Overlay -->
     <div id="authOverlay" class="fixed inset-0 bg-[#1b1e24] z-50 flex items-center justify-center">
         <div class="bg-[#2b2f35] rounded-lg shadow-lg p-8 max-w-md w-full mx-4 border border-gray-700">
@@ -44,7 +45,7 @@
     </div>
 
     <!-- Main Content (hidden until authenticated) -->
-    <div id="mainContent" class="hidden">
+    <div id="mainContent" class="hidden flex flex-col min-h-screen">
         <!-- Disclaimer Banner -->
         <div class="disclaimer-banner">
             <div class="max-w-7xl mx-auto px-4 py-3 sm:px-6 lg:px-8">
@@ -86,7 +87,7 @@
             </div>
         </nav>
 
-        <main>
+        <main class="flex-1">
             <!-- Hero Section -->
             <header class="relative overflow-hidden">
                 <div class="max-w-7xl mx-auto px-4 py-20 sm:px-6 lg:px-8">

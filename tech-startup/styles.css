@@ -31,6 +31,49 @@ body {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
+/* Logo improvements */
+.navbar .text-2xl {
+    font-size: 1.25rem;
+    line-height: 1.4;
+}
+
+.navbar .fas.fa-rocket {
+    font-size: 1rem;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    /* iPad/Tablet specific logo sizing */
+    .navbar .text-2xl {
+        font-size: 1.4rem;
+    }
+    
+    .navbar .fas.fa-rocket {
+        font-size: 1.1rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .navbar .text-2xl {
+        font-size: 2rem;
+    }
+    
+    .navbar .fas.fa-rocket {
+        font-size: 1.5rem;
+    }
+}
+
+/* Navbar height improvements for tablets */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .navbar .h-16 {
+        height: 4.5rem;
+    }
+    
+    .navbar .max-w-7xl {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
 .nav-link {
     color: #d1d5db;
     text-decoration: none;
@@ -83,20 +126,95 @@ body {
     color: #3abbfa;
 }
 
+/* Navigation Layout Improvements */
+@media (min-width: 768px) {
+    /* Three-column layout: Logo | Nav Links | Get Demo */
+    .navbar .flex.justify-between {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 2rem;
+    }
+    
+    /* Center the navigation links */
+    .navbar .hidden.md\\:flex {
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    /* Separate nav links from Get Demo button */
+    .navbar .hidden.md\\:flex .btn-primary {
+        margin-left: 0;
+    }
+}
+
+/* Tablet Navigation Improvements */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .hidden.md\:flex .nav-link {
+        padding: 0.5rem;
+        font-size: 0.875rem;
+    }
+    
+    /* Hide mobile menu button on tablets */
+    .md\:hidden {
+        display: none !important;
+    }
+}
+
+/* Better spacing for navigation items on tablets */
+@media (min-width: 768px) and (max-width: 1023px) {
+    /* Much tighter spacing on tablets */
+    .navbar .space-x-8 > * + * {
+        margin-left: 0.75rem !important;
+    }
+    
+    /* Override Tailwind space-x-8 specifically for navigation */
+    .navbar .hidden.md\\:flex.space-x-8 > * + * {
+        margin-left: 0.75rem !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    .navbar .space-x-8 > * + * {
+        margin-left: 2rem;
+    }
+}
+
 /* Buttons */
 .btn-primary {
     background: linear-gradient(135deg, #3abbfa 0%, #f3a515 100%);
     color: white;
-    padding: 0.75rem 1.5rem;
+    padding: 0.625rem 1.25rem;
     border-radius: 0.5rem;
     text-decoration: none;
     font-weight: 600;
+    font-size: 0.875rem;
     transition: all 0.3s ease;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     border: none;
     cursor: pointer;
+    min-height: 2.5rem;
+    white-space: nowrap;
+}
+
+/* Tablet button improvements */
+@media (min-width: 768px) {
+    .btn-primary {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
+        min-height: 2.75rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .btn-primary {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        min-height: auto;
+    }
 }
 
 .btn-primary:hover {
@@ -168,10 +286,56 @@ body {
     color: white;
     text-decoration: none;
     transition: color 0.3s ease;
+    padding: 0.5rem;
+    border-radius: 50%;
 }
 
 .scroll-indicator:hover {
     color: #3abbfa;
+}
+
+/* Touch-friendly improvements for tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+    /* Larger touch targets */
+    .nav-link,
+    .mobile-nav-link,
+    .btn-primary,
+    .btn-secondary,
+    .btn-outline {
+        min-height: 44px;
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Better button spacing in navigation */
+    .navbar .btn-primary {
+        padding: 0.625rem 1rem;
+        font-size: 0.875rem;
+    }
+    
+    /* Improved hero section for tablets */
+    .hero-section h1 {
+        font-size: 3.5rem;
+        line-height: 1.1;
+    }
+    
+    .hero-section p {
+        font-size: 1.125rem;
+        margin-bottom: 2rem;
+    }
+    
+    /* Better hover states for tablets */
+    .nav-link:hover,
+    .btn-primary:hover,
+    .btn-secondary:hover {
+        transform: translateY(-1px);
+    }
+    
+    .btn-primary:hover {
+        box-shadow: 0 8px 20px rgba(58, 187, 250, 0.25);
+    }
 }
 
 /* Solution Cards */
