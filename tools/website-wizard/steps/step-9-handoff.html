@@ -1,0 +1,584 @@
+<!-- Step 9: Project Handoff Details -->
+<div class="form-step active">
+    <!-- Step Header -->
+    <div class="text-center mb-8">
+        <h2 class="step-title text-3xl mb-2">Project Handoff Details</h2>
+        <h3 class="text-xl text-text-muted mb-4">Information for our development team</h3>
+        <p class="step-description max-w-2xl mx-auto">These details will help us prepare a comprehensive project package for our developers and ensure a smooth handoff process.</p>
+    </div>
+    
+    <!-- Project Name -->
+    <div class="form-group">
+        <label class="form-label flex items-center gap-2">
+            <i class="fas fa-project-diagram text-primary"></i>
+            Project Name <span class="text-error">*</span>
+        </label>
+        <p class="form-description text-sm text-text-muted mb-3">What would you like to call this project internally?</p>
+        <input type="text" name="projectName" placeholder="Enter a project name (e.g., 'ABC Company Website')" 
+               class="input-option w-full p-4 text-white transition-all duration-300 focus:border-primary focus:ring-2 focus:ring-primary/20" 
+               required>
+    </div>
+    
+    <!-- Target Completion Date -->
+    <div class="form-group">
+        <label class="form-label flex items-center gap-2">
+            <i class="fas fa-calendar-alt text-primary"></i>
+            Target Completion Date <span class="text-error">*</span>
+        </label>
+        <p class="form-description text-sm text-text-muted mb-4">When would you like your website to be ready? (Typical projects take 2-6 weeks)</p>
+        
+        <!-- Quick Date Selection -->
+        <div class="mb-6">
+            <h4 class="text-sm font-medium text-white mb-3">Quick Selection:</h4>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                <button type="button" class="quick-date-option bg-gray-800 hover:bg-primary/10 border border-gray-600 hover:border-primary text-white py-3 px-4 rounded-lg transition-all duration-200 flex flex-col items-center gap-1 group" data-weeks="2">
+                    <span class="text-sm font-medium">2 Weeks</span>
+                    <span class="text-xs text-gray-400 group-hover:text-primary" id="date-preview-2"></span>
+                </button>
+                <button type="button" class="quick-date-option bg-gray-800 hover:bg-primary/10 border border-gray-600 hover:border-primary text-white py-3 px-4 rounded-lg transition-all duration-200 flex flex-col items-center gap-1 group" data-weeks="4">
+                    <span class="text-sm font-medium">1 Month</span>
+                    <span class="text-xs text-gray-400 group-hover:text-primary" id="date-preview-4"></span>
+                </button>
+                <button type="button" class="quick-date-option bg-gray-800 hover:bg-primary/10 border border-gray-600 hover:border-primary text-white py-3 px-4 rounded-lg transition-all duration-200 flex flex-col items-center gap-1 group" data-weeks="8">
+                    <span class="text-sm font-medium">2 Months</span>
+                    <span class="text-xs text-gray-400 group-hover:text-primary" id="date-preview-8"></span>
+                </button>
+                <button type="button" class="quick-date-option bg-gray-800 hover:bg-primary/10 border border-gray-600 hover:border-primary text-white py-3 px-4 rounded-lg transition-all duration-200 flex flex-col items-center gap-1 group" data-weeks="12">
+                    <span class="text-sm font-medium">3 Months</span>
+                    <span class="text-xs text-gray-400 group-hover:text-primary" id="date-preview-12"></span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Custom Date Input -->
+        <div class="mb-4">
+            <h4 class="text-sm font-medium text-white mb-3">Or choose a specific date:</h4>
+            <div class="relative">
+                <input type="date" name="projectDeadline" id="projectDeadline"
+                       class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-4 text-white text-lg focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300" 
+                       required>
+                <div class="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                    <i class="fas fa-calendar-alt text-primary opacity-60"></i>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Selected Date Display -->
+        <div id="selected-date-display" class="hidden mb-4 p-4 bg-primary/10 border border-primary/20 rounded-lg">
+            <div class="flex items-center gap-2">
+                <i class="fas fa-check-circle text-primary"></i>
+                <span class="text-white font-medium">Target Date Selected:</span>
+                <span id="selected-date-text" class="text-primary font-bold"></span>
+            </div>
+        </div>
+        
+        <div class="bg-amber-500/10 border border-amber-500/20 rounded-lg p-3">
+            <div class="flex items-start gap-2">
+                <i class="fas fa-lightbulb text-amber-400 mt-0.5 text-sm"></i>
+                <p class="text-xs text-amber-200">
+                    <strong>Pro Tip:</strong> Realistic timelines help ensure quality results. Rush jobs often compromise quality and may cost more.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Developer Email -->
+    <div class="form-group">
+        <label class="form-label flex items-center gap-2">
+            <i class="fas fa-code text-primary"></i>
+            Developer Email (Optional)
+        </label>
+        <p class="form-description text-sm text-text-muted mb-3">If you have a preferred developer or team to receive the handoff package</p>
+        <input type="email" name="developerEmail" placeholder="developer@example.com" 
+               class="input-option w-full p-4 text-white transition-all duration-300 focus:border-primary focus:ring-2 focus:ring-primary/20">
+    </div>
+    
+    <!-- Upload Assets -->
+    <div class="form-group">
+        <label class="form-label flex items-center gap-2">
+            <i class="fas fa-upload text-primary"></i>
+            Project Assets & Resources
+        </label>
+        <p class="form-description text-sm text-text-muted mb-3">Upload logos, brand assets, content, wireframes, inspiration images, or any resources for your project</p>
+        
+        <!-- Upload Area -->
+        <div class="upload-area border-2 border-dashed border-gray-600 rounded-lg p-8 text-center transition-all duration-300 hover:border-primary hover:bg-primary/5 mb-6 cursor-pointer" 
+             onclick="triggerFileSelect()" 
+             ondragover="handleDragOver(event)" 
+             ondragleave="handleDragLeave(event)" 
+             ondrop="handleDrop(event)">
+            <input type="file" name="projectAssets" multiple accept=".png,.jpg,.jpeg,.gif,.svg,.pdf,.doc,.docx,.txt,.zip,.ai,.psd,.sketch,.fig,.mp4,.mov,.webp" 
+                   class="hidden" id="assetUpload" onchange="handleFileSelect(this.files)">
+            <div class="text-4xl text-primary mb-4">
+                <i class="fas fa-cloud-upload-alt"></i>
+            </div>
+            <div class="text-xl font-medium text-white mb-2">Drop files here or click to browse</div>
+            <div class="text-sm text-text-muted mb-4">Upload all your project assets at once</div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto text-xs text-text-muted">
+                <div class="flex items-center gap-1">
+                    <i class="fas fa-image text-blue-400"></i>
+                    <span>Images & Graphics</span>
+                </div>
+                <div class="flex items-center gap-1">
+                    <i class="fas fa-file-alt text-green-400"></i>
+                    <span>Documents</span>
+                </div>
+                <div class="flex items-center gap-1">
+                    <i class="fas fa-paint-brush text-purple-400"></i>
+                    <span>Design Files</span>
+                </div>
+                <div class="flex items-center gap-1">
+                    <i class="fas fa-video text-red-400"></i>
+                    <span>Videos</span>
+                </div>
+            </div>
+            <div class="mt-4 text-xs text-text-muted">
+                Maximum 25MB per file • Unlimited files
+            </div>
+        </div>
+
+        <!-- Upload Progress -->
+        <div id="uploadProgress" class="hidden mb-4">
+            <div class="bg-gray-700 rounded-full h-2">
+                <div id="progressBar" class="bg-primary h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+            </div>
+            <p class="text-xs text-text-muted mt-1" id="progressText">Uploading files...</p>
+        </div>
+
+        <!-- File Summary -->
+        <div id="fileSummary" class="hidden mb-6">
+            <div class="bg-gradient-to-r from-gray-800 to-gray-700 rounded-lg p-4 border border-gray-600">
+                <div class="flex items-center justify-between mb-3">
+                    <h4 class="text-lg font-semibold text-white flex items-center gap-2">
+                        <i class="fas fa-folder-open text-primary"></i>
+                        Project Assets
+                    </h4>
+                    <div class="flex items-center gap-4">
+                        <div class="text-center">
+                            <div class="text-lg font-bold text-primary" id="fileCount">0</div>
+                            <div class="text-xs text-text-muted">Files</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-lg font-bold text-green-400" id="totalSize">0 MB</div>
+                            <div class="text-xs text-text-muted">Total Size</div>
+                        </div>
+                        <button type="button" onclick="window.clearAllFiles()" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm transition-colors flex items-center gap-1">
+                            <i class="fas fa-trash"></i>
+                            Clear All
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- File Type Breakdown -->
+                <div id="fileTypeBreakdown" class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+                    <div class="bg-gray-900 rounded p-2 text-center">
+                        <div class="text-blue-400 text-lg mb-1"><i class="fas fa-image"></i></div>
+                        <div class="font-medium text-white" id="imageCount">0</div>
+                        <div class="text-gray-400">Images</div>
+                    </div>
+                    <div class="bg-gray-900 rounded p-2 text-center">
+                        <div class="text-green-400 text-lg mb-1"><i class="fas fa-file-alt"></i></div>
+                        <div class="font-medium text-white" id="documentCount">0</div>
+                        <div class="text-gray-400">Documents</div>
+                    </div>
+                    <div class="bg-gray-900 rounded p-2 text-center">
+                        <div class="text-purple-400 text-lg mb-1"><i class="fas fa-paint-brush"></i></div>
+                        <div class="font-medium text-white" id="designCount">0</div>
+                        <div class="text-gray-400">Design Files</div>
+                    </div>
+                    <div class="bg-gray-900 rounded p-2 text-center">
+                        <div class="text-red-400 text-lg mb-1"><i class="fas fa-video"></i></div>
+                        <div class="font-medium text-white" id="videoCount">0</div>
+                        <div class="text-gray-400">Videos/Other</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Uploaded Files -->
+        <div id="uploadedFiles" class="hidden">            
+            <!-- File Categories -->
+            <div class="space-y-6">
+                <!-- Images -->
+                <div id="imageFiles" class="hidden">
+                    <div class="bg-gray-800 rounded-lg p-4 border border-gray-600">
+                        <div class="flex items-center justify-between mb-3">
+                            <h5 class="text-sm font-medium text-white flex items-center gap-2">
+                                <i class="fas fa-image text-blue-400"></i> 
+                                Images & Graphics
+                                <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded-full" id="imageCounter">0</span>
+                            </h5>
+                            <button type="button" class="text-xs text-gray-400 hover:text-white transition-colors" onclick="toggleImageView()">
+                                <i class="fas fa-th" id="imageViewIcon"></i> Grid View
+                            </button>
+                        </div>
+                        <div id="imageGrid" class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 gap-2"></div>
+                    </div>
+                </div>
+
+                <!-- Documents -->
+                <div id="documentFiles" class="hidden">
+                    <div class="bg-gray-800 rounded-lg p-4 border border-gray-600">
+                        <div class="flex items-center justify-between mb-3">
+                            <h5 class="text-sm font-medium text-white flex items-center gap-2">
+                                <i class="fas fa-file-alt text-green-400"></i> 
+                                Documents & Files
+                                <span class="bg-green-500 text-white text-xs px-2 py-1 rounded-full" id="documentCounter">0</span>
+                            </h5>
+                            <button type="button" class="text-xs text-gray-400 hover:text-white transition-colors" onclick="toggleDocumentView()">
+                                <i class="fas fa-list" id="documentViewIcon"></i> List View
+                            </button>
+                        </div>
+                        <div id="documentList" class="grid grid-cols-1 md:grid-cols-2 gap-2"></div>
+                    </div>
+                </div>
+
+                <!-- Design Files -->
+                <div id="designFiles" class="hidden">
+                    <div class="bg-gray-800 rounded-lg p-4 border border-gray-600">
+                        <div class="flex items-center justify-between mb-3">
+                            <h5 class="text-sm font-medium text-white flex items-center gap-2">
+                                <i class="fas fa-paint-brush text-purple-400"></i> 
+                                Design Files
+                                <span class="bg-purple-500 text-white text-xs px-2 py-1 rounded-full" id="designCounter">0</span>
+                            </h5>
+                        </div>
+                        <div id="designList" class="grid grid-cols-1 md:grid-cols-2 gap-2"></div>
+                    </div>
+                </div>
+
+                <!-- Other Files -->
+                <div id="otherFiles" class="hidden">
+                    <div class="bg-gray-800 rounded-lg p-4 border border-gray-600">
+                        <div class="flex items-center justify-between mb-3">
+                            <h5 class="text-sm font-medium text-white flex items-center gap-2">
+                                <i class="fas fa-file text-red-400"></i> 
+                                Other Files
+                                <span class="bg-red-500 text-white text-xs px-2 py-1 rounded-full" id="otherCounter">0</span>
+                            </h5>
+                        </div>
+                        <div id="otherList" class="grid grid-cols-1 md:grid-cols-2 gap-2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Technical Requirements -->
+    <div class="form-group">
+        <label class="form-label flex items-center gap-2">
+            <i class="fas fa-cogs text-primary"></i>
+            Technical Requirements
+        </label>
+        <div class="space-y-4">
+            <!-- Hosting & Domain -->
+            <div class="bg-gray-800 rounded-lg p-4">
+                <h4 class="text-sm font-medium text-white mb-3">Hosting & Domain</h4>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs text-text-muted mb-1">Do you have a domain?</label>
+                        <select name="hasDomain" class="input-option w-full p-3 text-white text-sm">
+                            <option value="yes">Yes, I have a domain</option>
+                            <option value="no">No, need help purchasing one</option>
+                            <option value="unsure">Not sure</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-text-muted mb-1">Domain name (if you have one)</label>
+                        <input type="text" name="domainName" placeholder="example.com" class="input-option w-full p-3 text-white text-sm">
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <label class="block text-xs text-text-muted mb-1">Hosting preference</label>
+                    <select name="hostingPreference" class="input-option w-full p-3 text-white text-sm">
+                        <option value="developer-choice">Let developer choose (recommended)</option>
+                        <option value="existing">I have existing hosting</option>
+                        <option value="specific">I prefer a specific provider</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Integrations -->
+            <div class="bg-gray-800 rounded-lg p-4">
+                <h4 class="text-sm font-medium text-white mb-3">Required Integrations</h4>
+                <div class="grid md:grid-cols-2 gap-3">
+                    <label class="flex items-center gap-2 text-sm">
+                        <input type="checkbox" name="integrations" value="Google Analytics" class="rounded border-gray-600">
+                        <span class="text-white">Google Analytics</span>
+                    </label>
+                    <label class="flex items-center gap-2 text-sm">
+                        <input type="checkbox" name="integrations" value="Email Marketing" class="rounded border-gray-600">
+                        <span class="text-white">Email Marketing (Mailchimp, etc.)</span>
+                    </label>
+                    <label class="flex items-center gap-2 text-sm">
+                        <input type="checkbox" name="integrations" value="Social Media" class="rounded border-gray-600">
+                        <span class="text-white">Social Media Links</span>
+                    </label>
+                    <label class="flex items-center gap-2 text-sm">
+                        <input type="checkbox" name="integrations" value="Payment Processing" class="rounded border-gray-600">
+                        <span class="text-white">Payment Processing</span>
+                    </label>
+                    <label class="flex items-center gap-2 text-sm">
+                        <input type="checkbox" name="integrations" value="CRM" class="rounded border-gray-600">
+                        <span class="text-white">CRM Integration</span>
+                    </label>
+                    <label class="flex items-center gap-2 text-sm">
+                        <input type="checkbox" name="integrations" value="Chat Widget" class="rounded border-gray-600">
+                        <span class="text-white">Live Chat Widget</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content & SEO -->
+    <div class="form-group">
+        <label class="form-label flex items-center gap-2">
+            <i class="fas fa-file-text text-primary"></i>
+            Content & SEO Requirements
+        </label>
+        <div class="space-y-4">
+            <div class="bg-gray-800 rounded-lg p-4">
+                <h4 class="text-sm font-medium text-white mb-3">Content Responsibility</h4>
+                <div class="space-y-2">
+                    <label class="flex items-center gap-2 text-sm">
+                        <input type="radio" name="contentResponsibility" value="client" class="border-gray-600">
+                        <span class="text-white">I will provide all content (text, images, etc.)</span>
+                    </label>
+                    <label class="flex items-center gap-2 text-sm">
+                        <input type="radio" name="contentResponsibility" value="developer" class="border-gray-600">
+                        <span class="text-white">Developer should create placeholder content</span>
+                    </label>
+                    <label class="flex items-center gap-2 text-sm">
+                        <input type="radio" name="contentResponsibility" value="mixed" class="border-gray-600">
+                        <span class="text-white">Mix - I'll provide some, developer creates some</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="bg-gray-800 rounded-lg p-4">
+                <h4 class="text-sm font-medium text-white mb-3">SEO & Performance</h4>
+                <div class="grid md:grid-cols-2 gap-3">
+                    <label class="flex items-center gap-2 text-sm">
+                        <input type="checkbox" name="seoRequirements" value="Basic SEO" class="rounded border-gray-600">
+                        <span class="text-white">Basic SEO optimization</span>
+                    </label>
+                    <label class="flex items-center gap-2 text-sm">
+                        <input type="checkbox" name="seoRequirements" value="Mobile Responsive" class="rounded border-gray-600">
+                        <span class="text-white">Mobile responsive design</span>
+                    </label>
+                    <label class="flex items-center gap-2 text-sm">
+                        <input type="checkbox" name="seoRequirements" value="Fast Loading" class="rounded border-gray-600">
+                        <span class="text-white">Fast loading times</span>
+                    </label>
+                    <label class="flex items-center gap-2 text-sm">
+                        <input type="checkbox" name="seoRequirements" value="SSL Certificate" class="rounded border-gray-600">
+                        <span class="text-white">SSL certificate setup</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Management -->
+    <div class="form-group">
+        <label class="form-label flex items-center gap-2">
+            <i class="fas fa-users text-primary"></i>
+            Project Management & Communication
+        </label>
+        <div class="space-y-4">
+            <div class="bg-gray-800 rounded-lg p-4">
+                <h4 class="text-sm font-medium text-white mb-3">Communication Preferences</h4>
+                <div class="grid md:grid-cols-2 gap-3">
+                    <label class="flex items-center gap-2 text-sm">
+                        <input type="checkbox" name="communicationMethods" value="Fiverr Messages" class="rounded border-gray-600">
+                        <span class="text-white">Fiverr Messages</span>
+                    </label>
+                    <label class="flex items-center gap-2 text-sm">
+                        <input type="checkbox" name="communicationMethods" value="Email" class="rounded border-gray-600">
+                        <span class="text-white">Email Updates</span>
+                    </label>
+                    <label class="flex items-center gap-2 text-sm">
+                        <input type="checkbox" name="communicationMethods" value="Video Calls" class="rounded border-gray-600">
+                        <span class="text-white">Video Calls (if needed)</span>
+                    </label>
+                    <label class="flex items-center gap-2 text-sm">
+                        <input type="checkbox" name="communicationMethods" value="Progress Screenshots" class="rounded border-gray-600">
+                        <span class="text-white">Regular Progress Screenshots</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 rounded-lg p-4">
+                <h4 class="text-sm font-medium text-white mb-3">Post-Launch Support</h4>
+                <div>
+                    <label class="block text-xs text-text-muted mb-1">What kind of support do you expect after launch?</label>
+                    <select name="postLaunchSupport" class="input-option w-full p-3 text-white text-sm">
+                        <option value="none">No ongoing support needed</option>
+                        <option value="basic">Basic bug fixes (30 days)</option>
+                        <option value="extended">Extended support & updates</option>
+                        <option value="maintenance">Ongoing maintenance package</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional Notes for Handoff -->
+    <div class="form-group">
+        <label class="form-label flex items-center gap-2">
+            <i class="fas fa-sticky-note text-primary"></i>
+            Additional Project Notes
+        </label>
+        <p class="form-description text-sm text-text-muted mb-3">Any other specific requirements, inspiration references, or important details for the developer</p>
+        <textarea name="handoffNotes" placeholder="Examples:
+• Specific functionality requirements
+• Design inspiration or reference websites
+• Branding guidelines or restrictions
+• Third-party tools you already use
+• Any technical constraints or preferences
+• Special features or custom functionality needed..." 
+                  class="input-option w-full p-4 text-white resize-none" 
+                  rows="6"></textarea>
+    </div>
+    
+    <!-- Handoff Package Info -->
+    <div class="form-group">
+        <div class="bg-gradient-to-r from-green-500/10 to-blue-500/10 border border-green-500/20 rounded-xl p-6">
+            <h4 class="font-semibold text-white mb-3 flex items-center gap-2">
+                <i class="fas fa-package text-green-400"></i>
+                Developer Handoff Package
+            </h4>
+            <ul class="text-sm text-text-muted space-y-2">
+                <li>• Comprehensive project requirements document</li>
+                <li>• All consultation details and client preferences</li>
+                <li>• Uploaded assets and brand materials</li>
+                <li>• Technical specifications and timeline</li>
+                <li>• Client contact information for project coordination</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Navigation Buttons -->
+    <div class="btn-group mt-12">
+        <button type="button" class="btn btn-secondary" data-action="prev">
+            <i class="fas fa-arrow-left mr-2"></i>Previous
+        </button>
+        <button type="button" class="btn btn-secondary btn-sm" data-action="reset">
+            <i class="fas fa-refresh mr-2"></i>Start Over
+        </button>
+        <button type="button" class="btn btn-primary" data-action="next">
+            Next<i class="fas fa-arrow-right ml-2"></i>
+        </button>
+    </div>
+</div>
+
+<script>
+// Date picker functionality only - file upload is now handled globally in wizard.js
+document.addEventListener('DOMContentLoaded', function() {
+    // Enhanced date picker functionality
+    const dateInput = document.getElementById('projectDeadline');
+    const selectedDateDisplay = document.getElementById('selected-date-display');
+    const selectedDateText = document.getElementById('selected-date-text');
+    
+    // Set minimum date to today
+    const today = new Date();
+    const todayString = today.toISOString().split('T')[0];
+    dateInput.setAttribute('min', todayString);
+    
+    // Initialize date previews for quick selection buttons
+    function initializeDatePreviews() {
+        const now = new Date();
+        
+        // Calculate dates based on weeks
+        [2, 4, 8, 12].forEach(weeks => {
+            const futureDate = new Date(now.getTime() + (weeks * 7 * 24 * 60 * 60 * 1000));
+            const previewElement = document.getElementById(`date-preview-${weeks}`);
+            if (previewElement) {
+                previewElement.textContent = futureDate.toLocaleDateString('en-US', { 
+                    month: 'short', 
+                    day: 'numeric' 
+                });
+            }
+        });
+    }
+    
+    // Quick date selection with enhanced feedback
+    document.querySelectorAll('.quick-date-option').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const weeks = parseInt(this.dataset.weeks);
+            
+            if (weeks) {
+                const targetDate = new Date(today.getTime() + (weeks * 7 * 24 * 60 * 60 * 1000));
+                
+                // Update the date input
+                dateInput.value = targetDate.toISOString().split('T')[0];
+                
+                // Clear previous selections
+                document.querySelectorAll('.quick-date-option').forEach(b => {
+                    b.classList.remove('bg-primary', 'border-primary');
+                    b.classList.add('bg-gray-800', 'border-gray-600');
+                });
+                
+                // Highlight selected option
+                this.classList.remove('bg-gray-800', 'border-gray-600');
+                this.classList.add('bg-primary', 'border-primary');
+                
+                // Update selected date display
+                updateSelectedDateDisplay(targetDate);
+            }
+        });
+    });
+    
+    // Handle manual date input changes
+    dateInput.addEventListener('change', function() {
+        if (this.value) {
+            const selectedDate = new Date(this.value + 'T00:00:00');
+            updateSelectedDateDisplay(selectedDate);
+            
+            // Clear quick selection highlights
+            document.querySelectorAll('.quick-date-option').forEach(b => {
+                b.classList.remove('bg-primary', 'border-primary');
+                b.classList.add('bg-gray-800', 'border-gray-600');
+            });
+        }
+    });
+    
+    // Update selected date display
+    function updateSelectedDateDisplay(date) {
+        if (selectedDateDisplay && selectedDateText) {
+            selectedDateText.textContent = date.toLocaleDateString('en-US', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            selectedDateDisplay.classList.remove('hidden');
+        }
+    }
+    
+    // Initialize date functionality
+    initializeDatePreviews();
+
+    // Image view toggle functions (still need these for UI)
+    window.toggleImageView = function() {
+        const grid = document.getElementById('imageGrid');
+        const icon = document.getElementById('imageViewIcon');
+        const button = icon?.parentElement;
+        
+        if (grid && grid.classList.contains('grid-cols-3')) {
+            grid.className = 'grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2';
+            if (icon) icon.className = 'fas fa-th-large';
+            if (button) button.innerHTML = '<i class="fas fa-th-large" id="imageViewIcon"></i> Large View';
+        } else if (grid) {
+            grid.className = 'grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 gap-2';
+            if (icon) icon.className = 'fas fa-th';
+            if (button) button.innerHTML = '<i class="fas fa-th" id="imageViewIcon"></i> Grid View';
+        }
+    };
+
+    window.toggleDocumentView = function() {
+        console.log('Document view toggle');
+    };
+});
+</script>

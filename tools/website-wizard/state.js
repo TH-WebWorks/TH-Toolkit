@@ -327,7 +327,61 @@ window.wizardSteps = [
         ]
     },
     
-    // 8. Summary & Submission
+    // 8. Project Handoff Details
+    {
+        id: 'handoff',
+        title: 'Project Handoff Details',
+        subtitle: 'Information for our development team',
+        icon: 'handshake',
+        description: 'These details will help us prepare a comprehensive project package for our developers and ensure a smooth handoff process.',
+        fields: [
+            { 
+                type: 'text', 
+                name: 'projectName', 
+                label: 'Project Name', 
+                description: 'What would you like to call this project internally?',
+                placeholder: 'Enter a project name (e.g., \'ABC Company Website\')',
+                required: true,
+                icon: 'project-diagram'
+            },
+            { 
+                type: 'date', 
+                name: 'projectDeadline', 
+                label: 'Estimated Project Deadline', 
+                description: 'When would you ideally like the project completed?',
+                required: true,
+                icon: 'calendar-alt'
+            },
+            { 
+                type: 'email', 
+                name: 'developerEmail', 
+                label: 'Developer Email (Optional)', 
+                description: 'If you have a preferred developer or team to receive the handoff package',
+                placeholder: 'developer@example.com',
+                icon: 'code'
+            },
+            { 
+                type: 'file-upload', 
+                name: 'projectAssets', 
+                label: 'Upload Project Assets', 
+                description: 'Upload logos, images, documents, or any other assets for your project',
+                accept: '.png,.jpg,.jpeg,.gif,.svg,.pdf,.doc,.docx,.txt,.zip',
+                multiple: true,
+                icon: 'upload'
+            },
+            { 
+                type: 'textarea', 
+                name: 'handoffNotes', 
+                label: 'Additional Handoff Notes', 
+                description: 'Any specific instructions, requirements, or notes for the development team',
+                placeholder: 'Include any specific technical requirements, hosting preferences, integrations needed, or other important details for the development team...',
+                rows: 5,
+                icon: 'sticky-note'
+            }
+        ]
+    },
+    
+    // 9. Summary & Submission
     {
         id: 'summary',
         title: 'Review Your Website Vision',

@@ -54,11 +54,11 @@
             <!-- Progress Bar -->
             <div class="progress-container">
                 <div class="flex items-center justify-between mb-3">
-                    <span class="text-sm font-semibold text-primary">Step <span id="progressStep">1</span> of <span id="progressTotal">8</span></span>
+                    <span class="text-sm font-semibold text-primary">Step <span id="progressStep">1</span> of <span id="progressTotal">10</span></span>
                     <span class="text-sm text-text-muted" id="progressLabel">Welcome</span>
                 </div>
                 <div class="w-full h-3 bg-dark-lighter rounded-full overflow-hidden">
-                    <div id="progressBar" class="progress-bar h-3 transition-all duration-500" style="width: 12.5%"></div>
+                    <div id="progressBar" class="progress-bar h-3 transition-all duration-500" style="width: 10%"></div>
                 </div>
             </div>
             <!-- Dynamic Form -->
@@ -101,6 +101,13 @@
         </div>
     </div>
 
+    <!-- Backend Configuration -->
+    <script>
+        // Configure backend URL (change this when you deploy your backend)
+        window.BACKEND_URL = 'http://localhost:3001'; // Local development
+        // window.BACKEND_URL = 'https://your-app.render.com'; // Production (uncomment and update)
+    </script>
+    
     <!-- External JavaScript Files -->
     <script src="state.js"></script>
     <script src="wizard.js"></script>

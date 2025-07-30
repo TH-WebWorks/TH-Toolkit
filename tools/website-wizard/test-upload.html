@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Upload Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #2c3e50; color: white; }
+        .upload-area { border: 2px dashed #3abbfa; padding: 20px; text-align: center; margin: 20px 0; border-radius: 10px; }
+        .upload-area:hover { background: rgba(58, 187, 250, 0.1); }
+        .file-list { margin-top: 20px; }
+        .file-item { background: #34495e; padding: 10px; margin: 5px 0; border-radius: 5px; }
+        button { background: #3abbfa; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        input[type="file"] { display: none; }
+    </style>
+</head>
+<body>
+    <h1>🧪 File Upload Test</h1>
+    <p>This is a simple test to verify file upload functionality works.</p>
+    
+    <div class="upload-area" onclick="document.getElementById('testUpload').click()">
+        <input type="file" id="testUpload" multiple>
+        <h3>Click to Upload Files</h3>
+        <p>Or drag and drop files here</p>
+    </div>
+    
+    <div id="fileList" class="file-list"></div>
+    <button onclick="clearFiles()">Clear All Files</button>
+    
+    <div style="margin-top: 30px; padding: 20px; background: #34495e; border-radius: 10px;">
+        <h3>Console Output:</h3>
+        <div id="console" style="background: black; color: lime; padding: 10px; border-radius: 5px; height: 200px; overflow-y: scroll; font-family: monospace;"></div>
+    </div>
+
+    <script>
+        let uploadedFiles = [];
+        const fileListEl = document.getElementById('fileList');
+        const consoleEl = document.getElementById('console');
+        
+        function log(message) {
+            console.log(message);
+            consoleEl.innerHTML += message + '<br>';
+            consoleEl.scrollTop = consoleEl.scrollHeight;
+        }
+        
+        log('🚀 File upload test initialized');
+        
+        const uploadInput = document.getElementById('testUpload');
+        const uploadArea = document.querySelector('.upload-area');
+        
+        // File input change handler
+        uploadInput.addEventListener('change', (e) => {
+            log(`📁 Files selected: ${e.target.files.length}`);
+            handleFiles(e.target.files);
+        });
+        
+        // Drag and drop handlers
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.style.background = 'rgba(58, 187, 250, 0.2)';
+            log('📥 Drag over detected');
+        });
+        
+        uploadArea.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            uploadArea.style.background = '';
+            log('📤 Drag leave detected');
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.style.background = '';
+            log(`📁 Files dropped: ${e.dataTransfer.files.length}`);
+            handleFiles(e.dataTransfer.files);
+        });
+        
+        function handleFiles(files) {
+            log(`🔄 Processing ${files.length} files`);
+            
+            for (let file of files) {
+                log(`📄 File: ${file.name} (${file.type}, ${formatFileSize(file.size)})`);
+                
+                if (file.size > 25 * 1024 * 1024) {
+                    log(`❌ File too large: ${file.name}`);
+                    continue;
+                }
+                
+                uploadedFiles.push(file);
+                log(`✅ File added: ${file.name}`);
+            }
+            
+            updateDisplay();
+        }
+        
+        function updateDisplay() {
+            log(`📊 Updating display with ${uploadedFiles.length} files`);
+            
+            fileListEl.innerHTML = '';
+            
+            uploadedFiles.forEach((file, index) => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = `
+                    <strong>${file.name}</strong><br>
+                    Type: ${file.type}<br>
+                    Size: ${formatFileSize(file.size)}
+                    <button onclick="removeFile(${index})" style="float: right; background: #e74c3c;">Remove</button>
+                `;
+                fileListEl.appendChild(fileItem);
+            });
+        }
+        
+        function removeFile(index) {
+            const file = uploadedFiles[index];
+            log(`🗑️ Removing file: ${file.name}`);
+            uploadedFiles.splice(index, 1);
+            updateDisplay();
+        }
+        
+        function clearFiles() {
+            log(`🧹 Clearing all ${uploadedFiles.length} files`);
+            uploadedFiles = [];
+            updateDisplay();
+        }
+        
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 B';
+            const k = 1024;
+            const sizes = ['B', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+        }
+        
+        log('✅ All event listeners attached');
+    </script>
+</body>
+</html> 

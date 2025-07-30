@@ -33,20 +33,21 @@
     <div class="form-group">
         <label class="form-label flex items-center gap-2">
             <i class="fas fa-phone text-primary"></i>
-            Phone Number
+            Phone Number <span class="text-error">*</span>
         </label>
         <input type="tel" name="phone" placeholder="Enter your phone number" 
-               class="input-option w-full p-4 text-white transition-all duration-300 focus:border-primary focus:ring-2 focus:ring-primary/20">
+               class="input-option w-full p-4 text-white transition-all duration-300 focus:border-primary focus:ring-2 focus:ring-primary/20"
+               required>
     </div>
     
     <!-- Budget -->
     <div class="form-group">
         <label class="form-label flex items-center gap-2">
             <i class="fas fa-dollar text-primary"></i>
-            Budget Range
+            Budget Range <span class="text-error">*</span>
         </label>
         <p class="form-description text-sm text-text-muted mb-3">This helps us recommend the best solution for your needs</p>
-        <select name="budget" class="input-option w-full p-4 text-white">
+        <select name="budget" class="input-option w-full p-4 text-white" required>
             <option value="">Select your budget range</option>
             <option value="$1,000 - $2,500">$1,000 - $2,500</option>
             <option value="$2,500 - $5,000">$2,500 - $5,000</option>
@@ -61,10 +62,10 @@
     <div class="form-group">
         <label class="form-label flex items-center gap-2">
             <i class="fas fa-calendar text-primary"></i>
-            Project Timeline
+            Project Timeline <span class="text-error">*</span>
         </label>
         <p class="form-description text-sm text-text-muted mb-3">When would you like your website completed?</p>
-        <select name="timeline" class="input-option w-full p-4 text-white">
+        <select name="timeline" class="input-option w-full p-4 text-white" required>
             <option value="">Select your timeline</option>
             <option value="ASAP (1-2 weeks)">ASAP (1-2 weeks)</option>
             <option value="1-2 months">1-2 months</option>
@@ -94,10 +95,46 @@
                 <span class="form-label">Send me a copy of this consultation</span>
             </div>
             <div class="relative">
-                <input type="checkbox" name="sendEmailCopy" class="sr-only" checked>
-                <div class="toggle-switch w-12 h-6 bg-primary rounded-full transition-colors duration-200">
-                    <div class="toggle-knob w-5 h-5 bg-white rounded-full transition-transform duration-200 transform translate-x-6 translate-y-0.5">        </div>
+                <input type="checkbox" name="sendEmailCopy" class="toggle-checkbox sr-only" checked>
+                <div class="toggle-bg w-12 h-6 bg-gray-600 rounded-full shadow-inner transition-colors duration-300">
+                    <div class="toggle-dot absolute w-5 h-5 bg-white rounded-full shadow transition-transform duration-300 top-0.5 left-0.5"></div>
+                </div>
+            </div>
+        </label>
+        <p class="form-description text-sm text-text-muted mt-2">We'll email you a summary of your consultation</p>
     </div>
+
+    <style>
+        /* Custom toggle switch styles */
+        .toggle-checkbox:checked + .toggle-bg {
+            background-color: #3abbfa; /* primary color */
+        }
+        
+        .toggle-checkbox:checked + .toggle-bg .toggle-dot {
+            transform: translateX(24px); /* move to the right */
+        }
+        
+        .toggle-bg {
+            position: relative;
+        }
+        
+        .toggle-dot {
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        
+        .toggle-checkbox:checked + .toggle-bg .toggle-dot {
+            background-color: white;
+        }
+        
+        /* Hover effects */
+        .toggle-bg:hover {
+            box-shadow: 0 0 0 3px rgba(58, 187, 250, 0.1);
+        }
+        
+        .toggle-checkbox:focus + .toggle-bg {
+            box-shadow: 0 0 0 3px rgba(58, 187, 250, 0.2);
+        }
+    </style>
     
     <!-- Navigation Buttons -->
     <div class="btn-group mt-12">
@@ -110,9 +147,5 @@
         <button type="button" class="btn btn-primary" data-action="next">
             Next<i class="fas fa-arrow-right ml-2"></i>
         </button>
-    </div>
-</div>
-        </label>
-        <p class="form-description text-sm text-text-muted mt-2">We'll email you a summary of your consultation</p>
     </div>
 </div> 

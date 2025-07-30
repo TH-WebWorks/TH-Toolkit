@@ -88,14 +88,31 @@ function initializeFormData() {
         timeline: '',
         additionalNotes: '',
         exampleSites: '',
-        sendEmailCopy: true
+        sendEmailCopy: true,
+        // Handoff details
+        projectName: '',
+        projectDeadline: '',
+        developerEmail: '',
+        projectAssets: [],
+        handoffNotes: '',
+        // Technical requirements
+        hasDomain: 'no',
+        domainName: '',
+        hostingPreference: 'developer-choice',
+        integrations: [],
+        // Content & SEO
+        contentResponsibility: 'client',
+        seoRequirements: [],
+        // Project management
+        communicationMethods: ['Fiverr Messages'],
+        postLaunchSupport: 'basic'
     };
     
     // Update local reference
     formData = window.formData;
     
     // Ensure all array fields are properly initialized
-    const arrayFields = ['goals', 'pagesCore', 'pagesTrust', 'pagesEngage', 'pagesCommerce', 'features'];
+    const arrayFields = ['goals', 'pagesCore', 'pagesTrust', 'pagesEngage', 'pagesCommerce', 'features', 'projectAssets', 'integrations', 'seoRequirements', 'communicationMethods'];
     arrayFields.forEach(field => {
         if (!Array.isArray(formData[field])) {
             formData[field] = [];
@@ -337,6 +354,7 @@ function getStepSlug(idx) {
         'design',
         'colors',
         'contact',
+        'handoff',
         'summary'
     ];
     return slugs[idx] || 'welcome';
@@ -1045,21 +1063,127 @@ function showSuccessMessage() {
 }
 
 // === FORM SUBMISSION ===
-function submitForm() {
+async function submitForm() {
     // Validate final step
     if (!validateStep(currentStep)) {
         alert('Please complete all required fields before submitting.');
         return;
     }
     
-    // Add completion celebration
-    addCompletionCelebration();
+    try {
+        // Show loading state
+        const submitBtn = document.querySelector('[data-action="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Creating Handoff Package...';
+        submitBtn.disabled = true;
+
+        // Prepare form data for submission
+        const submissionData = await prepareSubmissionData();
+        
+        // Backend endpoint configuration
+        const BACKEND_URL = window.BACKEND_URL || 'http://localhost:3001';
+        
+        // Submit to backend endpoint
+        const response = await fetch(`${BACKEND_URL}/create-package`, {
+            method: 'POST',
+            body: submissionData
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            
+            // Add completion celebration
+            addCompletionCelebration();
+            
+            // Show success message with download link if provided
+            showSubmissionSuccess(result);
+            
+            console.log('Form submitted successfully:', result);
+        } else {
+            throw new Error(`Submission failed: ${response.status}`);
+        }
+    } catch (error) {
+        console.error('Submission error:', error);
+        
+        // Show error message
+        alert('There was an error submitting your consultation. Please try again or contact support.');
+        
+        // Restore button state
+        const submitBtn = document.querySelector('[data-action="submit"]');
+        if (submitBtn) {
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane mr-2"></i>Submit Consultation';
+            submitBtn.disabled = false;
+        }
+    }
     
-    // Here you would typically send the data to your server
-    console.log('Form submitted:', formData);
-    
-    // Clear saved data
+    // Clear saved data on successful submission
     localStorage.removeItem('consultationWizardData');
+}
+
+// Prepare form data for submission including file uploads
+async function prepareSubmissionData() {
+    const formDataObj = new FormData();
+    
+    // Add all form fields as JSON
+    const consultationData = { ...formData };
+    
+    // Handle file uploads separately
+    const uploadedFiles = window.getUploadedFiles ? window.getUploadedFiles() : [];
+    delete consultationData.projectAssets; // Remove from JSON as files are handled separately
+    
+    // Add consultation data as JSON
+    formDataObj.append('consultationData', JSON.stringify(consultationData));
+    
+    // Add uploaded files
+    uploadedFiles.forEach((file, index) => {
+        formDataObj.append(`asset_${index}`, file);
+    });
+    
+    return formDataObj;
+}
+
+// Show submission success with download link or confirmation
+function showSubmissionSuccess(result) {
+    const successDiv = document.createElement('div');
+    successDiv.className = 'fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75';
+    
+    let downloadSection = '';
+    if (result.downloadUrl) {
+        downloadSection = `
+            <div class="mt-6 p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
+                <p class="text-green-400 font-medium mb-3">Your handoff package is ready!</p>
+                <a href="${result.downloadUrl}" 
+                   class="inline-flex items-center bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+                    <i class="fas fa-download mr-2"></i>Download Package
+                </a>
+            </div>
+        `;
+    }
+    
+    successDiv.innerHTML = `
+        <div class="bg-gray-800 p-8 rounded-lg max-w-md w-full mx-4 text-center">
+            <div class="text-6xl mb-4">🎉</div>
+            <h3 class="text-2xl font-bold text-white mb-4">Consultation Submitted!</h3>
+            <p class="text-gray-300 mb-6">Your consultation has been submitted successfully and a handoff package has been created for our development team.</p>
+            ${downloadSection}
+            <div class="mt-6">
+                <p class="text-sm text-gray-400 mb-4">We'll get back to you within 24 hours with a custom proposal.</p>
+                <button onclick="location.reload()" 
+                        class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+                    Start New Consultation
+                </button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(successDiv);
+    
+    // Auto-close after 30 seconds
+    setTimeout(() => {
+        if (document.body.contains(successDiv)) {
+            document.body.removeChild(successDiv);
+        }
+    }, 30000);
 }
 
 function downloadSummary() {
@@ -1088,10 +1212,427 @@ function generateSummary() {
     summary += `Phone: ${formData.phone}\n`;
     summary += `Budget: ${formData.budget}\n`;
     summary += `Timeline: ${formData.timeline}\n`;
-    summary += `Additional Notes: ${formData.additionalNotes}\n`;
+    summary += `Additional Notes: ${formData.additionalNotes}\n\n`;
+    
+    // Add comprehensive handoff details
+    if (formData.projectName || formData.projectDeadline || formData.developerEmail || formData.handoffNotes) {
+        summary += 'PROJECT HANDOFF DETAILS\n';
+        summary += '=======================\n';
+        summary += `Project Name: ${formData.projectName || 'Not specified'}\n`;
+        summary += `Target Completion Date: ${formData.projectDeadline || 'Not specified'}\n`;
+        summary += `Developer Email: ${formData.developerEmail || 'Not specified'}\n\n`;
+        
+        // Technical Requirements
+        summary += 'TECHNICAL REQUIREMENTS\n';
+        summary += '---------------------\n';
+        summary += `Has Domain: ${formData.hasDomain}\n`;
+        summary += `Domain Name: ${formData.domainName || 'Not specified'}\n`;
+        summary += `Hosting Preference: ${formData.hostingPreference}\n`;
+        
+        if (formData.integrations && formData.integrations.length > 0) {
+            summary += `Required Integrations: ${formData.integrations.join(', ')}\n`;
+        }
+        summary += '\n';
+        
+        // Content & SEO
+        summary += 'CONTENT & SEO\n';
+        summary += '-------------\n';
+        summary += `Content Responsibility: ${formData.contentResponsibility}\n`;
+        if (formData.seoRequirements && formData.seoRequirements.length > 0) {
+            summary += `SEO Requirements: ${formData.seoRequirements.join(', ')}\n`;
+        }
+        summary += '\n';
+        
+        // Project Management
+        summary += 'PROJECT MANAGEMENT\n';
+        summary += '------------------\n';
+        if (formData.communicationMethods && formData.communicationMethods.length > 0) {
+            summary += `Communication Methods: ${formData.communicationMethods.join(', ')}\n`;
+        }
+        summary += `Post-Launch Support: ${formData.postLaunchSupport}\n`;
+        
+        // Assets
+        const uploadedFiles = window.getUploadedFiles ? window.getUploadedFiles() : [];
+        if (uploadedFiles.length > 0) {
+            summary += `\nUPLOADED ASSETS (${uploadedFiles.length} files)\n`;
+            summary += '---------------\n';
+            uploadedFiles.forEach(file => {
+                summary += `• ${file.name} (${(file.size / 1024 / 1024).toFixed(1)}MB)\n`;
+            });
+        }
+        
+        // Additional Notes
+        if (formData.handoffNotes) {
+            summary += `\nADDITIONAL NOTES\n`;
+            summary += '----------------\n';
+            summary += `${formData.handoffNotes}\n`;
+        }
+    }
     
     return summary;
 }
+
+// === FILE UPLOAD FUNCTIONALITY ===
+// Global array to store uploaded files
+let uploadedFiles = [];
+
+// File type categorization
+function getFileCategory(file) {
+    const imageTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif', 'image/svg+xml', 'image/webp'];
+    const documentTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'text/plain'];
+    const designTypes = ['application/postscript', 'image/vnd.adobe.photoshop', 'application/sketch', 'application/figma'];
+    const videoTypes = ['video/mp4', 'video/mov', 'video/quicktime'];
+
+    if (imageTypes.includes(file.type)) return 'image';
+    if (documentTypes.includes(file.type)) return 'document';
+    if (designTypes.includes(file.type)) return 'design';
+    if (videoTypes.includes(file.type)) return 'video';
+    return 'other';
+}
+
+function formatFileSize(bytes) {
+    if (bytes === 0) return '0 B';
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+}
+
+// Global file upload functions
+window.triggerFileSelect = function() {
+    console.log('🚀 triggerFileSelect called');
+    const input = document.getElementById('assetUpload');
+    if (input) {
+        input.click();
+    } else {
+        console.error('❌ File input not found!');
+    }
+};
+
+window.handleFileSelect = function(files) {
+    console.log('📂 handleFileSelect called with', files.length, 'files');
+    if (files.length > 0) {
+        showUploadFeedback(files.length);
+        showSimpleFileList(files);
+        handleFiles(files);
+    }
+};
+
+window.handleDragOver = function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log('🔥 Drag over detected');
+    const uploadArea = event.currentTarget;
+    uploadArea.style.borderColor = '#3abbfa';
+    uploadArea.style.backgroundColor = 'rgba(58, 187, 250, 0.1)';
+};
+
+window.handleDragLeave = function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log('👋 Drag leave detected');
+    const uploadArea = event.currentTarget;
+    uploadArea.style.borderColor = '';
+    uploadArea.style.backgroundColor = '';
+};
+
+window.handleDrop = function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log('📂 Drop detected with', event.dataTransfer.files.length, 'files');
+    
+    const uploadArea = event.currentTarget;
+    uploadArea.style.borderColor = '';
+    uploadArea.style.backgroundColor = '';
+    
+    if (event.dataTransfer.files.length > 0) {
+        window.handleFileSelect(event.dataTransfer.files);
+    }
+};
+
+window.getUploadedFiles = function() {
+    return uploadedFiles;
+};
+
+window.clearAllFiles = function() {
+    uploadedFiles = [];
+    updateFileDisplay();
+    console.log('🗑️ All files cleared');
+};
+
+function showUploadFeedback(count) {
+    const uploadArea = document.querySelector('.upload-area');
+    if (uploadArea) {
+        // Flash green border to show files were selected
+        uploadArea.style.borderColor = '#10b981';
+        uploadArea.style.backgroundColor = 'rgba(16, 185, 129, 0.1)';
+        
+        // Reset after a moment
+        setTimeout(() => {
+            uploadArea.style.borderColor = '';
+            uploadArea.style.backgroundColor = '';
+        }, 1000);
+    }
+    
+    // Show a temporary message
+    const message = document.createElement('div');
+    message.className = 'fixed top-4 right-4 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 transition-all duration-300';
+    message.innerHTML = `<i class="fas fa-check mr-2"></i>Processing ${count} file${count > 1 ? 's' : ''}...`;
+    document.body.appendChild(message);
+    
+    setTimeout(() => {
+        message.style.opacity = '0';
+        setTimeout(() => {
+            if (document.body.contains(message)) {
+                document.body.removeChild(message);
+            }
+        }, 300);
+    }, 2000);
+}
+
+function showSimpleFileList(files) {
+    // Create a simple test display to prove files are being received
+    let testDiv = document.getElementById('testFileDisplay');
+    if (!testDiv) {
+        testDiv = document.createElement('div');
+        testDiv.id = 'testFileDisplay';
+        testDiv.className = 'bg-green-900 border border-green-600 rounded-lg p-4 mb-4';
+        
+        // Insert after upload area
+        const uploadArea = document.querySelector('.upload-area');
+        if (uploadArea) {
+            uploadArea.parentNode.insertBefore(testDiv, uploadArea.nextSibling);
+        }
+    }
+    
+    testDiv.innerHTML = `
+        <h4 class="text-green-400 font-bold mb-2">🎉 Files Selected Successfully!</h4>
+        ${Array.from(files).map(file => `
+            <div class="text-sm text-white mb-1">
+                📁 ${file.name} (${formatFileSize(file.size)})
+            </div>
+        `).join('')}
+        <p class="text-xs text-green-300 mt-2">Processing for full display...</p>
+    `;
+}
+
+function handleFiles(files) {
+    console.log('🔄 handleFiles called with', files.length, 'files');
+    
+    const allowedTypes = [
+        'image/png', 'image/jpeg', 'image/jpg', 'image/gif', 'image/svg+xml', 'image/webp',
+        'application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'text/plain', 'application/zip', 'application/x-zip-compressed',
+        'video/mp4', 'video/mov', 'video/quicktime',
+        'application/postscript', 'image/vnd.adobe.photoshop'
+    ];
+    
+    let addedCount = 0;
+    
+    for (let file of files) {
+        console.log(`📄 Processing: ${file.name} (${file.type}, ${formatFileSize(file.size)})`);
+        
+        if (file.size > 25 * 1024 * 1024) { // 25MB limit
+            alert(`File "${file.name}" is too large. Maximum file size is 25MB.`);
+            continue;
+        }
+        
+        // Check if file already exists
+        const exists = uploadedFiles.some(f => f.name === file.name && f.size === file.size);
+        if (exists) {
+            console.log(`⚠️ Duplicate file skipped: ${file.name}`);
+            continue;
+        }
+        
+        uploadedFiles.push(file);
+        addedCount++;
+        console.log(`✅ Added: ${file.name} (Total files: ${uploadedFiles.length})`);
+    }
+
+    console.log(`📊 Successfully added ${addedCount} files. Total files now: ${uploadedFiles.length}`);
+    updateFileDisplay();
+}
+
+function updateFileDisplay() {
+    console.log(`🖼️ updateFileDisplay called - ${uploadedFiles.length} files to display`);
+    
+    const uploadedFilesContainer = document.getElementById('uploadedFiles');
+    const fileSummary = document.getElementById('fileSummary');
+    
+    if (uploadedFiles.length === 0) {
+        console.log('No files to display, hiding containers');
+        uploadedFilesContainer?.classList.add('hidden');
+        fileSummary?.classList.add('hidden');
+        return;
+    }
+
+    // Show containers
+    console.log('Showing file containers');
+    uploadedFilesContainer?.classList.remove('hidden');
+    fileSummary?.classList.remove('hidden');
+
+    // Update main summary
+    const fileCount = document.getElementById('fileCount');
+    const totalSize = document.getElementById('totalSize');
+    
+    if (fileCount) fileCount.textContent = uploadedFiles.length;
+    if (totalSize) {
+        const total = uploadedFiles.reduce((sum, file) => sum + file.size, 0);
+        totalSize.textContent = formatFileSize(total);
+    }
+
+    // Update type breakdown
+    updateTypeBreakdown();
+    
+    // Display file categories
+    displayFilesByCategory();
+}
+
+function updateTypeBreakdown() {
+    const categories = {
+        image: { count: 0, element: 'imageCount' },
+        document: { count: 0, element: 'documentCount' },
+        design: { count: 0, element: 'designCount' },
+        video: { count: 0, element: 'videoCount' }
+    };
+
+    uploadedFiles.forEach(file => {
+        const category = getFileCategory(file);
+        if (categories[category]) {
+            categories[category].count++;
+        } else {
+            categories.video.count++; // Default to video/other
+        }
+    });
+
+    Object.values(categories).forEach(cat => {
+        const element = document.getElementById(cat.element);
+        if (element) element.textContent = cat.count;
+    });
+}
+
+function displayFilesByCategory() {
+    const categories = {
+        image: { files: [], container: 'imageFiles', grid: 'imageGrid', counter: 'imageCounter' },
+        document: { files: [], container: 'documentFiles', list: 'documentList', counter: 'documentCounter' },
+        design: { files: [], container: 'designFiles', list: 'designList', counter: 'designCounter' },
+        other: { files: [], container: 'otherFiles', list: 'otherList', counter: 'otherCounter' }
+    };
+
+    // Categorize files
+    uploadedFiles.forEach(file => {
+        const category = getFileCategory(file);
+        if (categories[category]) {
+            categories[category].files.push(file);
+        } else {
+            categories.other.files.push(file);
+        }
+    });
+
+    // Display each category
+    Object.entries(categories).forEach(([categoryName, category]) => {
+        const container = document.getElementById(category.container);
+        const counter = document.getElementById(category.counter);
+        
+        if (category.files.length > 0) {
+            container?.classList.remove('hidden');
+            if (counter) counter.textContent = category.files.length;
+            
+            if (categoryName === 'image') {
+                displayImageFiles(category.files, category.grid);
+            } else {
+                displayListFiles(category.files, category.list);
+            }
+        } else {
+            container?.classList.add('hidden');
+        }
+    });
+}
+
+function displayImageFiles(files, gridId) {
+    const grid = document.getElementById(gridId);
+    if (!grid) return;
+    
+    grid.innerHTML = '';
+    
+    files.forEach((file, index) => {
+        const imageContainer = document.createElement('div');
+        imageContainer.className = 'relative group bg-gray-900 rounded-lg overflow-hidden aspect-square';
+        
+        const img = document.createElement('img');
+        img.className = 'w-full h-full object-cover';
+        img.src = URL.createObjectURL(file);
+        img.alt = file.name;
+        
+        const overlay = document.createElement('div');
+        overlay.className = 'absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center';
+        
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'bg-red-600 hover:bg-red-700 text-white p-2 rounded-full';
+        removeBtn.innerHTML = '<i class="fas fa-trash text-sm"></i>';
+        removeBtn.onclick = () => removeFile(file);
+        
+        overlay.appendChild(removeBtn);
+        imageContainer.appendChild(img);
+        imageContainer.appendChild(overlay);
+        grid.appendChild(imageContainer);
+    });
+}
+
+function displayListFiles(files, listId) {
+    const list = document.getElementById(listId);
+    if (!list) return;
+    
+    list.innerHTML = '';
+    
+    files.forEach(file => {
+        const item = document.createElement('div');
+        item.className = 'flex items-center justify-between p-3 bg-gray-900 rounded-lg';
+        
+        item.innerHTML = `
+            <div class="flex items-center gap-3">
+                <i class="${getFileIcon(file)} text-lg"></i>
+                <div>
+                    <div class="text-sm font-medium text-white">${file.name}</div>
+                    <div class="text-xs text-gray-400">${formatFileSize(file.size)}</div>
+                </div>
+            </div>
+            <button onclick="removeFile(arguments[0])" class="bg-red-600 hover:bg-red-700 text-white p-2 rounded transition-colors">
+                <i class="fas fa-trash text-sm"></i>
+            </button>
+        `;
+        
+        // Store file reference for removal
+        item.querySelector('button').fileRef = file;
+        
+        list.appendChild(item);
+    });
+}
+
+function getFileIcon(file) {
+    const type = file.type.toLowerCase();
+    if (type.includes('pdf')) return 'fas fa-file-pdf text-red-400';
+    if (type.includes('word')) return 'fas fa-file-word text-blue-400';
+    if (type.includes('image')) return 'fas fa-file-image text-green-400';
+    if (type.includes('video')) return 'fas fa-file-video text-purple-400';
+    if (type.includes('zip')) return 'fas fa-file-archive text-yellow-400';
+    return 'fas fa-file text-gray-400';
+}
+
+window.removeFile = function(file) {
+    const index = uploadedFiles.indexOf(file);
+    if (index > -1) {
+        uploadedFiles.splice(index, 1);
+        console.log(`🗑️ Removed file: ${file.name}`);
+        updateFileDisplay();
+        
+        // Update the simple test display
+        const testDiv = document.getElementById('testFileDisplay');
+        if (testDiv && uploadedFiles.length === 0) {
+            testDiv.remove();
+        }
+    }
+};
 
 // Export functions for use in other modules
 window.wizardFunctions = {
@@ -1101,5 +1642,9 @@ window.wizardFunctions = {
     selectRadioOption,
     toggleCheckboxOption,
     submitForm,
-    downloadSummary
+    downloadSummary,
+    triggerFileSelect: window.triggerFileSelect,
+    handleFileSelect: window.handleFileSelect,
+    clearAllFiles: window.clearAllFiles,
+    getUploadedFiles: window.getUploadedFiles
 }; 
