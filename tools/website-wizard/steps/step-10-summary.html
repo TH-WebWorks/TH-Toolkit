@@ -9,25 +9,37 @@
     
     <!-- Summary Content -->
     <div class="form-group">
-        <div class="bg-gray-800 rounded-lg p-6">
-            <h3 class="text-xl font-semibold text-white mb-4">Your Website Requirements</h3>
-            <div class="space-y-4 text-sm" id="summaryContent">
-                <!-- Summary content will be populated by JavaScript -->
-                <div class="text-text-muted">Loading your consultation summary...</div>
+        <div class="section-container">
+            <h3 class="section-header">
+                <i class="fas fa-list-alt"></i>
+                Your Website Requirements
+            </h3>
+            <div class="section-content">
+                <div class="space-y-3 text-sm" id="summaryContent">
+                    <!-- Summary content will be populated by JavaScript -->
+                    <div class="text-text-muted">Loading your consultation summary...</div>
+                </div>
+                
+
             </div>
         </div>
     </div>
     
     <!-- Final Notes -->
     <div class="form-group">
-        <div class="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-xl p-6">
-            <h4 class="font-semibold text-white mb-3">What Happens Next?</h4>
-            <ul class="text-sm text-text-muted space-y-2">
-                <li>• You'll receive a detailed consultation summary via email</li>
-                <li>• Our team will review your requirements and prepare a custom proposal</li>
-                <li>• We'll schedule a follow-up call to discuss your project in detail</li>
-                <li>• You'll receive a comprehensive project timeline and pricing</li>
-            </ul>
+        <div class="section-container" style="background: linear-gradient(135deg, rgba(58, 187, 250, 0.1) 0%, rgba(139, 69, 255, 0.1) 100%); border-color: rgba(58, 187, 250, 0.3);">
+            <h4 class="section-header">
+                <i class="fas fa-rocket"></i>
+                What Happens Next?
+            </h4>
+            <div class="section-content">
+                <ul class="text-sm text-text-muted space-y-2">
+                    <li>• You'll receive a detailed consultation summary via email</li>
+                    <li>• Our team will review your requirements and prepare a custom proposal</li>
+                    <li>• We'll schedule a follow-up call to discuss your project in detail</li>
+                    <li>• You'll receive a comprehensive project timeline and pricing</li>
+                </ul>
+            </div>
         </div>
     </div>
     
@@ -35,6 +47,9 @@
     <div class="btn-group mt-12">
         <button type="button" class="btn btn-secondary" data-action="prev">
             <i class="fas fa-arrow-left mr-2"></i>Previous
+        </button>
+        <button type="button" class="btn btn-secondary" data-action="reset">
+            <i class="fas fa-refresh mr-2"></i>Start Over
         </button>
         <button type="button" class="btn btn-primary btn-primary-large" data-action="submit">
             <i class="fas fa-paper-plane mr-2"></i>Submit Consultation
@@ -43,18 +58,5 @@
     
     <div class="text-center mt-4">
         <p class="text-sm text-text-muted">By submitting, you agree to receive follow-up communications about your project.</p>
-    </div>
-    
-    <!-- Navigation Buttons -->
-    <div class="btn-group mt-12">
-        <button type="button" class="btn btn-secondary" data-action="prev">
-            <i class="fas fa-arrow-left mr-2"></i>Previous
-        </button>
-        <button type="button" class="btn btn-secondary btn-sm" data-action="reset">
-            <i class="fas fa-refresh mr-2"></i>Start Over
-        </button>
-        <button type="button" class="btn btn-primary btn-primary-large" data-action="submit">
-            <i class="fas fa-paper-plane mr-2"></i>Submit Consultation
-        </button>
     </div>
 </div> 

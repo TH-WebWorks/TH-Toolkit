@@ -29,38 +29,33 @@
         
         <!-- Quick Date Selection -->
         <div class="mb-6">
-            <h4 class="text-sm font-medium text-white mb-3">Quick Selection:</h4>
+            <h4 class="section-label">Quick Selection:</h4>
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
-                <button type="button" class="quick-date-option bg-gray-800 hover:bg-primary/10 border border-gray-600 hover:border-primary text-white py-3 px-4 rounded-lg transition-all duration-200 flex flex-col items-center gap-1 group" data-weeks="2">
+                <button type="button" class="quick-date-option py-3 px-4 rounded-lg flex flex-col items-center gap-1" data-weeks="2">
                     <span class="text-sm font-medium">2 Weeks</span>
-                    <span class="text-xs text-gray-400 group-hover:text-primary" id="date-preview-2"></span>
+                    <span class="text-xs text-text-muted" id="date-preview-2"></span>
                 </button>
-                <button type="button" class="quick-date-option bg-gray-800 hover:bg-primary/10 border border-gray-600 hover:border-primary text-white py-3 px-4 rounded-lg transition-all duration-200 flex flex-col items-center gap-1 group" data-weeks="4">
+                <button type="button" class="quick-date-option py-3 px-4 rounded-lg flex flex-col items-center gap-1" data-weeks="4">
                     <span class="text-sm font-medium">1 Month</span>
-                    <span class="text-xs text-gray-400 group-hover:text-primary" id="date-preview-4"></span>
+                    <span class="text-xs text-text-muted" id="date-preview-4"></span>
                 </button>
-                <button type="button" class="quick-date-option bg-gray-800 hover:bg-primary/10 border border-gray-600 hover:border-primary text-white py-3 px-4 rounded-lg transition-all duration-200 flex flex-col items-center gap-1 group" data-weeks="8">
+                <button type="button" class="quick-date-option py-3 px-4 rounded-lg flex flex-col items-center gap-1" data-weeks="8">
                     <span class="text-sm font-medium">2 Months</span>
-                    <span class="text-xs text-gray-400 group-hover:text-primary" id="date-preview-8"></span>
+                    <span class="text-xs text-text-muted" id="date-preview-8"></span>
                 </button>
-                <button type="button" class="quick-date-option bg-gray-800 hover:bg-primary/10 border border-gray-600 hover:border-primary text-white py-3 px-4 rounded-lg transition-all duration-200 flex flex-col items-center gap-1 group" data-weeks="12">
+                <button type="button" class="quick-date-option py-3 px-4 rounded-lg flex flex-col items-center gap-1" data-weeks="12">
                     <span class="text-sm font-medium">3 Months</span>
-                    <span class="text-xs text-gray-400 group-hover:text-primary" id="date-preview-12"></span>
+                    <span class="text-xs text-text-muted" id="date-preview-12"></span>
                 </button>
             </div>
         </div>
         
         <!-- Custom Date Input -->
         <div class="mb-4">
-            <h4 class="text-sm font-medium text-white mb-3">Or choose a specific date:</h4>
-            <div class="relative">
-                <input type="date" name="projectDeadline" id="projectDeadline"
-                       class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-4 text-white text-lg focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300" 
-                       required>
-                <div class="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                    <i class="fas fa-calendar-alt text-primary opacity-60"></i>
-                </div>
-            </div>
+            <h4 class="section-label">Or choose a specific date:</h4>
+            <input type="date" name="projectDeadline" id="projectDeadline"
+                   class="date-input input-option w-full px-4 py-4 text-lg" 
+                   required>
         </div>
         
         <!-- Selected Date Display -->
@@ -93,103 +88,133 @@
                class="input-option w-full p-4 text-white transition-all duration-300 focus:border-primary focus:ring-2 focus:ring-primary/20">
     </div>
     
-    <!-- Upload Assets -->
+    <!-- Project Assets & Resources -->
     <div class="form-group">
         <label class="form-label flex items-center gap-2">
             <i class="fas fa-upload text-primary"></i>
             Project Assets & Resources
         </label>
-        <p class="form-description text-sm text-text-muted mb-3">Upload logos, brand assets, content, wireframes, inspiration images, or any resources for your project</p>
-        
-        <!-- Upload Area -->
-        <div class="upload-area border-2 border-dashed border-gray-600 rounded-lg p-8 text-center transition-all duration-300 hover:border-primary hover:bg-primary/5 mb-6 cursor-pointer" 
-             onclick="triggerFileSelect()" 
-             ondragover="handleDragOver(event)" 
-             ondragleave="handleDragLeave(event)" 
-             ondrop="handleDrop(event)">
-            <input type="file" name="projectAssets" multiple accept=".png,.jpg,.jpeg,.gif,.svg,.pdf,.doc,.docx,.txt,.zip,.ai,.psd,.sketch,.fig,.mp4,.mov,.webp" 
-                   class="hidden" id="assetUpload" onchange="handleFileSelect(this.files)">
-            <div class="text-4xl text-primary mb-4">
-                <i class="fas fa-cloud-upload-alt"></i>
-            </div>
-            <div class="text-xl font-medium text-white mb-2">Drop files here or click to browse</div>
-            <div class="text-sm text-text-muted mb-4">Upload all your project assets at once</div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto text-xs text-text-muted">
-                <div class="flex items-center gap-1">
-                    <i class="fas fa-image text-blue-400"></i>
-                    <span>Images & Graphics</span>
+        <div class="space-y-4">
+            <!-- Upload Area Container -->
+            <div class="section-container">
+                <h4 class="section-header">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    Upload Files & Folders
+                </h4>
+                <div class="section-content">
+                
+                <!-- Upload Area -->
+                <div class="upload-area" 
+                     onclick="triggerFileSelect()" 
+                     ondragover="handleDragOver(event)" 
+                     ondragleave="handleDragLeave(event)" 
+                     ondrop="handleDrop(event)">
+                    <input type="file" name="projectAssets" multiple accept=".png,.jpg,.jpeg,.gif,.svg,.pdf,.doc,.docx,.txt,.zip,.ai,.psd,.sketch,.fig,.mp4,.mov,.webp" 
+                           style="display: none;" id="assetUpload" onchange="handleFileSelect(this.files)">
+                    <input type="file" name="projectFolders" webkitdirectory multiple 
+                           style="display: none;" id="folderUpload" onchange="handleFileSelect(this.files)">
+                    
+                    <div class="upload-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    
+                    <div class="upload-title">Drop files/folders here or click to browse</div>
+                    <div class="upload-subtitle">Upload individual files or entire folders at once</div>
+                    
+                    <!-- Upload Mode Toggle -->
+                    <div class="upload-mode-toggle">
+                        <button type="button" onclick="setUploadMode('files')" id="filesModeBtn" 
+                                class="upload-mode-btn upload-mode-active">
+                            <i class="fas fa-file"></i>
+                            <span>Files</span>
+                        </button>
+                        <button type="button" onclick="setUploadMode('folders')" id="foldersModeBtn" 
+                                class="upload-mode-btn">
+                            <i class="fas fa-folder"></i>
+                            <span>Folders</span>
+                        </button>
+                    </div>
+                    
+                    <div class="upload-file-types">
+                        <div class="file-type-item">
+                            <i class="fas fa-image"></i>
+                            <span>Images & Graphics</span>
+                        </div>
+                        <div class="file-type-item">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Documents</span>
+                        </div>
+                        <div class="file-type-item">
+                            <i class="fas fa-paint-brush"></i>
+                            <span>Design Files</span>
+                        </div>
+                        <div class="file-type-item">
+                            <i class="fas fa-video"></i>
+                            <span>Videos</span>
+                        </div>
+                    </div>
+                    
+                    <div class="upload-limits">
+                        Maximum 25MB per file • Unlimited files
+                    </div>
                 </div>
-                <div class="flex items-center gap-1">
-                    <i class="fas fa-file-alt text-green-400"></i>
-                    <span>Documents</span>
                 </div>
-                <div class="flex items-center gap-1">
-                    <i class="fas fa-paint-brush text-purple-400"></i>
-                    <span>Design Files</span>
-                </div>
-                <div class="flex items-center gap-1">
-                    <i class="fas fa-video text-red-400"></i>
-                    <span>Videos</span>
-                </div>
-            </div>
-            <div class="mt-4 text-xs text-text-muted">
-                Maximum 25MB per file • Unlimited files
             </div>
         </div>
 
         <!-- Upload Progress -->
-        <div id="uploadProgress" class="hidden mb-4">
-            <div class="bg-gray-700 rounded-full h-2">
-                <div id="progressBar" class="bg-primary h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+        <div id="uploadProgress" class="upload-progress-container" style="display: none;">
+            <div class="upload-progress-bar-bg">
+                <div id="progressBar" class="upload-progress-bar" style="width: 0%"></div>
             </div>
-            <p class="text-xs text-text-muted mt-1" id="progressText">Uploading files...</p>
+            <p class="upload-progress-text" id="progressText">Uploading files...</p>
         </div>
 
         <!-- File Summary -->
-        <div id="fileSummary" class="hidden mb-6">
-            <div class="bg-gradient-to-r from-gray-800 to-gray-700 rounded-lg p-4 border border-gray-600">
-                <div class="flex items-center justify-between mb-3">
-                    <h4 class="text-lg font-semibold text-white flex items-center gap-2">
-                        <i class="fas fa-folder-open text-primary"></i>
+        <div id="fileSummary" class="file-summary-container" style="display: none;">
+            <div class="file-summary-card">
+                <div class="file-summary-header">
+                    <h4 class="file-summary-title">
+                        <i class="fas fa-folder-open"></i>
                         Project Assets
                     </h4>
-                    <div class="flex items-center gap-4">
-                        <div class="text-center">
-                            <div class="text-lg font-bold text-primary" id="fileCount">0</div>
-                            <div class="text-xs text-text-muted">Files</div>
+                    <div class="file-summary-stats">
+                        <div class="stat-item">
+                            <div class="stat-value" id="fileCount">0</div>
+                            <div class="stat-label">Files</div>
                         </div>
-                        <div class="text-center">
-                            <div class="text-lg font-bold text-green-400" id="totalSize">0 MB</div>
-                            <div class="text-xs text-text-muted">Total Size</div>
+                        <div class="stat-item">
+                            <div class="stat-value stat-size" id="totalSize">0 MB</div>
+                            <div class="stat-label">Total Size</div>
                         </div>
-                        <button type="button" onclick="window.clearAllFiles()" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm transition-colors flex items-center gap-1">
+                        <button type="button" onclick="window.clearAllFiles()" class="clear-all-btn">
                             <i class="fas fa-trash"></i>
-                            Clear All
+                            <span>Clear All</span>
                         </button>
                     </div>
                 </div>
                 
                 <!-- File Type Breakdown -->
-                <div id="fileTypeBreakdown" class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
-                    <div class="bg-gray-900 rounded p-2 text-center">
-                        <div class="text-blue-400 text-lg mb-1"><i class="fas fa-image"></i></div>
-                        <div class="font-medium text-white" id="imageCount">0</div>
-                        <div class="text-gray-400">Images</div>
+                <div id="fileTypeBreakdown" class="file-type-breakdown">
+                    <div class="file-type-stat">
+                        <div class="file-type-icon image-icon"><i class="fas fa-image"></i></div>
+                        <div class="file-type-count" id="imageCount">0</div>
+                        <div class="file-type-label">Images</div>
                     </div>
-                    <div class="bg-gray-900 rounded p-2 text-center">
-                        <div class="text-green-400 text-lg mb-1"><i class="fas fa-file-alt"></i></div>
-                        <div class="font-medium text-white" id="documentCount">0</div>
-                        <div class="text-gray-400">Documents</div>
+                    <div class="file-type-stat">
+                        <div class="file-type-icon document-icon"><i class="fas fa-file-alt"></i></div>
+                        <div class="file-type-count" id="documentCount">0</div>
+                        <div class="file-type-label">Documents</div>
                     </div>
-                    <div class="bg-gray-900 rounded p-2 text-center">
-                        <div class="text-purple-400 text-lg mb-1"><i class="fas fa-paint-brush"></i></div>
-                        <div class="font-medium text-white" id="designCount">0</div>
-                        <div class="text-gray-400">Design Files</div>
+                    <div class="file-type-stat">
+                        <div class="file-type-icon design-icon"><i class="fas fa-paint-brush"></i></div>
+                        <div class="file-type-count" id="designCount">0</div>
+                        <div class="file-type-label">Design Files</div>
                     </div>
-                    <div class="bg-gray-900 rounded p-2 text-center">
-                        <div class="text-red-400 text-lg mb-1"><i class="fas fa-video"></i></div>
-                        <div class="font-medium text-white" id="videoCount">0</div>
-                        <div class="text-gray-400">Videos/Other</div>
+                    <div class="file-type-stat">
+                        <div class="file-type-icon video-icon"><i class="fas fa-video"></i></div>
+                        <div class="file-type-count" id="videoCount">0</div>
+                        <div class="file-type-label">Videos/Other</div>
                     </div>
                 </div>
             </div>
@@ -197,67 +222,45 @@
         
         <!-- Uploaded Files -->
         <div id="uploadedFiles" class="hidden">            
-            <!-- File Categories -->
-            <div class="space-y-6">
-                <!-- Images -->
-                <div id="imageFiles" class="hidden">
-                    <div class="bg-gray-800 rounded-lg p-4 border border-gray-600">
-                        <div class="flex items-center justify-between mb-3">
-                            <h5 class="text-sm font-medium text-white flex items-center gap-2">
-                                <i class="fas fa-image text-blue-400"></i> 
-                                Images & Graphics
-                                <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded-full" id="imageCounter">0</span>
-                            </h5>
-                            <button type="button" class="text-xs text-gray-400 hover:text-white transition-colors" onclick="toggleImageView()">
-                                <i class="fas fa-th" id="imageViewIcon"></i> Grid View
-                            </button>
+            <!-- File Summary Display -->
+            <div id="fileSummaryDisplay" class="hidden">
+                <div class="file-display-container">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                        <!-- Image Files Summary -->
+                        <div class="file-category-summary text-center p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg">
+                            <i class="fas fa-image text-blue-400 text-xl mb-2"></i>
+                            <div class="text-white font-medium" id="imageCounter">0</div>
+                            <div class="text-xs text-text-muted">Images</div>
                         </div>
-                        <div id="imageGrid" class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 gap-2"></div>
+                        
+                        <!-- Document Files Summary -->
+                        <div class="file-category-summary text-center p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
+                            <i class="fas fa-file-alt text-green-400 text-xl mb-2"></i>
+                            <div class="text-white font-medium" id="documentCounter">0</div>
+                            <div class="text-xs text-text-muted">Documents</div>
+                        </div>
+                        
+                        <!-- Design Files Summary -->
+                        <div class="file-category-summary text-center p-3 bg-purple-500/10 border border-purple-500/20 rounded-lg">
+                            <i class="fas fa-paint-brush text-purple-400 text-xl mb-2"></i>
+                            <div class="text-white font-medium" id="designCounter">0</div>
+                            <div class="text-xs text-text-muted">Design Files</div>
+                        </div>
+                        
+                        <!-- Other Files Summary -->
+                        <div class="file-category-summary text-center p-3 bg-gray-500/10 border border-gray-500/20 rounded-lg">
+                            <i class="fas fa-file text-gray-400 text-xl mb-2"></i>
+                            <div class="text-white font-medium" id="otherCounter">0</div>
+                            <div class="text-xs text-text-muted">Other Files</div>
+                        </div>
                     </div>
-                </div>
-
-                <!-- Documents -->
-                <div id="documentFiles" class="hidden">
-                    <div class="bg-gray-800 rounded-lg p-4 border border-gray-600">
-                        <div class="flex items-center justify-between mb-3">
-                            <h5 class="text-sm font-medium text-white flex items-center gap-2">
-                                <i class="fas fa-file-alt text-green-400"></i> 
-                                Documents & Files
-                                <span class="bg-green-500 text-white text-xs px-2 py-1 rounded-full" id="documentCounter">0</span>
-                            </h5>
-                            <button type="button" class="text-xs text-gray-400 hover:text-white transition-colors" onclick="toggleDocumentView()">
-                                <i class="fas fa-list" id="documentViewIcon"></i> List View
-                            </button>
+                    
+                    <!-- Total Files Summary -->
+                    <div class="text-center mb-4">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-lg">
+                            <i class="fas fa-folder text-primary"></i>
+                            <span class="text-white font-medium">Total Files: <span id="totalFileCount">0</span></span>
                         </div>
-                        <div id="documentList" class="grid grid-cols-1 md:grid-cols-2 gap-2"></div>
-                    </div>
-                </div>
-
-                <!-- Design Files -->
-                <div id="designFiles" class="hidden">
-                    <div class="bg-gray-800 rounded-lg p-4 border border-gray-600">
-                        <div class="flex items-center justify-between mb-3">
-                            <h5 class="text-sm font-medium text-white flex items-center gap-2">
-                                <i class="fas fa-paint-brush text-purple-400"></i> 
-                                Design Files
-                                <span class="bg-purple-500 text-white text-xs px-2 py-1 rounded-full" id="designCounter">0</span>
-                            </h5>
-                        </div>
-                        <div id="designList" class="grid grid-cols-1 md:grid-cols-2 gap-2"></div>
-                    </div>
-                </div>
-
-                <!-- Other Files -->
-                <div id="otherFiles" class="hidden">
-                    <div class="bg-gray-800 rounded-lg p-4 border border-gray-600">
-                        <div class="flex items-center justify-between mb-3">
-                            <h5 class="text-sm font-medium text-white flex items-center gap-2">
-                                <i class="fas fa-file text-red-400"></i> 
-                                Other Files
-                                <span class="bg-red-500 text-white text-xs px-2 py-1 rounded-full" id="otherCounter">0</span>
-                            </h5>
-                        </div>
-                        <div id="otherList" class="grid grid-cols-1 md:grid-cols-2 gap-2"></div>
                     </div>
                 </div>
             </div>
@@ -272,60 +275,70 @@
         </label>
         <div class="space-y-4">
             <!-- Hosting & Domain -->
-            <div class="bg-gray-800 rounded-lg p-4">
-                <h4 class="text-sm font-medium text-white mb-3">Hosting & Domain</h4>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs text-text-muted mb-1">Do you have a domain?</label>
-                        <select name="hasDomain" class="input-option w-full p-3 text-white text-sm">
-                            <option value="yes">Yes, I have a domain</option>
-                            <option value="no">No, need help purchasing one</option>
-                            <option value="unsure">Not sure</option>
+            <div class="section-container">
+                <h4 class="section-header">
+                    <i class="fas fa-server"></i>
+                    Hosting & Domain
+                </h4>
+                <div class="section-content">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="section-label">Do you have a domain?</label>
+                            <select name="hasDomain" class="input-option w-full p-3 section-text">
+                                <option value="yes">Yes, I have a domain</option>
+                                <option value="no">No, need help purchasing one</option>
+                                <option value="unsure">Not sure</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="section-label">Domain name (if you have one)</label>
+                            <input type="text" name="domainName" placeholder="example.com" class="input-option w-full p-3 section-text">
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <label class="section-label">Hosting preference</label>
+                        <select name="hostingPreference" class="input-option w-full p-3 section-text">
+                            <option value="developer-choice">Let developer choose (recommended)</option>
+                            <option value="existing">I have existing hosting</option>
+                            <option value="specific">I prefer a specific provider</option>
                         </select>
                     </div>
-                    <div>
-                        <label class="block text-xs text-text-muted mb-1">Domain name (if you have one)</label>
-                        <input type="text" name="domainName" placeholder="example.com" class="input-option w-full p-3 text-white text-sm">
-                    </div>
-                </div>
-                <div class="mt-3">
-                    <label class="block text-xs text-text-muted mb-1">Hosting preference</label>
-                    <select name="hostingPreference" class="input-option w-full p-3 text-white text-sm">
-                        <option value="developer-choice">Let developer choose (recommended)</option>
-                        <option value="existing">I have existing hosting</option>
-                        <option value="specific">I prefer a specific provider</option>
-                    </select>
                 </div>
             </div>
 
             <!-- Integrations -->
-            <div class="bg-gray-800 rounded-lg p-4">
-                <h4 class="text-sm font-medium text-white mb-3">Required Integrations</h4>
-                <div class="grid md:grid-cols-2 gap-3">
-                    <label class="flex items-center gap-2 text-sm">
-                        <input type="checkbox" name="integrations" value="Google Analytics" class="rounded border-gray-600">
-                        <span class="text-white">Google Analytics</span>
-                    </label>
-                    <label class="flex items-center gap-2 text-sm">
-                        <input type="checkbox" name="integrations" value="Email Marketing" class="rounded border-gray-600">
-                        <span class="text-white">Email Marketing (Mailchimp, etc.)</span>
-                    </label>
-                    <label class="flex items-center gap-2 text-sm">
-                        <input type="checkbox" name="integrations" value="Social Media" class="rounded border-gray-600">
-                        <span class="text-white">Social Media Links</span>
-                    </label>
-                    <label class="flex items-center gap-2 text-sm">
-                        <input type="checkbox" name="integrations" value="Payment Processing" class="rounded border-gray-600">
-                        <span class="text-white">Payment Processing</span>
-                    </label>
-                    <label class="flex items-center gap-2 text-sm">
-                        <input type="checkbox" name="integrations" value="CRM" class="rounded border-gray-600">
-                        <span class="text-white">CRM Integration</span>
-                    </label>
-                    <label class="flex items-center gap-2 text-sm">
-                        <input type="checkbox" name="integrations" value="Chat Widget" class="rounded border-gray-600">
-                        <span class="text-white">Live Chat Widget</span>
-                    </label>
+            <div class="section-container">
+                <h4 class="section-header">
+                    <i class="fas fa-plug"></i>
+                    Required Integrations
+                </h4>
+                <div class="section-content">
+                    <div class="checkbox-grid">
+                        <label>
+                            <input type="checkbox" name="integrations" value="Google Analytics">
+                            <span>Google Analytics</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="integrations" value="Email Marketing">
+                            <span>Email Marketing</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="integrations" value="Social Media">
+                            <span>Social Media Links</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="integrations" value="Payment Processing">
+                            <span>Payment Processing</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="integrations" value="CRM">
+                            <span>CRM Integration</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="integrations" value="Chat Widget">
+                            <span>Live Chat Widget</span>
+                        </label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -338,43 +351,53 @@
             Content & SEO Requirements
         </label>
         <div class="space-y-4">
-            <div class="bg-gray-800 rounded-lg p-4">
-                <h4 class="text-sm font-medium text-white mb-3">Content Responsibility</h4>
-                <div class="space-y-2">
-                    <label class="flex items-center gap-2 text-sm">
-                        <input type="radio" name="contentResponsibility" value="client" class="border-gray-600">
-                        <span class="text-white">I will provide all content (text, images, etc.)</span>
-                    </label>
-                    <label class="flex items-center gap-2 text-sm">
-                        <input type="radio" name="contentResponsibility" value="developer" class="border-gray-600">
-                        <span class="text-white">Developer should create placeholder content</span>
-                    </label>
-                    <label class="flex items-center gap-2 text-sm">
-                        <input type="radio" name="contentResponsibility" value="mixed" class="border-gray-600">
-                        <span class="text-white">Mix - I'll provide some, developer creates some</span>
-                    </label>
+            <div class="section-container">
+                <h4 class="section-header">
+                    <i class="fas fa-edit"></i>
+                    Content Responsibility
+                </h4>
+                <div class="section-content">
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="contentResponsibility" value="client">
+                            <span>I will provide all content</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="contentResponsibility" value="developer">
+                            <span>Developer creates placeholder content</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="contentResponsibility" value="mixed">
+                            <span>Mixed approach</span>
+                        </label>
+                    </div>
                 </div>
             </div>
             
-            <div class="bg-gray-800 rounded-lg p-4">
-                <h4 class="text-sm font-medium text-white mb-3">SEO & Performance</h4>
-                <div class="grid md:grid-cols-2 gap-3">
-                    <label class="flex items-center gap-2 text-sm">
-                        <input type="checkbox" name="seoRequirements" value="Basic SEO" class="rounded border-gray-600">
-                        <span class="text-white">Basic SEO optimization</span>
-                    </label>
-                    <label class="flex items-center gap-2 text-sm">
-                        <input type="checkbox" name="seoRequirements" value="Mobile Responsive" class="rounded border-gray-600">
-                        <span class="text-white">Mobile responsive design</span>
-                    </label>
-                    <label class="flex items-center gap-2 text-sm">
-                        <input type="checkbox" name="seoRequirements" value="Fast Loading" class="rounded border-gray-600">
-                        <span class="text-white">Fast loading times</span>
-                    </label>
-                    <label class="flex items-center gap-2 text-sm">
-                        <input type="checkbox" name="seoRequirements" value="SSL Certificate" class="rounded border-gray-600">
-                        <span class="text-white">SSL certificate setup</span>
-                    </label>
+            <div class="section-container">
+                <h4 class="section-header">
+                    <i class="fas fa-search"></i>
+                    SEO & Performance
+                </h4>
+                <div class="section-content">
+                    <div class="checkbox-grid">
+                        <label>
+                            <input type="checkbox" name="seoRequirements" value="Basic SEO">
+                            <span>Basic SEO optimization</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="seoRequirements" value="Mobile Responsive">
+                            <span>Mobile responsive design</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="seoRequirements" value="Fast Loading">
+                            <span>Fast loading times</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="seoRequirements" value="SSL Certificate">
+                            <span>SSL certificate setup</span>
+                        </label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -387,37 +410,45 @@
             Project Management & Communication
         </label>
         <div class="space-y-4">
-            <div class="bg-gray-800 rounded-lg p-4">
-                <h4 class="text-sm font-medium text-white mb-3">Communication Preferences</h4>
-                <div class="grid md:grid-cols-2 gap-3">
-                    <label class="flex items-center gap-2 text-sm">
-                        <input type="checkbox" name="communicationMethods" value="Fiverr Messages" class="rounded border-gray-600">
-                        <span class="text-white">Fiverr Messages</span>
-                    </label>
-                    <label class="flex items-center gap-2 text-sm">
-                        <input type="checkbox" name="communicationMethods" value="Email" class="rounded border-gray-600">
-                        <span class="text-white">Email Updates</span>
-                    </label>
-                    <label class="flex items-center gap-2 text-sm">
-                        <input type="checkbox" name="communicationMethods" value="Video Calls" class="rounded border-gray-600">
-                        <span class="text-white">Video Calls (if needed)</span>
-                    </label>
-                    <label class="flex items-center gap-2 text-sm">
-                        <input type="checkbox" name="communicationMethods" value="Progress Screenshots" class="rounded border-gray-600">
-                        <span class="text-white">Regular Progress Screenshots</span>
-                    </label>
+            <div class="section-container">
+                <h4 class="section-header">
+                    <i class="fas fa-comments"></i>
+                    Communication Preferences
+                </h4>
+                <div class="section-content">
+                    <div class="checkbox-grid">
+                        <label>
+                            <input type="checkbox" name="communicationMethods" value="Fiverr Messages">
+                            <span>Fiverr Messages</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="communicationMethods" value="Email">
+                            <span>Email Updates</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="communicationMethods" value="Video Calls">
+                            <span>Video Calls</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="communicationMethods" value="Progress Screenshots">
+                            <span>Progress Screenshots</span>
+                        </label>
+                    </div>
                 </div>
             </div>
 
-            <div class="bg-gray-800 rounded-lg p-4">
-                <h4 class="text-sm font-medium text-white mb-3">Post-Launch Support</h4>
-                <div>
-                    <label class="block text-xs text-text-muted mb-1">What kind of support do you expect after launch?</label>
-                    <select name="postLaunchSupport" class="input-option w-full p-3 text-white text-sm">
-                        <option value="none">No ongoing support needed</option>
+            <div class="section-container">
+                <h4 class="section-header">
+                    <i class="fas fa-life-ring"></i>
+                    Post-Launch Support
+                </h4>
+                <div class="section-content">
+                    <select name="postLaunchSupport" class="input-option w-full p-3 section-text">
+                        <option value="">Select support level</option>
+                        <option value="none">No ongoing support</option>
                         <option value="basic">Basic bug fixes (30 days)</option>
-                        <option value="extended">Extended support & updates</option>
-                        <option value="maintenance">Ongoing maintenance package</option>
+                        <option value="extended">Extended support</option>
+                        <option value="maintenance">Maintenance package</option>
                     </select>
                 </div>
             </div>
@@ -430,33 +461,9 @@
             <i class="fas fa-sticky-note text-primary"></i>
             Additional Project Notes
         </label>
-        <p class="form-description text-sm text-text-muted mb-3">Any other specific requirements, inspiration references, or important details for the developer</p>
-        <textarea name="handoffNotes" placeholder="Examples:
-• Specific functionality requirements
-• Design inspiration or reference websites
-• Branding guidelines or restrictions
-• Third-party tools you already use
-• Any technical constraints or preferences
-• Special features or custom functionality needed..." 
-                  class="input-option w-full p-4 text-white resize-none" 
-                  rows="6"></textarea>
-    </div>
-    
-    <!-- Handoff Package Info -->
-    <div class="form-group">
-        <div class="bg-gradient-to-r from-green-500/10 to-blue-500/10 border border-green-500/20 rounded-xl p-6">
-            <h4 class="font-semibold text-white mb-3 flex items-center gap-2">
-                <i class="fas fa-package text-green-400"></i>
-                Developer Handoff Package
-            </h4>
-            <ul class="text-sm text-text-muted space-y-2">
-                <li>• Comprehensive project requirements document</li>
-                <li>• All consultation details and client preferences</li>
-                <li>• Uploaded assets and brand materials</li>
-                <li>• Technical specifications and timeline</li>
-                <li>• Client contact information for project coordination</li>
-            </ul>
-        </div>
+        <textarea name="handoffNotes" placeholder="Any additional requirements or special notes..." 
+                  class="input-option w-full p-4 resize-none" 
+                  rows="4"></textarea>
     </div>
     
     <!-- Navigation Buttons -->
@@ -516,13 +523,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Clear previous selections
                 document.querySelectorAll('.quick-date-option').forEach(b => {
-                    b.classList.remove('bg-primary', 'border-primary');
-                    b.classList.add('bg-gray-800', 'border-gray-600');
+                    b.classList.remove('selected');
                 });
                 
                 // Highlight selected option
-                this.classList.remove('bg-gray-800', 'border-gray-600');
-                this.classList.add('bg-primary', 'border-primary');
+                this.classList.add('selected');
                 
                 // Update selected date display
                 updateSelectedDateDisplay(targetDate);
@@ -538,8 +543,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Clear quick selection highlights
             document.querySelectorAll('.quick-date-option').forEach(b => {
-                b.classList.remove('bg-primary', 'border-primary');
-                b.classList.add('bg-gray-800', 'border-gray-600');
+                b.classList.remove('selected');
             });
         }
     });
