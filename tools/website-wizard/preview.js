@@ -2,8 +2,17 @@
 // Handles dynamic preview updates only
 
 // === PREVIEW UPDATE SYSTEM ===
+// PREVIEW DISABLED: To re-enable live preview, change PREVIEW_ENABLED to true
+const PREVIEW_ENABLED = false; // Set to true to re-enable live preview
+
 // Make updatePreview globally accessible
 window.updatePreview = function() {
+    // PREVIEW DISABLED: Skip preview updates when disabled
+    if (!PREVIEW_ENABLED) {
+        console.log('Preview disabled - skipping update');
+        return;
+    }
+    
     console.log('updatePreview called');
     // Get formData from the global scope
     const formData = window.formData || {};
@@ -501,6 +510,26 @@ function renderOtherPreview(state) {
     // This is implemented in layout-service.js (can be extended for other)
     console.log('Rendering other preview with state:', state);
     renderServiceBusinessPreview(state); // Use service layout as base
+}
+
+function renderAutomotivePreview(state) {
+    // This is implemented in layout-automotive.js
+    console.log('Rendering automotive preview with state:', state);
+}
+
+function renderFoodHospitalityPreview(state) {
+    // This is implemented in layout-food-hospitality.js
+    console.log('Rendering food & hospitality preview with state:', state);
+}
+
+function renderRetailPreview(state) {
+    // This is implemented in layout-retail.js
+    console.log('Rendering retail preview with state:', state);
+}
+
+function renderTechStartupPreview(state) {
+    // This is implemented in layout-tech.js
+    console.log('Rendering tech startup preview with state:', state);
 }
 
 // Make functions globally accessible

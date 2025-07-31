@@ -229,24 +229,34 @@ function resetWizard() {
 }
 
 // Update preview visibility based on current step
+// PREVIEW DISABLED: To re-enable live preview, change PREVIEW_ENABLED to true
+const PREVIEW_ENABLED = false; // Set to true to re-enable live preview
+
 function updatePreviewVisibility() {
     const previewPanel = document.getElementById('previewPanel');
     if (previewPanel) {
-        // Only show preview from step 2 onwards (index 1+)
-        if (currentStep >= 1) {
-            previewPanel.style.display = 'block';
-            previewPanel.classList.remove('hidden');
-            // Add visible class after a small delay for smooth animation
-            setTimeout(() => {
-                previewPanel.classList.add('visible');
-            }, 50);
+        if (PREVIEW_ENABLED) {
+            // Only show preview from step 2 onwards (index 1+)
+            if (currentStep >= 1) {
+                previewPanel.style.display = 'block';
+                previewPanel.classList.remove('hidden');
+                // Add visible class after a small delay for smooth animation
+                setTimeout(() => {
+                    previewPanel.classList.add('visible');
+                }, 50);
+            } else {
+                previewPanel.classList.remove('visible');
+                // Hide after animation completes
+                setTimeout(() => {
+                    previewPanel.style.display = 'none';
+                    previewPanel.classList.add('hidden');
+                }, 500);
+            }
         } else {
+            // PREVIEW DISABLED: Always hide the preview panel
             previewPanel.classList.remove('visible');
-            // Hide after animation completes
-            setTimeout(() => {
-                previewPanel.style.display = 'none';
-                previewPanel.classList.add('hidden');
-            }, 500);
+            previewPanel.style.display = 'none';
+            previewPanel.classList.add('hidden');
         }
     }
 }

@@ -31,6 +31,9 @@ body {
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 
 /* === AUTH OVERLAY === */
@@ -97,15 +100,18 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
 }
 
+/* OPTIMIZED FOR NO-PREVIEW MODE - Full width layout */
 .form-panel {
-    width: 50%;
+    width: 100%;
+    max-width: 1600px; /* Increased from 1400px for better use of space */
     height: 100vh;
     overflow-y: auto;
-    position: fixed;
-    left: 0;
-    top: 0;
+    position: relative;
     z-index: 10;
     box-sizing: border-box;
     scroll-behavior: smooth;
@@ -118,14 +124,14 @@ body {
 }
 
 .form-panel > * {
-    max-width: 800px;
+    max-width: 1600px; /* Increased from 1400px for better use of space */
     width: 100%;
     background: rgba(43, 47, 53, 0.95);
     backdrop-filter: blur(20px);
     border: 1px solid var(--border);
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-xl);
-    padding: 3rem 2rem;
+    padding: 3rem 3rem; /* Increased horizontal padding from 2rem to 3rem */
     margin-bottom: 2rem;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -133,26 +139,26 @@ body {
 /* Step 1 (landing page) - centered */
 .form-panel.step-1 {
     width: 100%;
-    left: 0;
+    max-width: 1800px; /* Increased for welcome step */
     align-items: center;
     justify-content: center;
 }
 
 .form-panel.step-1 > * {
-    max-width: 900px;
+    max-width: 1800px; /* Increased for welcome step */
     text-align: center;
 }
 
-/* Steps 2+ - centered within left half */
+/* Steps 2+ - full width for better form layout */
 .form-panel:not(.step-1) {
-    width: 50%;
-    left: 0;
+    width: 100%;
+    max-width: 1600px; /* Increased from 1400px */
     align-items: center;
     justify-content: flex-start;
 }
 
 .form-panel:not(.step-1) > * {
-    max-width: 800px;
+    max-width: 1600px; /* Increased from 1400px */
     text-align: left;
 }
 
@@ -174,6 +180,14 @@ body {
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 0;
     transform: translateX(20px);
+}
+
+/* PREVIEW DISABLED: Ensure preview panel is completely hidden when disabled */
+.preview-panel[style*="display: none"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    transform: translateX(100%) !important;
 }
 
 .preview-panel.visible {
@@ -295,6 +309,7 @@ body {
 .input-group {
     display: grid;
     gap: 1rem;
+    grid-template-columns: 1fr; /* Default to single column */
 }
 
 /* === BUSINESS TYPE CARDS === */
@@ -303,6 +318,21 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.25rem;
     margin-bottom: 1rem;
+}
+
+/* OPTIMIZED FOR WIDER LAYOUTS - Better business type grid */
+@media (min-width: 1200px) {
+    .business-type-grid {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Wider cards on large screens */
+        gap: 1.5rem; /* Increased gap */
+    }
+}
+
+@media (min-width: 1600px) {
+    .business-type-grid {
+        grid-template-columns: repeat(4, 1fr); /* Force 4 columns on very wide screens */
+        gap: 2rem; /* Even more space */
+    }
 }
 
 .business-type-card {
@@ -497,13 +527,37 @@ body {
     grid-template-columns: repeat(2, 1fr);
 }
 
-.input-group.md\\:grid-cols-3 {
+/* Responsive grid layouts for input groups */
+.input-group.grid-cols-3 {
     grid-template-columns: repeat(3, 1fr);
+}
+
+.input-group.md-grid-cols-3 {
+    grid-template-columns: 1fr; /* Default single column for mobile */
+}
+
+@media (min-width: 768px) {
+    .input-group.md-grid-cols-3 {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns on medium screens and up */
+    }
+}
+
+/* OPTIMIZED FOR WIDER LAYOUTS - Better use of space */
+@media (min-width: 1200px) {
+    .input-group.grid-cols-2 {
+        grid-template-columns: repeat(3, 1fr); /* Use 3 columns on larger screens */
+    }
+    
+    .input-group.grid-cols-3,
+    .input-group.md-grid-cols-3 {
+        grid-template-columns: repeat(4, 1fr); /* Use 4 columns on larger screens */
+    }
 }
 
 @media (max-width: 768px) {
     .input-group.grid-cols-2,
-    .input-group.md\\:grid-cols-3 {
+    .input-group.grid-cols-3,
+    .input-group.md-grid-cols-3 {
         grid-template-columns: 1fr;
     }
 }
@@ -1417,23 +1471,34 @@ body {
 @media (max-width: 1024px) {
     .main-container {
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5rem;
     }
     
     .form-panel {
         position: relative;
         width: 100%;
+        max-width: 95vw; /* Increased from 90vw for better mobile use */
         height: auto;
         min-height: 100vh;
+        padding: 1.5rem; /* Reduced padding for mobile */
+    }
+    
+    .form-panel > * {
+        padding: 2rem 1.5rem; /* Adjusted padding for mobile */
     }
     
     .form-panel.step-1 {
         width: 100%;
+        max-width: 95vw; /* Increased from 90vw */
         align-items: center;
         justify-content: center;
     }
     
     .form-panel:not(.step-1) {
         width: 100%;
+        max-width: 95vw; /* Increased from 90vw */
         align-items: center;
         justify-content: flex-start;
     }
@@ -1445,9 +1510,27 @@ body {
         border-left: none;
         border-top: 1px solid var(--border);
     }
+    
+    /* PREVIEW DISABLED: Ensure preview panel is hidden on mobile when disabled */
+    .preview-panel[style*="display: none"] {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        transform: translateY(100%) !important;
+    }
 }
 
 @media (max-width: 768px) {
+    .form-panel {
+        max-width: 98vw; /* Increased from 95vw for maximum mobile width */
+        padding: 1rem;
+    }
+    
+    .form-panel > * {
+        padding: 1.5rem 1rem; /* Optimized padding for small screens */
+        margin-bottom: 1rem;
+    }
+    
     .btn-group {
         flex-direction: column;
     }
@@ -1514,6 +1597,26 @@ body {
     
     .btn-group button {
         width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-panel {
+        max-width: 98vw;
+        padding: 0.5rem;
+    }
+    
+    .form-panel > * {
+        padding: 1.5rem 0.75rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .step-title {
+        font-size: 1.25rem !important;
+    }
+    
+    .step-description {
+        font-size: 0.9rem !important;
     }
 }
 

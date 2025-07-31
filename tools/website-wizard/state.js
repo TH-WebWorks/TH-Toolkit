@@ -486,6 +486,39 @@ window.previewTemplates = {
         layout: 'technology',
         sections: ['hero', 'products-showcase', 'features', 'pricing', 'case-studies', 'developer-hub']
     },
+    'automotive': {
+        name: 'ProAuto Services',
+        tagline: 'Expert Auto Care You Can Trust',
+        features: ['Service scheduling', 'Diagnostic services', 'Custom work', 'Warranty coverage', 'Emergency roadside', 'Parts ordering'],
+        color: '#e74c3c',
+        heroImage: '🚗',
+        icons: ['🔧', '🛢️', '🚗', '🛡️'],
+        specialties: ['Auto Repair', 'Maintenance', 'Custom Work'],
+        layout: 'automotive',
+        sections: ['hero', 'services-grid', 'why-choose-us', 'testimonials', 'service-areas', 'emergency-contact']
+    },
+    'food-hospitality': {
+        name: 'Culinary Delights',
+        tagline: 'Exceptional Dining Experience',
+        features: ['Online reservations', 'Menu showcase', 'Private events', 'Catering services', 'Gift cards', 'Loyalty program'],
+        color: '#e67e22',
+        heroImage: '🍽️',
+        icons: ['🍽️', '🍷', '🎉', '👨‍🍳'],
+        specialties: ['Fine Dining', 'Private Events', 'Catering'],
+        layout: 'food-hospitality',
+        sections: ['hero', 'menu-showcase', 'why-choose-us', 'testimonials', 'private-events', 'reservations']
+    },
+    'retail': {
+        name: 'StyleHub Store',
+        tagline: 'Discover Amazing Products',
+        features: ['Online shopping', 'Product catalog', 'Customer reviews', 'Loyalty program', 'Gift cards', 'Customer support'],
+        color: '#9b59b6',
+        heroImage: '🛍️',
+        icons: ['📦', '🎁', '⭐', '💳'],
+        specialties: ['Quality Products', 'Fast Shipping', 'Best Prices'],
+        layout: 'retail',
+        sections: ['hero', 'featured-products', 'why-choose-us', 'testimonials', 'product-categories', 'customer-service']
+    },
     'other': {
         name: 'Your Business',
         tagline: 'Professional Solutions for Your Needs',
