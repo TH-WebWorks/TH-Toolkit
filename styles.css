@@ -94,3 +94,39 @@ footer {
         background-position: 40px 40px;
     }
 } 
+
+/* Project Card Styles */
+.project-card {
+    background-color: var(--bg-card);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    border-color: var(--primary);
+}
+
+/* Status Badge Styles */
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.status-active {
+    background-color: #10b981;
+    color: white;
+}
+
+.status-pending {
+    background-color: var(--secondary);
+    color: var(--bg-dark);
+}
+
+.status-completed {
+    background-color: var(--primary);
+    color: white;
+} 
